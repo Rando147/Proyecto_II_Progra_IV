@@ -1,10 +1,130 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 28/05/2021, 09:49:45 PM
-    Author     : josedf
-*/
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+    --selected-color: #2ecc71!important;
+    --occupied-color: #e74c3c!important;
+    --available-color: #fff!important;
+}
+
+* {
+    box-sizing: border-box!important;
+}
+
+.modal-body {
+    position: relative!important;
+    overflow-y: auto!important;
+    max-height: 400px!important;
+    padding: 15px!important;
+}
+
+.theather-container {
+
+    font-family: "Lato", sans-serif!important;
+    background-color: #242333!important;
+    color: white!important;
+    display: flex!important;
+    flex-direction: column!important;
+    align-items: center!important;
+    justify-content: center!important;
+    height: 100vh!important;
+    overflow: hidden!important;
+}
+
+.movie-container {
+    margin: 20px 0!important;
+}
+
+.movie-container select {
+    background-color: #fff!important;
+    border: 0!important;
+    border-radius: 5px!important;
+    font-size: 14px!important;
+    margin-left: 10px!important;
+    padding: 5px 15px 5px 15px!important;
+    -moz-appearance: none!important;
+    -webkit-appearance: none!important;
+    appearance: none!important;
+}
+
+.container {
+    perspective: 1000px!important;
+    margin-bottom: 3px!important;
+}
+
+.seat {
+    background-color: #444451!important;
+    height: 12px !important;
+    width: 15px !important;
+    margin: 3px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.seat.selected {
+    background-color: var(--selected-color) !important;
+}
+
+.seat.occupied {
+    background-color: var(--available-color) !important;
+}
+
+/* Selects the second row f*/
+.seat:nth-of-type(2) {
+    margin-right: 18px !important;
+}
+
+.seat:nth-last-of-type(2) {
+    margin-left: 18px !important;
+}
+
+.seat:not(.occupied) {
+    cursor: pointer !important;
+    transform: scale(1.2) !important;
+}
+
+.showcase .seat:not(.occupied) {
+    cursor: default !important;
+    transform: scale(1)!important;
+}
+
+.showcase {
+    background-color: rgba(0, 0, 0, 0.1)!important;
+    padding: 5px 10px!important;
+    border-radius: 5px!important;
+    color: #777!important;
+    list-style-type: none!important;
+    display: flex!important;
+    justify-content: space-between!important;
+}
+
+.showcase li {
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+    margin: 0 10px!important;
+}
+
+.showcase li small {
+    margin-left: 2px!important;
+}
+
+.row {
+    display: flex!important;
+}
+
+.screen {
+    background-color: #fff!important;
+    height: 70px!important;
+    width: 100%!important;
+    margin: 15px 0!important;
+    transform: rotateX(-45deg)!important;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7)!important;
+}
+
+p.text {
+    margin: 5px 0!important;
+}
+
+p.text span {
+    color: #6feaf6!important;
+}
