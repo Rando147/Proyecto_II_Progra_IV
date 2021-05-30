@@ -68,13 +68,13 @@ and open the template in the editor.
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About us</a>
+                                <a class="nav-link" href="#" >About us</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -175,6 +175,70 @@ and open the template in the editor.
 
     </body>
 
+
+
+    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="login-container">
+                        <ul id="login">
+                            <li id="LIlogin">
+                                <table>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Cédula:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="idEstudiante" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda">Nombre:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="nombre" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda">Apellidos:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="apellidos" type="text">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="curso-izquierda">Numero de Tarjeta:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="numero_cuenta" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda">Password:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="password" type="text">
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" >Aceptar</button>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -199,6 +263,10 @@ and open the template in the editor.
             </div>
         </div>
     </div>
+
+
+
+
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
