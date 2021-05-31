@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -87,6 +83,12 @@ and open the template in the editor.
                                     <li><a class="dropdown-item" href="#">Ver compras</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">Logout</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalPelicula">Pelicula</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalSala">Sala</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalCartelera">Cartelera</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -98,7 +100,7 @@ and open the template in the editor.
                 </div>
             </nav>
         </header>
-<!--################################################################################################################################################################################################-->
+<!--#####################################################################################################################################################################################################-->
 
 
 
@@ -174,8 +176,11 @@ and open the template in the editor.
                 <p class="float-end mb-1">
                     <a href="#">Back to top</a>
                 </p>
-                <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-                <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.</p>
+                <p class="mb-1">II Proyecto de programacion IV</p>
+                <p class="mb-0">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
+                <p class="mb-0">Prof. José A. Sánchez S.</p>
+                <p class="mb-0">JRD Inc. ©2021.</p>
+                
             </div>
         </footer>
 
@@ -403,3 +408,131 @@ and open the template in the editor.
 </html>
 
 
+<!--###################################################################################PELICULA#############################################################################################################-->
+
+    <div class="modal fade" id="modalPelicula" aria-hidden="true" aria-labelledby="modalPeliculaLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPeliculaLabel">Pelicula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                                <table>
+                                     <tr>
+                                        <td class="curso-izquierda input-number">Id de la Pelicula:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="idPelicula" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="pelicula" type="text">
+                                        </td>
+                                    </tr>
+                                        <td class="curso-izquierda">Descripcion:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="descripcion" type="text">
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" >Aceptar</button>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--###################################################################################SALA#############################################################################################################-->
+
+    <div class="modal fade" id="modalSala" aria-hidden="true" aria-labelledby="modalSalaLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSalalaLabel">Sala</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                                <table>
+                                     <tr>
+                                        <td class="curso-izquierda input-number">Id de la Sala:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="idSala" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Cantidad de asientos:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="asientos" type="text">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" >Aceptar</button>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--###################################################################################CARTELERA#############################################################################################################-->
+
+    <div class="modal fade" id="modalCartelera" aria-hidden="true" aria-labelledby="modalCarteleraLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCarteleraLabel">Cartelera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                                <table>
+                                     <tr>
+                                        <td class="curso-izquierda input-number">Id de la Cartelera:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="idCartelera" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Fecha de la funcion:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="fecha" type="date">
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="curso-izquierda input-number">Hora de inicio:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="horaInicio" type="time">
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="curso-izquierda input-number">Hora de final:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="horaFin" type="time">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Id de la pelicula:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="IdpeliC" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">Id de la sala:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="IdSalaC" type="text">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" >Aceptar</button>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
