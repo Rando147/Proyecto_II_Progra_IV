@@ -51,8 +51,11 @@ and open the template in the editor.
 
     </head>
     <body>
+        
+<!--###################################################################################NAVBAR#############################################################################################################-->
 
         <header>
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -68,10 +71,10 @@ and open the template in the editor.
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" >About us</a>
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">About us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Register</a>
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalRegistro">Register</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</a>
@@ -95,6 +98,13 @@ and open the template in the editor.
                 </div>
             </nav>
         </header>
+<!--################################################################################################################################################################################################-->
+
+
+
+
+
+<!--###################################################################################CARDS#############################################################################################################-->
 
         <main>
             <div class="album py-5 bg-light">
@@ -174,23 +184,31 @@ and open the template in the editor.
 
 
     </body>
+<!--################################################################################################################################################################################################-->
 
 
 
-    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
+
+
+
+<!--###################################################################################MODALS#############################################################################################################-->
+
+<!--###################################################################################REGISTRAR#############################################################################################################-->
+
+
+
+<div class="modal fade" id="modalRegistro" aria-hidden="true" aria-labelledby="modalRegistroLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+                    <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="login-container">
-                        <ul id="login">
-                            <li id="LIlogin">
+                    
                                 <table>
                                     <tr>
-                                        <td class="curso-izquierda input-number">Cédula:</td>
+                                        <td class="curso-izquierda input-number ">Cédula:</td>
                                         <td class="curso-derecha "> <input class = "curso-derecha" name="idEstudiante" type="text">
                                         </td>
                                     </tr>
@@ -218,11 +236,43 @@ and open the template in the editor.
                                     
                                 </table>
 
-                            </li>
+                      
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" >Registrar</button>
 
-                        </ul>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
-                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--###################################################################################LOGIN#############################################################################################################-->
+
+    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                                <table>
+                                    <tr>
+                                        <td class="curso-izquierda input-number">ID:</td>
+                                        <td class="curso-derecha "> <input class = "curso-derecha" name="idEstudiante" type="text">
+                                        </td>
+                                    </tr>
+                                        <td class="curso-izquierda">Password:</td>
+                                        <td class="curso-derecha"> <input class = "curso-derecha" name="password" type="text">
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" >Aceptar</button>
@@ -235,8 +285,36 @@ and open the template in the editor.
     </div>
 
 
+<!--###################################################################################ABOUT US#############################################################################################################-->
 
+    <div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAboutLabel">About Us</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="login-container" >
+                        
+                        <h5 class="curso-centro">II Proyecto de Programacion IV</h5>
+                        <h5 class="curso-centro">Integrantes:</h5>
+                        <h5 class="curso-centro">Jose Flores</h5>
+                        <h5 class="curso-centro">Roy Rojas</h5>
+                        <h5 class="curso-centro">Diego Luna</h5>
 
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--###################################################################################PELICULAS#############################################################################################################-->
 
 
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -265,6 +343,7 @@ and open the template in the editor.
     </div>
 
 
+<!--###################################################################################BUTACAS#############################################################################################################-->
 
 
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
