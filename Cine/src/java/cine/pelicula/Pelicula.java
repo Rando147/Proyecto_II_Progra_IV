@@ -6,14 +6,16 @@ public class Pelicula {
     String id;
     String nombre;
     String descripcion;
+    String duracion;
 
     public Pelicula() {
     }
 
-    public Pelicula(String id, String nombre, String descripcion) {
+    public Pelicula(String id, String nombre, String descripcion, String duracion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.duracion = duracion;
     }
 
     public String getId() {
@@ -39,5 +41,14 @@ public class Pelicula {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+
+   
 }

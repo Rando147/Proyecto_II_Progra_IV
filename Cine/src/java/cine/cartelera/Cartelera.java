@@ -12,13 +12,13 @@ public class Cartelera {
     Date fecha_funcion;
     Time hora_inicio;
     Time hora_fin;
-    Pelicula pelicula;
-    Sala sala;
+    int pelicula;
+    int sala;
 
     public Cartelera() {
     }
 
-    public Cartelera(String id, Date fecha_funcion, Time hora_inicio, Time hora_fin, Pelicula pelicula, Sala sala) {
+    public Cartelera(String id, Date fecha_funcion, Time hora_inicio, Time hora_fin, int pelicula, int sala) {
         this.id = id;
         this.fecha_funcion = fecha_funcion;
         this.hora_inicio = hora_inicio;
@@ -59,19 +59,19 @@ public class Cartelera {
         this.hora_fin = hora_fin;
     }
 
-    public Pelicula getPelicula() {
+    public int getPelicula() {
         return pelicula;
     }
 
-    public void setPelicula(Pelicula pelicula) {
+    public void setPelicula(int pelicula) {
         this.pelicula = pelicula;
     }
 
-    public Sala getSala() {
+    public int getSala() {
         return sala;
     }
 
-    public void setSala(Sala sala) {
+    public void setSala(int sala) {
         this.sala = sala;
     }
     
