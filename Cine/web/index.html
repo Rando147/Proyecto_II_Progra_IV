@@ -1,393 +1,368 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Hugo 0.83.1">
-        <title>Cine 2000</title>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Cine 2000</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
 
 
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="CSS/styles.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="CSS/styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="js/login.js"> </script>
 
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-        <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
-        <meta name="theme-color" content="#7952b3">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
 
-        <script src="JS/theaterSeats.js"></script>
-        <script src="JS/movieSchedule.js"></script>
+    <script src="JS/theaterSeats.js"></script>
+    <script src="JS/movieSchedule.js"></script>
 
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
             }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
-            }
-        </style>
+        }
+    </style>
 
 
-    </head>
-    <body>
+</head>
 
-        <!--###################################################################################NAVBAR#############################################################################################################-->
+<body>
 
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="Images/palomitas.png" style="width:50px; height:50px; ">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">About us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalRegistro">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Usuario
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Ver compras</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Logout</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalPelicula">Pelicula</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalSala">Sala</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalCartelera">Cartelera</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <!--#####################################################################################################################################################################################################-->
+    <!--###################################################################################NAVBAR#############################################################################################################-->
 
-
-
-
-
-        <!--###################################################################################CARDS#############################################################################################################-->
-        <main>
-            <div class="album py-5 bg-light">
-                <div class="container">
-
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                                <div class="card-body">
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" id="view-movie">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                        </div>
-                                        <small class="text-muted">9 mins</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                                <div class="card-body">
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-
-                                        </div>
-                                        <small class="text-muted">9 mins</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-                                <div class="card-body">
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-
-                                        </div>
-                                        <small class="text-muted">9 mins</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="Images/palomitas.png" style="width:50px; height:50px; ">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">About
+                                us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalRegistro">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Login</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuario
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Ver compras</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalPelicula">Pelicula</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalSala">Sala</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalCartelera">Cartelera</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
+        </nav>
+    </header>
+    <!--#####################################################################################################################################################################################################-->
 
-        </main>
 
-        <footer class="text-muted py-5">
+
+
+
+    <!--###################################################################################CARDS#############################################################################################################-->
+    <main>
+        <div class="album py-5 bg-light">
             <div class="container">
-                <p class="float-end mb-1">
-                    <a href="#">Back to top</a>
-                </p>
-                <p class="mb-1">II Proyecto de programacion IV</p>
-                <p class="mb-0">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
-                <p class="mb-0">Prof. José A. Sánchez S.</p>
-                <p class="mb-0">JRD Inc. ©2021.</p>
 
-            </div>
-        </footer>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="movie-cards-container">
 
+                    
 
-        <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
-
-    </body>
-    <!--################################################################################################################################################################################################-->
-
-
-
-
-
-
-    <!--###################################################################################MODALS#############################################################################################################-->
-
-    <!--###################################################################################REGISTRAR#############################################################################################################-->
-
-
-
-    <div class="modal fade" id="modalRegistro" aria-hidden="true" aria-labelledby="modalRegistroLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <table>
-                        <tr>
-                            <td class="curso-izquierda input-number ">Cédula:</td>
-                            <td class="curso-derecha "> <input class = "curso-derecha" name="cedula" type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="curso-izquierda">Nombre:</td>
-                            <td class="curso-derecha"> <input class = "curso-derecha" name="nombre" type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="curso-izquierda">Apellidos:</td>
-                            <td class="curso-derecha"> <input class = "curso-derecha" name="apellidos" type="text">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="curso-izquierda">Numero de Tarjeta:</td>
-                            <td class="curso-derecha"> <input class = "curso-derecha" name="numero_cuenta" type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="curso-izquierda">Password:</td>
-                            <td class="curso-derecha"> <input class = "curso-derecha" name="password" type="text">
-                            </td>
-                        </tr>
-
-                    </table>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" >Registrar</button>
-
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
                 </div>
             </div>
         </div>
-    </div>
+
+    </main>
+
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1">II Proyecto de programacion IV</p>
+            <p class="mb-0">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
+            <p class="mb-0">Prof. José A. Sánchez S.</p>
+            <p class="mb-0">JRD Inc. ©2021.</p>
+
+        </div>
+    </footer>
+
+
+    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+
+</body>
+<!--################################################################################################################################################################################################-->
 
 
 
-    <!--###################################################################################LOGIN#############################################################################################################-->
 
-    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLoginLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td class="curso-izquierda input-number">ID:</td>
-                            <td class="curso-derecha "> <input class = "curso-derecha" name="id" type="text">
-                            </td>
-                        </tr>
-                        <td class="curso-izquierda">Password:</td>
-                        <td class="curso-derecha"> <input class = "curso-derecha" name="password" type="text">
+
+
+<!--###################################################################################MODALS#############################################################################################################-->
+
+<!--###################################################################################REGISTRAR#############################################################################################################-->
+
+
+
+<div class="modal fade" id="modalRegistro" aria-hidden="true" aria-labelledby="modalRegistroLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <table>
+                    <tr>
+                        <td class="curso-izquierda input-number ">Cédula:</td>
+                        <td class="curso-derecha "> <input class="curso-derecha" name="cedula" type="text">
                         </td>
-                        </tr>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Nombre:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" name="nombre" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Apellidos:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" name="apellidos" type="text">
+                        </td>
+                    </tr>
 
-                    </table>
+                    <tr>
+                        <td class="curso-izquierda">Numero de Tarjeta:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" name="numero_cuenta" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Password:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" name="password" type="text">
+                        </td>
+                    </tr>
 
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" >Aceptar</button>
+                </table>
 
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">Registrar</button>
+
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
             </div>
         </div>
     </div>
+</div>
 
 
-    <!--###################################################################################ABOUT US#############################################################################################################-->
 
-    <div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAboutLabel">About Us</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="login-container" >
+<!--###################################################################################LOGIN#############################################################################################################-->
 
-                        <h5 class="curso-centro">II Proyecto de Programacion IV</h5>
-                        <h5 class="curso-centro">Integrantes:</h5>
-                        <h5 class="curso-centro">Jose Flores</h5>
-                        <h5 class="curso-centro">Roy Rojas</h5>
-                        <h5 class="curso-centro">Diego Luna</h5>
+<div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td class="curso-izquierda input-number">ID:</td>
+                        <td class="curso-derecha "> <input class="curso-derecha" name="id" type="text">
+                        </td>
+                    </tr>
+                    <td class="curso-izquierda">Password:</td>
+                    <td class="curso-derecha"> <input class="curso-derecha" name="password" type="text">
+                    </td>
+                    </tr>
 
-                    </div>
-                </div>
-                <div class="modal-footer">
+                </table>
 
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">Aceptar</button>
 
-                </div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+
             </div>
         </div>
     </div>
+</div>
 
-    <!--###################################################################################PELICULAS#############################################################################################################-->
 
+<!--###################################################################################ABOUT US#############################################################################################################-->
 
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAboutLabel">About Us</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="login-container">
+
+                    <h5 class="curso-centro">II Proyecto de Programacion IV</h5>
+                    <h5 class="curso-centro">Integrantes:</h5>
+                    <h5 class="curso-centro">Jose Flores</h5>
+                    <h5 class="curso-centro">Roy Rojas</h5>
+                    <h5 class="curso-centro">Diego Luna</h5>
+
                 </div>
-                <div class="modal-body">
-                    <div id="lista-peliculas-container">
-                        <ul id="lista-peliculas">
-                            
+            </div>
+            <div class="modal-footer">
 
-                        </ul>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
 
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
-                </div>
             </div>
         </div>
     </div>
+</div>
+
+<!--###################################################################################PELICULAS#############################################################################################################-->
 
 
-    <!--###################################################################################BUTACAS#############################################################################################################-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="lista-peliculas-container">
+                    <ul id="lista-peliculas">
+                    </ul>
 
-
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="theather-container">
-                        <ul class="showcase">
-                            <li>
-                                <div class="seat"></div>
-                                <small>Available</small>
-                            </li>
-                            <li>
-                                <div class="seat selected"></div>
-                                <small>Selected</small>
-                            </li>
-                            <li>
-                                <div class="seat occupied"></div>
-                                <small>Occupied</small>
-                            </li>
-                        </ul>
-
-                        <div class="container" id="screen-seats-container"></div>
-
-                        <p class="text">
-                            You have selected <span id="count">0</span> seats for the price of $<span
-                                id="total"
-                                >0</span
-                            >!
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Open second modal</button>
             </div>
         </div>
     </div>
+</div>
+
+
+<!--###################################################################################BUTACAS#############################################################################################################-->
+
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="theather-container">
+                    <ul class="showcase">
+                        <li>
+                            <div class="seat"></div>
+                            <small>Available</small>
+                        </li>
+                        <li>
+                            <div class="seat selected"></div>
+                            <small>Selected</small>
+                        </li>
+                        <li>
+                            <div class="seat occupied"></div>
+                            <small>Occupied</small>
+                        </li>
+                    </ul>
+
+                    <div class="container" id="screen-seats-container"></div>
+
+                    <p class="text">
+                        You have selected <span id="count">0</span> seats for the price of $<span id="total">0</span>!
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </html>
 
@@ -405,16 +380,16 @@
                 <table>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="idPelicula" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="idPelicula" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="pelicula" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" type="text">
                         </td>
                     </tr>
                     <td class="curso-izquierda">Descripcion:</td>
-                    <td class="curso-derecha"> <input class = "curso-derecha" name="descripcion" type="text">
+                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion" type="text">
                     </td>
                     </tr>
 
@@ -422,7 +397,7 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" >Aceptar</button>
+                <button class="btn btn-primary">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
@@ -445,19 +420,19 @@
                 <table>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la Sala:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="idSala" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="idSala" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Cantidad de asientos:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="asientos" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="asientos" type="text">
                         </td>
                     </tr>
                 </table>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" >Aceptar</button>
+                <button class="btn btn-primary">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
@@ -480,39 +455,39 @@
                 <table>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la Cartelera:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="idCartelera" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="idCartelera" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Fecha de la funcion:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="fecha" type="date">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="fecha" type="date">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Hora de inicio:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="horaInicio" type="time">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="horaInicio" type="time">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Hora de final:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="horaFin" type="time">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="horaFin" type="time">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la pelicula:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="IdpeliC" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="IdpeliC" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la sala:</td>
-                        <td class="curso-derecha "> <input class = "curso-derecha" name="IdSalaC" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="IdSalaC" type="text">
                         </td>
                     </tr>
                 </table>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" >Aceptar</button>
+                <button class="btn btn-primary">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
