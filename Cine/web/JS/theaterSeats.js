@@ -8,6 +8,25 @@ var seatSelected = 0;
 var seatsArray = [];
 var ocupiedSeats = ["0-1", "0-2", "0-3"];
 
+const moviesJson = 
+    [
+        {
+            "movie": "Spiderman",
+            "schedule": "Martes 4pm",
+            "sala": 01
+        },
+        {
+            "movie": "Sapo Rene",
+            "schedule": "Martes 5pm",
+            "sala": 02
+        },
+        {
+            "movie": "Gallo Claudio",
+            "schedule": "Mates 6pm",
+            "sala": 03
+        }
+    ];
+
 
 function loadSeats() {
     resetArray();
@@ -92,10 +111,40 @@ function setSelected_Unselected() {
 }
 function addListeners() {
     $("#movie-link").click(loadSeats);
+    $("#view-movie").click(readJson);
 }
 function mainLoader() {
     addListeners();
 }
+
+
+
+
+    
+function resetMoviesContainer(){//Simplemente borra lo que tiene el array del Json
+    $("#lista-peliculas").empty();
+}
+    
+function readJson(){
+    
+    var listaPeliculasContainer = $("#lista-peliculas");
+    resetMoviesContainer();
+    moviesJson.forEach((item)=>{
+        
+        var movieName = item.movie;
+        var movieSchedule = item.schedule;
+        var movieRoom = item.sala;
+
+        var newListItem = "<li><a id='movie-link' href='#exampleModalToggle2' data-bs-toggle='modal' data-bs-dismiss='modal'>" +movieName+ " " + movieSchedule + "</a></li>";
+        
+        listaPeliculasContainer.append(newListItem);
+        
+    });
+    
+    mainLoader();
+    
+}
+
 $(mainLoader);
 
 
