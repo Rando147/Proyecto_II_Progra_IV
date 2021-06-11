@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Database;
 
-import javax.servlet.http.HttpServletRequest;
 
 public class TicketDAO {
 
