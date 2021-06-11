@@ -1,5 +1,6 @@
 package logic;
 
+import cine.pelicula.ModelPeli;
 import cine.pelicula.Pelicula;
 import cine.usuario.Usuario;
 import java.util.ArrayList;
@@ -8,6 +9,52 @@ import java.util.List;
 
 
 public class Service {
+    
+    private static Service uniqueInstance;
+    
+    
+     public static Service instance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Service();
+        }
+        return uniqueInstance;
+    }
+    
+    
+    
+    //---------------------------------------------------Peliculas------------------------------------------------------------------
+    
+    public Pelicula getPelicula(String nombre) throws Exception{
+    return ModelPeli.instance().getPelicula(nombre);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //
 //    private static Service uniqueInstance;
 //    HashMap<String,Pelicula> peliculas;

@@ -24,13 +24,13 @@ public class SalaDAO {
         return instancia;
     }
     
-    public Sala recuperar(int id) {
+    public Sala recuperar(String id) {
         Sala resultado = null;
         try {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(SalaCRUD.CMD_RECUPERAR)) {
                 stm.clearParameters();
-                stm.setInt(1, id);
+                stm.setString(1, id);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Sala(
@@ -52,4 +52,6 @@ public class SalaDAO {
     
     private Database db;
     private static SalaDAO instancia;
+
+    
 }
