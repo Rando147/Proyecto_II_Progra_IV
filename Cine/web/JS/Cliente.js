@@ -1,23 +1,41 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 var url="http://localhost:8080/Cine/";
 
 
-    function login(){
+
+
+
+
+
+function register(){
          console.log("LOGIN");
         //if (!loginValidar()) return;
+        cliente = {
+            id: $("#id").val(),
+            password: $("#password").val(),
+            nombre:$("#nombre").val(),
+            apellidos :$("#apellidos").val(),
+            numero_cuenta :$("#numero_cuenta").val(),
+            type = "CLIENTE"
+        };
         usuario = {
             id: $("#id").val(),
             password: $("#password").val(),
-            type = "LOGIN"
+            type = "CLIENTE"
         };
-        console.log(usuario);
-        let request = new Request(url+'api/usuario/login', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
+        console.log(cliente);
+        let request = new Request(url+'api/cliente/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(cliente)});
         (async ()=>{
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
             usuario = await response.json();
             sessionStorage.setItem('Usuario', JSON.stringify(usuario));
             $('#loginDialog').modal('hide');            
-           switch(usuario.type){
+           switch(cliente.type){
                case 'ADMINISTRATOR': console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
                    break;
                case 'CLIENTE': console.log("LOGIN CLIENTE");//document.location = url+"about.html"; 
@@ -26,27 +44,6 @@ var url="http://localhost:8080/Cine/";
         })(); 
     
     }
-function show(){
-    
-    
-    
-    
-}
-    function loginValidar(){
-        $("#loginForm").addClass("was-validated");
-        return $("#loginForm").get(0).checkValidity(); 
-    }
-
-    function logout(){
-        let request = new Request(url+'api/login', {method: 'DELETE', headers: { }});
-        (async ()=>{
-            const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-            sessionStorage.removeItem('user');
-            document.location = url+"about.html";                         
-        })();          
-    }
-
   function errorMessage(status,place){  
         switch(status){
             case 404: error= "Registro no encontrado"; break;
@@ -60,18 +57,17 @@ function show(){
         return;        
     }  
   
-  function loadLogin(){
+  function load(){
         //let request = new Request(url+'index.html', {method: 'GET'});
 //        (async ()=>{
 //            const response = await fetch(request);
 //            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
 //            content = await response.text();
-            $('body').append(content); 
-            $("#login").click(login);
-            $("#logout").click(logout);
-            console.log("LOAD");
+            //$('body').append(content); 
+            $("#register").click(register);
+            //$("#logout").click(logout);
+            console.log("LOAD CLIENTE");
 //        })();     
   }
   
-  $(loadLogin);  
-  
+  $(load);  

@@ -1,5 +1,6 @@
 package controller;
 
+import cine.cliente.Cliente;
 import cine.usuario.Usuario;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -120,8 +121,9 @@ public class User {
 //    }    
 
     @POST
+    @Path("register")
     @Consumes(MediaType.APPLICATION_JSON) 
-    public void add(Usuario u) {  
+    public void add(Cliente c) {  
         try {
             //Service.instance().usuarioAdd(u);
         } catch (Exception ex) {
