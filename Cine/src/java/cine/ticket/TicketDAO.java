@@ -39,7 +39,6 @@ public class TicketDAO {
                                 rs.getString("numero_Butaca"),
                                 rs.getInt("id_Cliente"),
                                 rs.getInt("id_Cartelera")
-                                
                         );
                     }
                 }

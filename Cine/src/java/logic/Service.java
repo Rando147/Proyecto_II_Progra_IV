@@ -36,14 +36,10 @@ public class Service {
 //        usuarios.put("04", new Usuario("02","ccc"));
 //        usuarios.put("04", new Usuario("03","ddd"));
 //    }
-//    
-//    
-//    
-//    
-//    
+//   
 //    public List<Pelicula> peliculaListAll() {
 //        return new ArrayList(peliculas.values());
-//    } 
+//    }
 //    public List<Usuario> usuarioListAll() {
 //        return new ArrayList(usuarios.values());
 //    }
