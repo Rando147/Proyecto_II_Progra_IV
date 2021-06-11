@@ -114,7 +114,7 @@ function resetMoviesContainer() {//Simplemente borra lo que tiene el array del J
     $("#lista-peliculas").empty();
 }
 
-function readMoviesListingJson() {
+function readMoviesListingJson() { //Dentro de este metodo deberia ir el request al API para solicitar las peliculas de la cartelera
 
     var listaPeliculasContainer = $("#movie-cards-container");
     //concole.log(listaPeliculasContainer);
@@ -140,9 +140,8 @@ function readMoviesListingJson() {
                 `</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            
-                                            id="view-movie">View
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie">
+                                            View
                                         </button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                     </div>
@@ -158,9 +157,40 @@ function readMoviesListingJson() {
         listaPeliculasContainer.append(newListItem);
     });
 }
-function view(idPelicula) {
-    alert(idPelicula);
+function view(idPelicula) {//Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
+
+    
+    listaHorariosJSON = [
+        {
+            "Fecha": "Lunes 20 Junio",
+            "Hora": "5:00pm"
+        },
+        {
+            "Fecha": "Martes 21 Junio",
+            "Hora": "5:00pm"
+        },
+        {
+            "Fecha": "Miercoles 22 Junio",
+            "Hora": "5:00pm"
+        }
+    ];
+
+    var listaHorarios = $("#lista-horarios");//Lista de horarios del modal se limpia
+
+    listaHorariosJSON.forEach((item) => {
+        var newListItem = $("<li></li>");
+        newListItem.html('<a href="#" id="horario">' + item.Fecha + ' ' + item.Hora + '</a>');
+        listaHorarios.append(newListItem);
+    });     
+    
+    $('#modalHorarios').modal('show');
 }
+
+function selectSeatsShow(idPelicula, fechaHora) {
+
+}
+
+
 
 function loadMoviesListing() {
 
