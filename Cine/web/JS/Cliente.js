@@ -30,7 +30,7 @@ function register(){
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return false;}
             usuario = await response.json();
             sessionStorage.setItem('Usuario', JSON.stringify(usuario));
-            $('#loginDialog').modal('hide');            
+            $('#modalRegistro').modal('hide');            
            switch(cliente.type){
                case 'ADMINISTRATOR': console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
                    break;
@@ -54,16 +54,16 @@ function register(){
     }  
   
   function load(){
-        //let request = new Request(url+'index.html', {method: 'GET'});
-//        (async ()=>{
-//            const response = await fetch(request);
-//            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-//            content = await response.text();
-            //$('body').append(content); 
+        let request = new Request(url+'modal.html', {method: 'GET'});
+        (async ()=>{
+            const response = await fetch(request);
+            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            content = await response.text();
+            $('body').append(content); 
             $("#register").click(register);
             //$("#logout").click(logout);
             console.log("LOAD CLIENTE");
-//        })();     
+        })();     
   }
   
   $(load);  
