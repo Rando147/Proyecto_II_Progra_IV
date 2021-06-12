@@ -18,10 +18,10 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
             "descripcion": "A principios de los años 70, Ed y Lorrain Warren, reputados investigadores de fenómenos paranormales, se enfrentan a una entidad demoníaca al intentar ayudar a una familia que está siendo aterrorizada por una presencia oscura en su aislada granja."
         },
         {
-            "id_pelicula": "Conjuro1",
-            "nombre": "El Conjuro 1",
-            "duracion": "2.5 horas",
-            "descripcion": "A principios de los años 70, Ed y Lorrain Warren, reputados investigadores de fenómenos paranormales, se enfrentan a una entidad demoníaca al intentar ayudar a una familia que está siendo aterrorizada por una presencia oscura en su aislada granja."
+            "id_pelicula": "blackdynamite",
+            "nombre": "Black Dynamite",
+            "duracion": "2 horas",
+            "descripcion": "Después de que un hombre mata a su hermano y envenena a una comunidad con licor adulterado, un super atleta (Michael Jai White) especializado en kung fu inicia una guerra sangrienta que lo lleva hasta la Casa Blanca de Richard Nixon.."
         },
         {
             "id_pelicula": "Conjuro1",
