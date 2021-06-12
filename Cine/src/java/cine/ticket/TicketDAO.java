@@ -1,4 +1,3 @@
-
 package cine.ticket;
 
 import java.io.IOException;
@@ -7,14 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Database;
 
-
 public class TicketDAO {
 
-    private TicketDAO() {
+    private Database db;
+    private static TicketDAO instancia;
+
+    TicketDAO() {
         db = Database.instance();
     }
 
@@ -25,6 +27,54 @@ public class TicketDAO {
         return instancia;
     }
 
+    public void crear(Ticket p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_AGREGAR);
+
+        stm.setString(1, p.getId());
+        stm.setString(2, p.getButaca());
+        stm.setString(3, p.getCliente());
+        stm.setString(4, p.getCartelera());
+
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+
+    
+    public HashMap listarTicket(){
+        Ticket resultado = null;
+        HashMap<String,Ticket> peliculas = new HashMap<>();
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR)) {
+                stm.clearParameters();
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        resultado = new Ticket(
+                                rs.getString("id_Ticket"),
+                                rs.getString("numero_Butaca"),
+                                rs.getString("id_Cliente"),
+                                rs.getString("id_Cartelera")
+                                
+                        );
+                        peliculas.put(resultado.getId(), resultado);
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return peliculas;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return peliculas;
+        }
+        return peliculas;
+    
+    }
+    
+    
     public Ticket recuperar(int id) {
         Ticket resultado = null;
         try {
@@ -37,8 +87,8 @@ public class TicketDAO {
                         resultado = new Ticket(
                                 rs.getString("id_Ticket"),
                                 rs.getString("numero_Butaca"),
-                                rs.getInt("id_Cliente"),
-                                rs.getInt("id_Cartelera")
+                                rs.getString("id_Cliente"),
+                                rs.getString("id_Cartelera")
                         );
                     }
                 }
@@ -52,197 +102,16 @@ public class TicketDAO {
         }
         return resultado;
     }
-
     
     
     
+    public void eliminar(String p) throws Exception {
+        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_ELIMINAR);
+        stm.setString(1, p);
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
     
-//    public Service listarTickets(String codigoCurso) {
-//        Service listaTickets;
-//        try {
-//            listaTickets = new Service();
-//            int codigoCursoInt = Integer.parseInt(codigoCurso);
-//            Connection connection = db.getConnection();
-//            PreparedStatement stm = connection.prepareStatement(TicketCRUD.CMD_Listar_CODIGO);
-//            stm.setInt(1, codigoCursoInt);
-//            ResultSet result = stm.executeQuery();
-//            while (result.next()) {
-//                Ticket aux = new Ticket(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
-//                listaTickets.gruposAdd(aux);
-//            }
-//            return listaTickets;
-//        } catch (URISyntaxException | IOException | SQLException ex) {
-//            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//        //return listaTickets;
-//    }
-    
-//    public Service listarTickets(int idProfesor) {
-//        Service listaTickets;
-//        try {
-//            listaTickets = new Service();
-//            Connection connection = db.getConnection();
-//            PreparedStatement stm = connection.prepareStatement(TicketCRUD.CMD_LISTAR_GRUPOS_PROFESOR);
-//            stm.setInt(1, idProfesor);
-//            ResultSet result = stm.executeQuery();
-//            while (result.next()) {
-//                Ticket aux = new Ticket();
-//                
-//                int cedula = result.getInt(1);
-//                String horario = result.getString(2);
-//                
-//                aux.setCodigo(cedula);
-//                aux.setFecha(horario);
-//                
-//                listaTickets.gruposAdd(aux);
-//            }
-//            return listaTickets;
-//        } catch (URISyntaxException | IOException | SQLException ex) {
-//            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//        //return listaTickets;
-//    }
-//    
-//    
-//
-//    public Service listarTickets() {
-//
-//        Service listaTickets = new Service();
-//        Ticket auxTicket;
-//        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR)) {
-//
-//            try (ResultSet rs = stm.executeQuery()) {
-//                while (rs.next()) {
-//                    auxTicket = new Ticket(
-//                            rs.getInt("codigo"),
-//                            rs.getInt("profeid"),
-//                            rs.getInt("cursoid"),
-//                            rs.getString("fecha")
-//                    );
-//
-//                    listaTickets.gruposAdd(auxTicket);
-//                }
-//            } catch (Exception ex) {
-//                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        } catch (URISyntaxException | IOException | SQLException ex) {
-//            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return listaTickets;
-//
-//    }
-//    
-//    
-//    public void matricular(int idTicket, int idEstudiante) throws Exception {
-//
-//        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_MATRICULAR);
-//        stm.setInt(1, idTicket);
-//        stm.setInt(2, idEstudiante);
-//
-//        int count = Database.instance().executeUpdate(stm);
-//        if (count == 0) {
-//            throw new Exception("Error agregando matricula a la base de datos");
-//        }
-//    }
-//
-//    public Service listaTicketsProfe(HttpServletRequest request) {
-//        Service listaTickets = new Service();
-//        Ticket auxTicket;
-//        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_RECUPERARPG)) {
-//
-//            try (ResultSet rs = stm.executeQuery()) {
-//                while (rs.next()) {
-//                    auxTicket = new Ticket(
-//                            rs.getInt("grupo_codigo"),
-//                            rs.getInt("grupo_Curso_codigo")
-//                    );
-//
-//                    listaTickets.gruposAdd(auxTicket);
-//                }
-//            } catch (Exception ex) {
-//                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        } catch (URISyntaxException | IOException | SQLException ex) {
-//            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return listaTickets;
-//    }
-//
-//    public void updateTicket(Ticket g) throws Exception {
-//
-//        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_ACTUALIZARG);
-//        stm.setInt(1, g.getCurso_codigo());
-//        stm.setInt(2, g.getProfesor_idPreofesor());
-//        stm.setString(3, g.getFecha());
-//        stm.setInt(4, g.getCodigo());
-//
-//        int count = Database.instance().executeUpdate(stm);
-//        if (count == 0) {
-//            throw new Exception("xxxxxxxxxxxxxxxxxxxx");
-//        }
-//    }
-//    
-//    public logic.usuario.estudiante.Service listarEstudiatesTicket(int idTicket) {
-//        logic.usuario.estudiante.Service listaEstudiantes;
-//        try {
-//            listaEstudiantes = new logic.usuario.estudiante.Service();
-//            Connection connection = db.getConnection();
-//            PreparedStatement stm = connection.prepareStatement(TicketCRUD.CMD_LISTAR_ESTUDIANTES_GRUPO);
-//            stm.setInt(1, idTicket);
-//            ResultSet result = stm.executeQuery();
-//            while (result.next()) {
-//                Estudiante aux = new Estudiante();
-//                
-//                int cedula = result.getInt(1);
-//                String nombre = result.getString(2);
-//                String apellido1 = result.getString(3);
-//                String apellido2 = result.getString(4);
-//                int nota = result.getInt(5);
-//                
-//                aux.setCedula(cedula);
-//                aux.setNombre(nombre);
-//                aux.setApellido1(apellido1);
-//                aux.setApellido2(apellido2);
-//                aux.setNota(nota);
-//                
-//                listaEstudiantes.estudiantesAdd(aux);
-//            }
-//            return listaEstudiantes;
-//        } catch (URISyntaxException | IOException | SQLException ex) {
-//            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//        //return listaTickets;
-//    }
-//    
-//    public void crearTicket(Ticket g) throws Exception {
-//
-//        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_AGREGAR);
-////        stm.setInt(1, g.getCodigo());
-////        stm.setInt(2, g.getCurso_codigo());
-////        stm.setInt(3, g.getProfesor_idPreofesor());
-////        stm.setString(4, g.getFecha());
-//        stm.setInt(1, g.getCurso_codigo());
-//        stm.setInt(2, g.getProfesor_idPreofesor());
-//        stm.setString(3, g.getFecha());
-//        
-//
-//        int count = Database.instance().executeUpdate(stm);
-//        if (count == 0) {
-//            throw new Exception("xxxxxxxxxxxxxxxxxxxx");
-//        }
-//    }
-    
-    
-    
-    
-    
-    private Database db;
-    private static TicketDAO instancia;
 }

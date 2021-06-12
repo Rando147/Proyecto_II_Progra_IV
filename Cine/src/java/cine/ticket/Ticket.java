@@ -8,13 +8,13 @@ import cine.cliente.Cliente;
 public class Ticket {
     String id;
     String butaca;
-    int cliente;
-    int cartelera;
+    String cliente;
+    String cartelera;
 
     public Ticket() {
     }
 
-    public Ticket(String id, String butaca, int cliente, int cartelera) {
+    public Ticket(String id, String butaca, String cliente, String cartelera) {
         this.id = id;
         this.butaca = butaca;
         this.cliente = cliente;
@@ -37,19 +37,19 @@ public class Ticket {
         this.butaca = butaca;
     }
 
-    public int getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public int getCartelera() {
+    public String getCartelera() {
         return cartelera;
     }
 
-    public void setCartelera(int cartelera) {
+    public void setCartelera(String cartelera) {
         this.cartelera = cartelera;
     }
     

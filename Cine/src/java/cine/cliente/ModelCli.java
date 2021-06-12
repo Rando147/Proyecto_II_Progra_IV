@@ -1,43 +1,54 @@
-
 package cine.cliente;
 
+import java.util.HashMap;
 import java.util.Map;
 
-
 public class ModelCli {
+
     private static ModelCli uniqueInstance;
-     static Map<String,Cliente> clientes;
-    
-    public static ModelCli instance(){
-        if (uniqueInstance == null){
+    HashMap<String, Cliente> clientes;
+    ClienteDAO dao;
+
+    public static ModelCli instance() {
+        if (uniqueInstance == null) {
             uniqueInstance = new ModelCli();
         }
         return uniqueInstance;
     }
 
     public ModelCli() {
-        tmpUser = new Cliente();
+        this.dao = new ClienteDAO();
     }
 
-    public ModelCli(Cliente usr) {
-        this.tmpUser = usr;
+    private void listaClientes() {
+        clientes = dao.listarCli();
     }
 
-    public Cliente getUsr() {
-        return tmpUser;
+    public HashMap retornaLista() {
+        clientes = dao.listarCli();
+        return clientes;
     }
 
-    public void setUsr(Cliente usr) {
-        this.tmpUser = usr;
+    public void insertar(Cliente p) throws Exception {
+        dao.crear(p);
     }
-    
-    private Cliente tmpUser;
-    
-    
-//     public static Cliente get(Cliente id)throws Exception{
-//        Cliente result = clientes.get(id.getCliente());
-//        if (result==null) throw new Exception("Cliente no existe");
-//        return result;
-//    }
-    
+
+    public Cliente getCliente(String cedula) throws Exception {
+        listaClientes();
+        Cliente result = null;
+        for (Cliente p : clientes.values()) {
+            if (p.getNombre().contains(cedula)) {
+                return p;
+            }
+        }
+        if (result == null) {
+            throw new Exception("Cliente no existe");
+        }
+        return result;
+    }
+
+    public void eliminar(String id) throws Exception {
+        dao.eliminar(id);
+    }
+
 }

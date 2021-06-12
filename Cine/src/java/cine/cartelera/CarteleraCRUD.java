@@ -30,29 +30,5 @@ public class CarteleraCRUD {
             + "FROM Cartelera "
             + "WHERE pelicula = ?;";
 
-//    protected static final String CMD_LISTAR_ESTUDIANTES_GRUPO = "SELECT codigo, nombre, apellido1, apellido2, nota "
-//            + "FROM Cartelera_has_estudiante "
-//            + "INNER JOIN estudiante "
-//            + "ON Cartelera_has_estudiante.codigo = estudiante.idEstudiante "
-//            + "WHERE Cartelera_has_estudiante.Cartelera_codigo = ?;";
-//
-//    // de aqui para abajo son los del Cartelera incluyendo a los estudiantes
-//    protected static final String CMD_MATRICULAR = "INSERT INTO Cartelera_has_estudiante (Cartelera_codigo, codigo) VALUES (?, ?);";
-//
-//    protected static final String CMD_RECUPERAREG
-//            = "SELECT Cartelera_codigo, Cartelera_Curso_codigo, Cartelera_profesor_idProfesor, estudiante_idEstudiante FROM Cartelera_has_estudiante "
-//            + "WHERE Cartelera_codigo = ?; ";
-//
-//    protected static final String CMD_ELIMINAREG
-//            = "DELETE FROM Cartelera_has_estudiante "
-//            + "WHERE Cartelera_codigo = ?; ";
-//
-//    protected static final String CMD_RECUPERARPG
-//            = "SELECT Cartelera_codigo, Cartelera_Curso_codigo, Cartelera_profesor_idProfesor, estudiante_idEstudiante FROM Cartelera_has_estudiante "
-//            + "WHERE Cartelera_profesor_idProfesor = ?; ";
-//
-//    protected static final String CMD_ACTUALIZARG
-//            = "UPDATE Cartelera SET Curso_codigo = ?, profesor_idProfesor = ?,fecha = ?"
-//            + "WHERE codigo = ?;";
 
 }

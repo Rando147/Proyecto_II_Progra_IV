@@ -16,6 +16,9 @@ import logic.Database;
 
 public class PeliculaDAO {
     
+    private Database db;
+    private static PeliculaDAO instancia;
+    
     
     PeliculaDAO(){
         db = Database.instance();
@@ -31,21 +34,16 @@ public class PeliculaDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
 
-//        stm.setInt(1, p.getCedula());
-//        stm.setString(2, p.getNombre());
-//        stm.setString(3, p.getApellido1());
-//        stm.setString(4, p.getApellido2());
-//        stm.setString(5, p.getCorreo());
-//        stm.setString(6, p.getNumero());
-//        stm.setString(7, p.getEspecialidad());
-//        stm.setString(8, p.getPassword());
+        stm.setString(1, p.getId());
+        stm.setString(2, p.getNombre());
+        stm.setString(3, p.getDescripcion());
+        stm.setString(4, p.getDuracion());      
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
-    
     
     public HashMap listarPeli(){
         Pelicula resultado = null;
@@ -54,7 +52,6 @@ public class PeliculaDAO {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(PeliculaCRUD.CMD_LISTAR)) {
                 stm.clearParameters();
-                //stm.setString(1, id);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Pelicula(
@@ -78,10 +75,7 @@ public class PeliculaDAO {
         return peliculas;
     
     }
-    
-    
-    
-    
+ 
     public Pelicula recuperar(String id) {
         Pelicula resultado = null;
         try {
@@ -109,7 +103,17 @@ public class PeliculaDAO {
         }
         return resultado;
     }
+ 
+    public void eliminar(String p) throws Exception {
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ELIMINAR);
+        stm.setString(1, p);
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+
     
-    private Database db;
-    private static PeliculaDAO instancia;
 }
+
+

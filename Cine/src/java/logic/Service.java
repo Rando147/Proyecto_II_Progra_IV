@@ -1,60 +1,120 @@
 package logic;
 
+import cine.administrador.Administrador;
+import cine.administrador.ModelAdmin;
+import cine.cartelera.Cartelera;
+import cine.cartelera.ModelCart;
+import cine.cliente.Cliente;
+import cine.cliente.ModelCli;
 import cine.pelicula.ModelPeli;
 import cine.pelicula.Pelicula;
-import cine.usuario.Usuario;
-import java.util.ArrayList;
+import cine.sala.ModelSala;
+import cine.sala.Sala;
+import cine.ticket.ModelTicket;
+import cine.ticket.Ticket;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class Service {
-    
+
     private static Service uniqueInstance;
-    
-    
-     public static Service instance() {
+
+    public static Service instance() {
         if (uniqueInstance == null) {
             uniqueInstance = new Service();
         }
         return uniqueInstance;
     }
-    
-    
-    
+
     //---------------------------------------------------Peliculas------------------------------------------------------------------
     
-    public Pelicula getPelicula(String nombre) throws Exception{
-    return ModelPeli.instance().getPelicula(nombre);
+    public Pelicula getPelicula(String nombre) throws Exception {
+        return ModelPeli.instance().getPelicula(nombre);
+    }
+    public void crearPelicula(Pelicula P) throws Exception {
+        ModelPeli.instance().insertar(P);
+    }
+    public void eliminarPelicula(String id) throws Exception{
+        ModelPeli.instance().eliminar(id);
+    }
+    public HashMap getListapeliculas(){
+    return ModelPeli.instance().retornaLista();
+    }
+    
+    //------------------------------------------------------Salas--------------------------------------------------------------------
+    
+    public Sala getSala(String nombre) throws Exception {
+        return ModelSala.instance().getSala(nombre);
+    }
+    public void crearSala(Sala P) throws Exception {
+        ModelSala.instance().insertar(P);
+    }
+    public void eliminarSala(String id) throws Exception{
+        ModelSala.instance().eliminar(id);
+    }
+    public HashMap getListaSalas(){
+    return ModelSala.instance().retornaLista();
+    }
+    
+    //------------------------------------------------------Clente--------------------------------------------------------------------
+    
+    public Cliente getCliente(String nombre) throws Exception {
+        return ModelCli.instance().getCliente(nombre);
+    }
+    public void crearCliente(Cliente P) throws Exception {
+        ModelCli.instance().insertar(P);
+    }
+    public void eliminarCliente(String id) throws Exception{
+        ModelCli.instance().eliminar(id);
+    }
+    public HashMap getListaClientes(){
+    return ModelCli.instance().retornaLista();
+    }
+    
+    //------------------------------------------------------Administrador-------------------------------------------------------------
+    
+    public Administrador getAdmin(String nombre) throws Exception {
+        return ModelAdmin.instance().getAdmin(nombre);
+    }
+    public void crearAdmin(Administrador P) throws Exception {
+        ModelAdmin.instance().insertar(P);
+    }
+    public void eliminarAdmin(String id) throws Exception{
+        ModelAdmin.instance().eliminar(id);
+    }
+    
+    //------------------------------------------------------Tickets--------------------------------------------------------------------
+    
+    public Ticket getTicket(String nombre) throws Exception {
+        return ModelTicket.instance().getTicket(nombre);
+    }
+    public void crearTicket(Ticket P) throws Exception {
+        ModelTicket.instance().insertar(P);
+    }
+    public void eliminarTicket(String id) throws Exception{
+        ModelTicket.instance().eliminar(id);
+    }
+    public HashMap getListaTickets(){
+    return ModelTicket.instance().retornaLista();
+    }
+    
+    //------------------------------------------------------Cartelera------------------------------------------------------------------
+    
+    public Cartelera getCartelera(String nombre) throws Exception {
+        return ModelCart.instance().getCart(nombre);
+    }
+    public void crearCartelera(Cartelera P) throws Exception {
+        ModelCart.instance().insertar(P);
+    }
+    public void eliminarCartelera(String id) throws Exception{
+        ModelCart.instance().eliminar(id);
+    }
+    public HashMap getListaCarteleras(){
+    return ModelCart.instance().retornaLista();
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 //
 //    private static Service uniqueInstance;
 //    HashMap<String,Pelicula> peliculas;
