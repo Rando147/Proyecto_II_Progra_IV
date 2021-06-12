@@ -6,39 +6,35 @@
 var url="http://localhost:8080/Cine/";
 
 
-
-
-
-
-
 function register(){
-         console.log("LOGIN");
+         console.log("REGISTER");
         //if (!loginValidar()) return;
         cliente = {
-            id: $("#id").val(),
-            password: $("#password").val(),
+            id: $("#idR").val(),
+            password: $("#passwordR").val(),
             nombre:$("#nombre").val(),
             apellidos :$("#apellidos").val(),
             numero_cuenta :$("#numero_cuenta").val(),
-            type = "CLIENTE"
+            type: "CLIENTE"
         };
         usuario = {
-            id: $("#id").val(),
-            password: $("#password").val(),
-            type = "CLIENTE"
+            id: "DEFAULT",
+            password: "DEFAULT",
+            type: "DEFAULT"
         };
         console.log(cliente);
-        let request = new Request(url+'api/cliente/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(cliente)});
+        console.log(usuario);
+        let request = new Request(url+'api/usuario/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(cliente)});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return false;}
             usuario = await response.json();
             sessionStorage.setItem('Usuario', JSON.stringify(usuario));
-            $('#loginDialog').modal('hide');            
+            $('#modalRegistro').modal('hide');            
            switch(cliente.type){
                case 'ADMINISTRATOR': console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
                    break;
-               case 'CLIENTE': console.log("LOGIN CLIENTE");//document.location = url+"about.html"; 
+               case 'CLIENTE': console.log("LOGIN REGISTER CLIENTE");//document.location = url+"about.html"; 
                    break;
            }                           
         })(); 
@@ -58,16 +54,16 @@ function register(){
     }  
   
   function load(){
-        //let request = new Request(url+'index.html', {method: 'GET'});
-//        (async ()=>{
-//            const response = await fetch(request);
-//            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-//            content = await response.text();
-            //$('body').append(content); 
+        let request = new Request(url+'modal.html', {method: 'GET'});
+        (async ()=>{
+            const response = await fetch(request);
+            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            content = await response.text();
+            $('body').append(content); 
             $("#register").click(register);
             //$("#logout").click(logout);
             console.log("LOAD CLIENTE");
-//        })();     
+        })();     
   }
   
   $(load);  

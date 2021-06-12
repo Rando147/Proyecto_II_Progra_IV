@@ -7,16 +7,16 @@ var url="http://localhost:8080/Cine/";
         usuario = {
             id: $("#id").val(),
             password: $("#password").val(),
-            type = "LOGIN"
+            type: "LOGIN"
         };
         console.log(usuario);
         let request = new Request(url+'api/usuario/login', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return false;}
             usuario = await response.json();
             sessionStorage.setItem('Usuario', JSON.stringify(usuario));
-            $('#loginDialog').modal('hide');            
+            $('#loginDialog').modal('hide');
            switch(usuario.type){
                case 'ADMINISTRATOR': console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
                    break;
@@ -66,12 +66,11 @@ function show(){
 //            const response = await fetch(request);
 //            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
 //            content = await response.text();
-            $('body').append(content); 
+            //$('body').append(content); 
             $("#login").click(login);
-            $("#logout").click(logout);
-            console.log("LOAD");
+            //$("#logout").click(logout);
+            console.log("LOAD LOGIN");
 //        })();     
   }
   
-  $(loadLogin);  
-  
+  $(loadLogin);
