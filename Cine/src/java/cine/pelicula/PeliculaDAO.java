@@ -34,10 +34,10 @@ public class PeliculaDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
 
-        stm.setString(1, p.getId());
-        stm.setString(2, p.getNombre());
-        stm.setString(3, p.getDescripcion());
-        stm.setString(4, p.getDuracion());      
+        
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getDescripcion());
+        stm.setString(3, p.getDuracion());      
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {

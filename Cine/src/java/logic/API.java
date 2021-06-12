@@ -1,5 +1,6 @@
 package logic;
 
+import controller.Administrador;
 import controller.User;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class API extends Application {
         classes.add(MultiPartFeature.class);
         System.out.println("added multipart feature");
         classes.add(User.class);
+        classes.add(Administrador.class);
         return classes;
     }   
 }

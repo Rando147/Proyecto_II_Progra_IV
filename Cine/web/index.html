@@ -26,6 +26,7 @@
         <script src="JS/CinemaListing.js"></script>
         <script src="JS/Cliente.js"></script>
         <script src="JS/Login.js"></script>
+        <script src="JS/Administrator.js"></script>
 
         <style>
             .bd-placeholder-img {
@@ -277,16 +278,22 @@
                 <table>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="idPelicula" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="idPelicula" id="idpeli" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" id="nombrepeli" type="text">
                         </td>
                     </tr>
+                    <tr>
                     <td class="curso-izquierda">Descripcion:</td>
-                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion" type="text">
+                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="descripeli" type="text">
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="curso-izquierda">Duracion:</td>
+                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="duracionpeli" type="text">
                     </td>
                     </tr>
 
@@ -294,7 +301,7 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary">Aceptar</button>
+                <button class="btn btn-primary" id="peliculaRegister">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 

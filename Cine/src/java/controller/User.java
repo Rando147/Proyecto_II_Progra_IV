@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import logic.Service;
 
 @Path("usuario")
 @PermitAll
@@ -60,8 +61,8 @@ public class User {
     public Usuario register(Cliente c) {
         Usuario user = null;
         try {
+            Service.instance().crearCliente(c);
             user = new Usuario(c.getId(),c.getPassword(),"CLIENTE");
-            //Service.instance().usuarioAdd(u);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
