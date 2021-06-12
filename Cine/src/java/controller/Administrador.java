@@ -1,19 +1,13 @@
 
 package controller;
 
-import cine.cliente.Cliente;
+import cine.cartelera.Cartelera;
 import cine.pelicula.Pelicula;
-import cine.usuario.Usuario;
-import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
+import cine.sala.Sala;
 import javax.ws.rs.NotAcceptableException;
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,16 +23,38 @@ public class Administrador {
     @POST
     @Path("pelicula")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public void crear(Pelicula p){
     try {
             Service.instance().crearPelicula(p);
-            
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
     
     // se lo dije pedazo de playo xD   
+    //@QueryParam("sala") String sala, @QueryParam("asientos") String asientos
+    @POST
+    @Path("sala")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void crear(String aux){
+    try {
+        int x=0; 
+            //Service.instance().crearSala(aux);
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
+    
+    @POST
+    @Path("cartelera")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void crear(Cartelera aux){
+    try {
+            System.out.print(aux);
+            //Service.instance().crearCartelera(c);
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
     
 }

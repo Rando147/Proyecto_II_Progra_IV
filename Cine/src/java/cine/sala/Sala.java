@@ -3,14 +3,14 @@ package cine.sala;
 
 public class Sala {
     String sala;
-    String butacas;
+    String asientos;
 
     public Sala() {
     }
 
-    public Sala(String sala, String butacas) {
+    public Sala(String sala, String asientos) {
         this.sala = sala;
-        this.butacas = butacas;
+        this.asientos = asientos;
     }
 
     public String getSala() {
@@ -22,11 +22,11 @@ public class Sala {
     }
 
     public String getButacas() {
-        return butacas;
+        return asientos;
     }
 
-    public void setButacas(String butacas) {
-        this.butacas = butacas;
+    public void setButacas(String asientoss) {
+        this.asientos = asientos;
     }
     
 }

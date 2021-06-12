@@ -270,37 +270,47 @@
 
 <div class="modal fade" id="modalPelicula" aria-hidden="true" aria-labelledby="modalPeliculaLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
+
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalPeliculaLabel">Pelicula</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
-                <table>
-                    <tr>
-                        <td class="curso-izquierda input-number">Id de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="idPelicula" id="idpeli" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" id="nombrepeli" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                    <td class="curso-izquierda">Descripcion:</td>
-                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="descripeli" type="text">
-                    </td>
-                    </tr>
-                    <tr>
-                    <td class="curso-izquierda">Duracion:</td>
-                    <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="duracionpeli" type="text">
-                    </td>
-                    </tr>
+                <form id="forPeli">
+                    <table>
+                        <tr>
+                            <td class="curso-izquierda input-number">Id de la Pelicula:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="idPelicula" id="idpeli" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" id="nombrepeli" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Descripcion:</td>
+                            <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="descripeli" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Duracion:</td>
+                            <td class="curso-derecha"> <input class="curso-derecha" name="descripcion"  id="duracionpeli" type="text">
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                             <td class="curso-izquierda">Imagen:</td>
+                             <td class="curso-derecha">
+                                 <input class = "curso-derecha" name="imagen" type="file" required>
+                             </td>
+                         </tr>-->
 
-                </table>
-
+                    </table>
+                </form>
             </div>
+
             <div class="modal-footer">
                 <button class="btn btn-primary" id="peliculaRegister">Aceptar</button>
 
@@ -308,6 +318,7 @@
 
             </div>
         </div>
+
     </div>
 </div>
 
@@ -316,33 +327,37 @@
 
 <div class="modal fade" id="modalSala" aria-hidden="true" aria-labelledby="modalSalaLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
+
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalSalalaLabel">Sala</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <table>
-                    <tr>
-                        <td class="curso-izquierda input-number">Id de la Sala:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="idSala" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Cantidad de asientos:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="asientos" type="text">
-                        </td>
-                    </tr>
-                </table>
+            <form id="forSala">
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td class="curso-izquierda input-number">Id de la Sala:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="idSala" id="idsala" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Cantidad de asientos:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="asientos" id="cantidadAsientos" type="text">
+                            </td>
+                        </tr>
+                    </table>
 
-            </div>
+                </div>
+            </form>   
             <div class="modal-footer">
-                <button class="btn btn-primary">Aceptar</button>
+                <button class="btn btn-primary" id="salaRegister" >Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
             </div>
         </div>
+
     </div>
 </div>
 
@@ -358,41 +373,37 @@
             </div>
             <div class="modal-body">
                 <table>
-                    <tr>
-                        <td class="curso-izquierda input-number">Id de la Cartelera:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="idCartelera" type="text">
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="curso-izquierda input-number">Fecha de la funcion:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="fecha" type="date">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="fecha" id="fecha" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Hora de inicio:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="horaInicio" type="time">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="horaInicio" id="Hinicio" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Hora de final:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="horaFin" type="time">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="horaFin" id="Hfinal" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="IdpeliC" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="IdpeliC" id="idP" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="curso-izquierda input-number">Id de la sala:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="IdSalaC" type="text">
+                        <td class="curso-derecha "> <input class="curso-derecha" name="IdSalaC" id="idS" type="text">
                         </td>
                     </tr>
                 </table>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary">Aceptar</button>
+                <button class="btn btn-primary" id="cartRegister">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 

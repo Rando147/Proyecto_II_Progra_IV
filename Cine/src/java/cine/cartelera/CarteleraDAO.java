@@ -34,17 +34,17 @@ public class CarteleraDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(CarteleraCRUD.CMD_AGREGAR);
 
-        stm.setString(1, p.getId());
-        stm.setDate(2, (Date) p.getFecha_funcion());
-        stm.setTime(3, p.getHora_inicio());
-        stm.setTime(4, p.getHora_fin()); 
-        stm.setString(5, p.getPelicula());
-        stm.setString(6, p.getSala());
-
-        int count = Database.instance().executeUpdate(stm);
-        if (count == 0) {
-            throw new Exception("duplicado");
-        }
+//        //stm.setString(1, p.getId());
+//        stm.setDate(1, (Date) p.getFecha_funcion());
+//        stm.setTime(2, p.getHora_inicio());
+//        stm.setTime(3, p.getHora_fin()); 
+//        stm.setString(4, p.getPelicula());
+//        stm.setString(5, p.getSala());
+//
+//        int count = Database.instance().executeUpdate(stm);
+//        if (count == 0) {
+//            throw new Exception("duplicado");
+//        }
     }
     
      
@@ -58,12 +58,12 @@ public class CarteleraDAO {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cartelera(
-                                rs.getString("id"),
-                                rs.getDate("fecha_funcion"),
-                                rs.getTime("hora_inicio"),
-                                rs.getTime("hora_fin"),
-                                rs.getString("pelicula"),
-                                rs.getString("sala")      
+//                                rs.getString("id"),
+//                                rs.getDate("fecha_funcion"),
+//                                rs.getTime("hora_inicio"),
+//                                rs.getTime("hora_fin"),
+//                                rs.getString("pelicula"),
+//                                rs.getString("sala")      
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -91,12 +91,12 @@ public class CarteleraDAO {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cartelera(
-                                rs.getString("id"),
-                                rs.getDate("fecha_funcion"),
-                                rs.getTime("hora_inicio"),
-                                rs.getTime("hora_fin"),
-                                rs.getString("pelicula"),
-                                rs.getString("sala") 
+//                                rs.getString("id"),
+//                                rs.getDate("fecha_funcion"),
+//                                rs.getTime("hora_inicio"),
+//                                rs.getTime("hora_fin"),
+//                                rs.getString("pelicula"),
+//                                rs.getString("sala") 
                         );
                     }
                 }
