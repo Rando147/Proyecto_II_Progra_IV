@@ -26,6 +26,7 @@ function login() {
                 break;
             case 'CLIENTE':
                 console.log("LOGIN CLIENTE");//document.location = url+"about.html"; 
+                console.log(usuario);
                 break;
         }
     })();
@@ -78,11 +79,22 @@ function errorMessage(status, place) {
 
 function openLoginModal(){
     $('#modalLogin').modal('show');
-    $('#aceptar-login-btn').click(login);
+    
+    
+    $('#login-cancelar-btn').on('click', ()=>{
+        $('#modalLogin').modal('hide');
+        
+    });
+    $('#login-exit-btn').on('click', ()=>{
+        $('#modalLogin').modal('hide');
+        
+    });
+     
+     
 }
 
 function loadLogin() {
-    $("#show-login-btn").click(openLoginModal);
+    $('#login-aceptar-btn').click(login);
     console.log("LOAD LOGIN");
 }
 

@@ -83,7 +83,7 @@ public class ClienteDAO {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(ClienteCRUD.CMD_RECUPERAR)) {
                 stm.clearParameters();
-                stm.setString(1, id);
+                stm.setInt(1, Integer.parseInt(id));
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cliente(
@@ -91,7 +91,7 @@ public class ClienteDAO {
                                 rs.getString("password"),
                                 rs.getString("nombre"),
                                 rs.getString("apellido"),
-                                rs.getString("numero_Cuenta")  
+                                null//Numero de cuenta  
                         );
                     }
                 }

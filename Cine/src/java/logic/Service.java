@@ -67,9 +67,6 @@ public class Service {
     public void eliminarCliente(String id) throws Exception{
         ModelCli.instance().eliminar(id);
     }
-    public HashMap getListaClientes(){
-        return ModelCli.instance().retornaLista();
-    }
     
     //------------------------------------------------------Administrador-------------------------------------------------------------
     

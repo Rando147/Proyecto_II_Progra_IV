@@ -40,21 +40,23 @@ public class User {
     public Usuario login(Usuario usuario) {
         Usuario logged = null;
         try {
-            logged = Service.instance().getCliente(usuario.getId());
-            if (logged == null) {
-                logged = Service.instance().getCliente(usuario.getId());
-                if (logged  == null)
-                    throw new NotFoundException();
-            }
-            if (!logged.getPassword().equals(usuario.getPassword())) {
-                throw new Exception("Clave incorrecta");
-            }
-            logged.setPassword(null);//Borra el password del usuario
-            request.getSession(true).setAttribute("Usuario", logged);
-            return logged;
+            logged = (Cliente)Service.instance().getCliente(usuario.getId());
         } catch (Exception ex) {
-            throw new NotFoundException();
+            try {
+                //logged = Service.instance().getAdmin(usuario.get);
+            } catch (Exception ex2) {
+                
+            }
         }
+        if (logged == null)
+            throw new NotFoundException("Usuario no existe");
+
+        if (!logged.getPassword().equals(usuario.getPassword())) {
+            throw new NotAcceptableException("Clave incorrecta");
+        }
+        logged.setPassword(null);//Borra el password del usuario
+        request.getSession(true).setAttribute("Usuario", logged);
+        return logged;
     }
 
     @POST

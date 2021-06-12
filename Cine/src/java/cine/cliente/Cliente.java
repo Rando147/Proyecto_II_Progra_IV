@@ -13,7 +13,7 @@ public class Cliente extends Usuario{
     public Cliente() {
     }
 
-    public Cliente( String apellidos,String id,  String nombre, String numero_cuenta, String password) {
+    public Cliente(String id, String password, String nombre, String apellidos, String numero_cuenta) {
         super(id, password,"CLIENTE");
         this.nombre=nombre;
         this.apellidos=apellidos;

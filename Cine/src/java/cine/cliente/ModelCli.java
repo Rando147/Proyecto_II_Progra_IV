@@ -6,8 +6,8 @@ import java.util.Map;
 public class ModelCli {
 
     private static ModelCli uniqueInstance;
-    HashMap<String, Cliente> clientes;
-    ClienteDAO dao;
+    private Cliente cliente;
+    private ClienteDAO dao;
 
     public static ModelCli instance() {
         if (uniqueInstance == null) {
@@ -20,31 +20,22 @@ public class ModelCli {
         this.dao = new ClienteDAO();
     }
 
-    private void listaClientes() {
-        clientes = dao.listarCli();
+    private void getClienteDB(String id) {
+        cliente = dao.recuperar(id);
     }
 
-    public HashMap retornaLista() {
-        clientes = dao.listarCli();
-        return clientes;
-    }
+    
 
     public void insertar(Cliente p) throws Exception {
         dao.crear(p);
     }
 
     public Cliente getCliente(String cedula) throws Exception {
-        listaClientes();
-        Cliente result = null;
-        for (Cliente p : clientes.values()) {
-            if (p.getNombre().contains(cedula)) {
-                return p;
-            }
-        }
-        if (result == null) {
+        getClienteDB(cedula);
+        if (cliente == null) {
             throw new Exception("Cliente no existe");
         }
-        return result;
+        return cliente;
     }
 
     public void eliminar(String id) throws Exception {

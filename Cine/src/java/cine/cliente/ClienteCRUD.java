@@ -11,7 +11,7 @@ public class ClienteCRUD {
             + "VALUES (?, ?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
-            = "SELECT id_Cliente, password FROM Cliente "
+            = "SELECT id_Cliente, password, nombre, apellido, numero_Cuenta FROM Cliente "
             + "WHERE id_Cliente = ?; ";
     
     protected static final String CMD_ACTUALIZAR
