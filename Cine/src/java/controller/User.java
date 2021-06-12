@@ -4,6 +4,7 @@ import cine.cliente.Cliente;
 import cine.usuario.Usuario;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,12 +13,16 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import logic.Service;
 
 @Path("usuario")
 @PermitAll
 public class User {
+
+    @Context
+    HttpServletRequest request;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -33,21 +38,23 @@ public class User {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario login(Usuario usuario) {
-
         Usuario logged = null;
-        //request.getSession(true).setAttribute("Usuario", logged);
-        usuario = new Usuario("01", "hoysecome");
-        return usuario;
-
-//            try {
-//                logged = Service.instance().get(usuario);
-//                if(!logged.getPass().equals(usuario.getPass())) throw new Exception("Clave incorrecta");
-//                request.getSession(true).setAttribute("Usuario", logged);
-//                return logged;
-//            } catch (Exception ex) {
-//                throw new NotFoundException();
-//            } 
-//      return logged;
+        try {
+            logged = Service.instance().getCliente(usuario.getId());
+            if (logged == null) {
+                logged = Service.instance().getCliente(usuario.getId());
+                if (logged  == null)
+                    throw new NotFoundException();
+            }
+            if (!logged.getPassword().equals(usuario.getPassword())) {
+                throw new Exception("Clave incorrecta");
+            }
+            logged.setPassword(null);//Borra el password del usuario
+            request.getSession(true).setAttribute("Usuario", logged);
+            return logged;
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }
     }
 
     @POST
@@ -57,12 +64,12 @@ public class User {
     public Usuario register(Cliente cliente) {
         Usuario user = null;
         try {
-            Service.instance().crearCliente(c);
-            user = new Usuario(cliente.getId(),cliente.getPassword(),"CLIENTE");
+            Service.instance().crearCliente(cliente);
+            user = new Usuario(cliente.getId(), cliente.getPassword(), "CLIENTE");
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
-       
+
         return user;
     }
 

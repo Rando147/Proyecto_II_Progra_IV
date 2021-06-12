@@ -56,7 +56,7 @@ public class Service {
     return ModelSala.instance().retornaLista();
     }
     
-    //------------------------------------------------------Clente--------------------------------------------------------------------
+    //------------------------------------------------------Cliente--------------------------------------------------------------------
     
     public Cliente getCliente(String nombre) throws Exception {
         return ModelCli.instance().getCliente(nombre);
@@ -68,7 +68,7 @@ public class Service {
         ModelCli.instance().eliminar(id);
     }
     public HashMap getListaClientes(){
-    return ModelCli.instance().retornaLista();
+        return ModelCli.instance().retornaLista();
     }
     
     //------------------------------------------------------Administrador-------------------------------------------------------------
@@ -113,9 +113,7 @@ public class Service {
     return ModelCart.instance().retornaLista();
     }
     
-    
 
-//
 //    private static Service uniqueInstance;
 //    HashMap<String,Pelicula> peliculas;
 //    HashMap<String,Usuario> usuarios;
