@@ -1,58 +1,96 @@
-    <!--###################################################################################REGISTRAR#############################################################################################################-->
+<!--###################################################################################REGISTRAR#############################################################################################################-->
 
 
 
-    <div class="modal fade" id="modalRegistro" aria-hidden="true" aria-labelledby="modalRegistroLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!--form-->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+<div class="modal fade" id="modalRegistro" aria-hidden="true" aria-labelledby="modalRegistroLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!--form-->
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-                    <table>
-                        <tr>
-                            <td class="curso-izquierda input-number ">Cédula:</td>
-                            <td class="curso-derecha "> <input class="curso-derecha" name="id" type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="curso-izquierda">Nombre:</td>
-                            <td class="curso-derecha"> <input class="curso-derecha" name="nombre" type="text">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="curso-izquierda">Apellidos:</td>
-                            <td class="curso-derecha"> <input class="curso-derecha" name="apellidos" type="text">
-                            </td>
-                        </tr>
+                <table>
+                    <tr>
+                        <td class="curso-izquierda input-number ">Cédula:</td>
+                        <td class="curso-derecha "> <input class="curso-derecha" id="idR" name="id" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Nombre:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" id="nombre"  name="nombre" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Apellidos:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" id="apellidos"  name="apellidos" type="text">
+                        </td>
+                    </tr>
 
-                            <tr>
-                                <td class="curso-izquierda">Numero de Tarjeta:</td>
-                                <td class="curso-derecha"> <input class="curso-derecha" name="numero_cuenta" type="text">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="curso-izquierda">Password:</td>
-                                <td class="curso-derecha"> <input class="curso-derecha" name="passwordR" type="text">
-                                </td>
-                            </tr>
+                    <tr>
+                        <td class="curso-izquierda">Numero de Tarjeta:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" id="numero_cuenta" name="numero_cuenta" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Password:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" id="passwordR" name="passwordR" type="text">
+                        </td>
+                    </tr>
 
-                        </table>
+                </table>
 
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" id="register">Registrar</button>
-
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                <!--form-->
 
             </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="register">Registrar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+            <!--form-->
+
         </div>
     </div>
+</div>
 
+
+<!--###################################################################################LOGIN#############################################################################################################-->
+
+
+<div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="modalLoginLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!--form!-->
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td class="curso-izquierda input-number">ID:</td>
+                        <td class="curso-derecha "> <input class = "curso-derecha" id="id" name="id" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="curso-izquierda">Password:</td>
+                        <td class="curso-derecha"> <input class="curso-derecha" id="password" name="password" type="text">
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="login" >Aceptar</button>
+
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+            <!--/form!-->
+
+        </div>
+    </div>
+</div>
 

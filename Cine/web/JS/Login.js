@@ -16,7 +16,7 @@ var url="http://localhost:8080/Cine/";
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return false;}
             usuario = await response.json();
             sessionStorage.setItem('Usuario', JSON.stringify(usuario));
-            $('#loginDialog').modal('hide');
+            $('#modalLogin').modal('hide');
            switch(usuario.type){
                case 'ADMINISTRATOR': console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
                    break;

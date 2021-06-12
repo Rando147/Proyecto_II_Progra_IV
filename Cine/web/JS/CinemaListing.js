@@ -119,7 +119,7 @@ function butacas(idPelicula, fechaHora) {
             "0-3",
             "0-4"
         ]
-    }
+    };
     
     loadSeats(informacionButacasJSON);
 
