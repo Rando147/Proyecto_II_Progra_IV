@@ -175,19 +175,23 @@ function view(idPelicula) {//Aqui va el request al API para que retorne los dato
         }
     ];
 
-    var listaHorarios = $("#lista-horarios");//Lista de horarios del modal se limpia
+    var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia
 
     listaHorariosJSON.forEach((item) => {
         var newListItem = $("<li></li>");
         newListItem.html('<a href="#" id="horario">' + item.Fecha + ' ' + item.Hora + '</a>');
+        newListItem.find('#horario').on('click', ()=>{
+            butacas(idPelicula, item);
+        });
         listaHorarios.append(newListItem);
     });     
     
     $('#modalHorarios').modal('show');
 }
 
-function selectSeatsShow(idPelicula, fechaHora) {
-
+function butacas(idPelicula, fechaHora) {
+    loadSeats();
+    $('#modalButacas').modal('show');
 }
 
 
