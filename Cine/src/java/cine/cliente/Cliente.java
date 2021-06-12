@@ -19,6 +19,12 @@ public class Cliente extends Usuario{
         this.apellidos=apellidos;
         this.numero_cuenta=numero_cuenta;
     }
+        public Cliente( String apellidos, String id, String password, String nombre,String numero_cuenta,String type) {
+        super(id, password,type);
+        this.nombre=nombre;
+        this.apellidos=apellidos;
+        this.numero_cuenta=numero_cuenta;
+    }
 
     public String getNombre() {
         return nombre;
