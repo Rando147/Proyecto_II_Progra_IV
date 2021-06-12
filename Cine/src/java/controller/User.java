@@ -3,19 +3,15 @@ package controller;
 import cine.cliente.Cliente;
 import cine.usuario.Usuario;
 import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.NotAcceptableException;
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAcceptableException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import logic.Service;
 
@@ -58,15 +54,15 @@ public class User {
     @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Usuario register(Cliente c) {
+    public Usuario register(Cliente cliente) {
         Usuario user = null;
         try {
             Service.instance().crearCliente(c);
-            user = new Usuario(c.getId(),c.getPassword(),"CLIENTE");
+            user = new Usuario(cliente.getId(),cliente.getPassword(),"CLIENTE");
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
-        
+       
         return user;
     }
 

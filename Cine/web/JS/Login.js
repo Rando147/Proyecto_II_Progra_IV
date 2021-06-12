@@ -53,7 +53,7 @@ function show(){
             case 403: case 405: error="Usuario no autorizado"; break;
             case 406: case 405: error="Usuario ya existe"; break;
             case 500: error="Usuario no existe"; break;        
-        };            
+        };
         place.html('<div class="alert alert-danger fade show">' +
         '<button type="button" class="close" data-dismiss="alert">' +
         '&times;</button><h4 class="alert-heading">Error!</h4>'+error+'</div>');

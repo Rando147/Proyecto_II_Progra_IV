@@ -6,23 +6,23 @@ import cine.usuario.Usuario;
 
 public class Cliente extends Usuario{
 
-    private String nombre;
     private String apellidos;
+    private String nombre;
     private String numero_cuenta;
 
     public Cliente() {
     }
 
-    public Cliente(String id, String password, String nombre, String apellidos, String numero_cuenta) {
+    public Cliente( String apellidos,String id,  String nombre, String numero_cuenta, String password) {
         super(id, password,"CLIENTE");
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.numero_cuenta=numero_cuenta;
     }
-        public Cliente( String apellidos, String id, String password, String nombre,String numero_cuenta,String type) {
+        public Cliente( String apellidos, String id,  String nombre,String numero_cuenta,String password,String type) {
         super(id, password,type);
-        this.nombre=nombre;
         this.apellidos=apellidos;
+        this.nombre=nombre;
         this.numero_cuenta=numero_cuenta;
     }
 
