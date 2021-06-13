@@ -1,6 +1,7 @@
 package controller;
 
 import cine.cliente.Cliente;
+import cine.cliente.JSON_TO_CLIENTE_PARSER;
 import cine.usuario.Usuario;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
@@ -61,9 +62,11 @@ public class User {
 
     @POST
     @Path("register")
-    @Consumes(MediaType.APPLICATION_JSON)
+    //@Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Usuario register(Cliente cliente) {
+    public Usuario register(String json) {
+        JSON_TO_CLIENTE_PARSER parser = new JSON_TO_CLIENTE_PARSER();//crea una clase para parsear el objeto
+        Cliente cliente = parser.parseCJSON(json);//llamado a un metodo que crea un objeto cliete a mano a partir del string
         Usuario user = null;
         try {
             Service.instance().crearCliente(cliente);
@@ -77,7 +80,7 @@ public class User {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Cliente c) {
+    public void update(Cliente cliente) {
         try {
             //Service.instance().clienteUpdate(p);
         } catch (Exception ex) {

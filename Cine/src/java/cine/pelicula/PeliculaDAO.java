@@ -1,8 +1,9 @@
-
 package cine.pelicula;
 
-
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,41 +14,55 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Database;
 
-
 public class PeliculaDAO {
-    
+
     private Database db;
     private static PeliculaDAO instancia;
-    
-    
-    PeliculaDAO(){
+
+    PeliculaDAO() {
         db = Database.instance();
     }
-    
-    public static PeliculaDAO obtenerInstancia(){
-        if (instancia == null)
+
+    public static PeliculaDAO obtenerInstancia() {
+        if (instancia == null) {
             instancia = new PeliculaDAO();
+        }
         return instancia;
     }
-    
-    public void crear(Pelicula p) throws Exception {
 
+    public void insertImage(String id_Pelicula, InputStream image) throws Exception {
+                int read = 0;
+                byte[] bytes = new byte[1024];
+                while ((read = image.read(bytes)) != -1);
+        
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
 
-        
-        stm.setString(1, p.getNombre());
-        stm.setString(2, p.getDescripcion());
-        stm.setString(3, p.getDuracion());      
+        stm.setString(1, id_Pelicula);
+        stm.setBinaryStream(2, (InputStream) image  , (int) (read));
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
-    
-    public HashMap listarPeli(){
+
+    public void crear(Pelicula p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
+
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getDescripcion());
+        stm.setString(3, p.getDuracion());
+
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+
+    public HashMap listarPeli() {
         Pelicula resultado = null;
-        HashMap<String,Pelicula> peliculas = new HashMap<>();
+        HashMap<String, Pelicula> peliculas = new HashMap<>();
         try {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(PeliculaCRUD.CMD_LISTAR)) {
@@ -59,7 +74,6 @@ public class PeliculaDAO {
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
                                 rs.getString("descripcion")
-                                
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -73,9 +87,9 @@ public class PeliculaDAO {
             return peliculas;
         }
         return peliculas;
-    
+
     }
- 
+
     public Pelicula recuperar(String id) {
         Pelicula resultado = null;
         try {
@@ -89,7 +103,7 @@ public class PeliculaDAO {
                                 rs.getString("id_Pelicula"),
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
-                                rs.getString("descripcion") 
+                                rs.getString("descripcion")
                         );
                     }
                 }
@@ -103,7 +117,7 @@ public class PeliculaDAO {
         }
         return resultado;
     }
- 
+
     public void eliminar(String p) throws Exception {
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ELIMINAR);
         stm.setString(1, p);
@@ -113,7 +127,4 @@ public class PeliculaDAO {
         }
     }
 
-    
 }
-
-

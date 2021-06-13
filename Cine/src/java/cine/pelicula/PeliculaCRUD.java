@@ -22,4 +22,17 @@ public class PeliculaCRUD {
             = "DELETE FROM Pelicula "
             + "WHERE id_Pelicula = ?; ";
     
+    /******************************IMAGES******************************************************************************************************/
+       protected static final String CMD_LISTAR_IMAGES
+            = "SELECT id, image FROM Images "
+            + "ORDER BY id;";
+       
+        protected static final String CMD_AGREGAR_IMAGE
+            = "INSERT INTO Images (id, image) "
+            + "VALUES (?, ?); ";
+
+    protected static final String CMD_RECUPERAR_IMAGE
+            = "SELECT image FROM Images "
+            + "WHERE id = ?; ";
+    
 }

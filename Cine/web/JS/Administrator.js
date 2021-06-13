@@ -53,7 +53,7 @@ function Cartelera(){
         hora_inicio:$("#Hinicio").val(),
         hora_fin:$("#Hfinal").val(),
         pelicula:$("#idP").val(),
-        sala:$("#idS").val(),
+        sala:$("#idS").val()
     };
     let request = new Request(url+'api/admin/cartelera', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(cartelera)});
         (async ()=>{
@@ -62,10 +62,19 @@ function Cartelera(){
             $('#modalCartelera').modal('hide');           
         })(); 
 }
+//Images/spiderman.jpg
 
 
-
-
+  function addImagen(){
+    var imagenData = new FormData();
+    imagenData.append("id_pelicula", pelicula.id_pelicula);
+    imagenData.append("imagen", $("#imagen").get(0).files[0]);
+    let request = new Request(url+'api/personas/'+pelicula.id_pelicula+"/image", {method: 'POST',body: imagenData});
+    (async ()=>{
+        const response = await fetch(request);
+        if (!response.ok) {errorMessage(response.status,$("#add-modal #errorDiv"));return;}
+    })();
+  }
 
 
 

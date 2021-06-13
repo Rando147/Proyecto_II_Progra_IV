@@ -7,6 +7,7 @@ public class Pelicula {
     String nombre;
     String descripcion;
     String duracion;
+    //final Part image;
 
     public Pelicula() {
     }
