@@ -32,10 +32,11 @@ public class PeliculaDAO {
 
     public void insertImage(String id_Pelicula, InputStream image) throws Exception {
                 int read = 0;
-                byte[] bytes = new byte[1024];
-                while ((read = image.read(bytes)) != -1);
+                byte[] bytes = new byte[10000];
+                read = image.read(bytes);
+                //while ((read = image.read(bytes)) != -1);
         
-        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR_IMAGE);
 
         stm.setString(1, id_Pelicula);
         stm.setBinaryStream(2, (InputStream) image  , (int) (read));
@@ -48,7 +49,7 @@ public class PeliculaDAO {
 
     public void crear(Pelicula p) throws Exception {
 
-        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR_IMAGE);
 
         stm.setString(1, p.getNombre());
         stm.setString(2, p.getDescripcion());

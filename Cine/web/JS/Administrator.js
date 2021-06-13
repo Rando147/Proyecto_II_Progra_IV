@@ -14,6 +14,9 @@ function loadPelicula() {
 function resetPelicula() {
     pelicula = {pelicula: "", descripcion: "", duracion: ""};
 }
+function resetSala() {
+    sala = {sala: "", asientos: ""};
+}
 
 function Pelicula() {
 //    pelicula = {
@@ -112,10 +115,11 @@ function Cartelera() {
 
 
 function addImagen() {
+    loadPelicula();
     var imagenData = new FormData();
     imagenData.append("id_pelicula", pelicula.id_pelicula);
-    imagenData.append("imagen", $("#imagen").get(0).files[0]);
-    let request = new Request(url + 'api/personas/' + pelicula.id_pelicula + "/image", {method: 'POST', body: imagenData});
+    imagenData.append("image", $("#imagen").get(0).files[0]);
+    let request = new Request(url + 'api/admin/' + pelicula.idPelicula + "/image", {method: 'POST', body: imagenData});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -146,7 +150,6 @@ function load() {
 //            $("#cartelera").click(cartelera);
 //            console.log("LOAD ADMINISTRADOR");
 //        })();  
-
 
     $("#peliculaRegister").click(Pelicula);
     $("#salaRegister").click(Sala);

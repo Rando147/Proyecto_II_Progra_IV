@@ -53,8 +53,8 @@ public class Administrador {
     
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA) 
-    @Path("{id_pelicula}/image")
-    public void addImage(@PathParam("id_pelicula") String id_pelicula, @FormDataParam("image") InputStream imageStream) {  
+    @Path("{id}/image")
+    public void addImage(@PathParam("id") String id_pelicula, @FormDataParam("image") InputStream imageStream) {  
         try{
             
             
