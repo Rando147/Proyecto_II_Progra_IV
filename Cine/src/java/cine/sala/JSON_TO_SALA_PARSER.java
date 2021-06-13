@@ -1,39 +1,25 @@
 
-package cine.cliente;
+package cine.sala;
 
-import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
 
-/**
- *
- * @author boyro
- */
-public class JSON_TO_CLIENTE_PARSER {
 
-    public JSON_TO_CLIENTE_PARSER() {
-    }
-
-    public Cliente parseCJSON(String json) {
-        Cliente cliente = null;
+public class JSON_TO_SALA_PARSER {
+ 
+    public Sala parseCJSON(String json) {
+        Sala aux = null;
         try {
             Object obj = new JSONParser().parse(json);
             JSONObject jo = (JSONObject) obj;
 
-            String firstName = (String) jo.get("nombre");
-            String lastName = (String) jo.get("apellidos");
-            String id = (String) jo.get("id");
-            String pass = (String) jo.get("password");
-            String numero_cuenta = (String) jo.get("numero_cuenta");
-            cliente = new Cliente(id,pass, firstName,lastName,numero_cuenta);
+            String sala = (String) jo.get("idSala");
+            String asientos = (String) jo.get("asientos");
+            aux = new Sala(sala,asientos);
             } catch (Exception ec) {
 
         }
-        return cliente;
+        return aux;
     }
     
 //
@@ -67,6 +53,4 @@ public class JSON_TO_CLIENTE_PARSER {
 //                    System.out.println(pair.getKey() + " : " + pair.getValue());
 //                }
 //            }
-        
-
 }

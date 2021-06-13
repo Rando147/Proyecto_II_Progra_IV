@@ -1,42 +1,30 @@
 
-package cine.cliente;
+package cine.cartelera;
 
-import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
 
-/**
- *
- * @author boyro
- */
-public class JSON_TO_CLIENTE_PARSER {
 
-    public JSON_TO_CLIENTE_PARSER() {
-    }
-
-    public Cliente parseCJSON(String json) {
-        Cliente cliente = null;
+public class JSON_TO_CARTELERA_PARSER {
+    public Cartelera parseCJSON(String json) {
+        Cartelera aux = null;
         try {
             Object obj = new JSONParser().parse(json);
             JSONObject jo = (JSONObject) obj;
 
-            String firstName = (String) jo.get("nombre");
-            String lastName = (String) jo.get("apellidos");
-            String id = (String) jo.get("id");
-            String pass = (String) jo.get("password");
-            String numero_cuenta = (String) jo.get("numero_cuenta");
-            cliente = new Cliente(id,pass, firstName,lastName,numero_cuenta);
+            String fecha = (String) jo.get("fecha");
+            String hi = (String) jo.get("horaInicio");
+            String hf = (String) jo.get("horaFin");
+            String idp = (String) jo.get("IdpeliC");
+            String idc = (String) jo.get("IdSalaC");
+            aux = new Cartelera(fecha,hi,hf,idp,idc);
             } catch (Exception ec) {
 
         }
-        return cliente;
+        return aux;
     }
+   
     
-//
 //            System.out.println(firstName);
 //            System.out.println(lastName);
 //
@@ -67,6 +55,4 @@ public class JSON_TO_CLIENTE_PARSER {
 //                    System.out.println(pair.getKey() + " : " + pair.getValue());
 //                }
 //            }
-        
-
 }

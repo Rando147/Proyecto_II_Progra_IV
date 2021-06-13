@@ -27,13 +27,14 @@ public class Cartelera {
         this.sala = sala;
     }
 
-//    public Cartelera(Date fecha_funcion, Time hora_inicio, Time hora_fin, String pelicula, String sala) {
-//        this.fecha_funcion = fecha_funcion;
-//        this.hora_inicio = hora_inicio;
-//        this.hora_fin = hora_fin;
-//        this.pelicula = pelicula;
-//        this.sala = sala;
-//    }
+    public Cartelera(String fecha_funcion, String hora_inicio, String hora_fin, String pelicula, String sala) {
+        this.fecha_funcion = fecha_funcion;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.pelicula = pelicula;
+        this.sala = sala;
+    }
+
     
 
     public String getId() {

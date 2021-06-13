@@ -34,17 +34,17 @@ public class CarteleraDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(CarteleraCRUD.CMD_AGREGAR);
 
-//        //stm.setString(1, p.getId());
-//        stm.setDate(1, (Date) p.getFecha_funcion());
-//        stm.setTime(2, p.getHora_inicio());
-//        stm.setTime(3, p.getHora_fin()); 
+        //stm.setString(1, p.getId());
+//        stm.setString(1,  p.getFecha_funcion());
+//        stm.setString(2, p.get);
+//        stm.setString(3, p.getHora_fin()); 
 //        stm.setString(4, p.getPelicula());
 //        stm.setString(5, p.getSala());
-//
-//        int count = Database.instance().executeUpdate(stm);
-//        if (count == 0) {
-//            throw new Exception("duplicado");
-//        }
+
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
     }
     
      

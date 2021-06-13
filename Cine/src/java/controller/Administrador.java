@@ -2,7 +2,12 @@
 package controller;
 
 import cine.cartelera.Cartelera;
+import cine.cartelera.JSON_TO_CARTELERA_PARSER;
+import cine.cliente.Cliente;
+import cine.cliente.JSON_TO_CLIENTE_PARSER;
+import cine.pelicula.JSON_TO_PELICULA_PARSER;
 import cine.pelicula.Pelicula;
+import cine.sala.JSON_TO_SALA_PARSER;
 import cine.sala.Sala;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,39 +30,42 @@ import javax.ws.rs.core.Response;
 import logic.Service;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
 @Path("admin")
 @PermitAll
 public class Administrador {
       String location="C:/AAA/images/";
+      
+      
     @POST
     @Path("pelicula")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crear(Pelicula p){
+    public void crearPeli(String json){
+        JSON_TO_PELICULA_PARSER parser = new JSON_TO_PELICULA_PARSER();
+        Pelicula p = parser.parseCJSON(json);
     try {
             Service.instance().crearPelicula(p);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
+    
+    
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA) 
     @Path("{id_pelicula}/image")
     public void addImage(@PathParam("id_pelicula") String id_pelicula, @FormDataParam("image") InputStream imageStream) {  
         try{
             
-            int x = 0;
+            
             Service.instance().insertarIMagen(id_pelicula, imageStream);
-//                int read = 0;
-//                byte[] bytes = new byte[1024];
-//
-//                OutputStream out = new FileOutputStream(new File(location + id_pelicula));
-//                while ((read = imageStream.read(bytes)) != -1){out.write(bytes, 0, read);}
-//                out.flush();
-//                out.close();
+
             } catch (Exception ex) {
                 throw new NotAcceptableException(); 
             }
     }
+    
+    
     @GET
     @Path("{id_pelicula}/imagen")
     @Produces("image/png")
@@ -67,15 +75,16 @@ public class Administrador {
         ResponseBuilder response = Response.ok((Object) file);
         return response.build();
     }    
-    // se lo dije pedazo de playo xD   
-    //@QueryParam("sala") String sala, @QueryParam("asientos") String asientos
+  
+    
     @POST
     @Path("sala")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crear(String aux){
+    public void crearSala(String json){
+        JSON_TO_SALA_PARSER parser = new JSON_TO_SALA_PARSER();
+        Sala sala = parser.parseCJSON(json);
     try {
-        int x=0; 
-            //Service.instance().crearSala(aux);
+            Service.instance().crearSala(sala);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
@@ -84,10 +93,11 @@ public class Administrador {
     @POST
     @Path("cartelera")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crear(Cartelera aux){
+    public void crear(String json){
+        JSON_TO_CARTELERA_PARSER parser = new JSON_TO_CARTELERA_PARSER();
+        Cartelera c = parser.parseCJSON(json);
     try {
-            System.out.print(aux);
-            //Service.instance().crearCartelera(c);
+            Service.instance().crearCartelera(c);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }

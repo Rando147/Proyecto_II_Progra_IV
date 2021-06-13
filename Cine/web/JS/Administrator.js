@@ -1,24 +1,21 @@
 
-var url="http://localhost:8080/Cine/";
-var sala={sala:"", asientos:""};
-var pelicula = {id:"",nombre:"",descripcion:"",duracion:""};
+var url = "http://localhost:8080/Cine/";
 
 
-function loadPelicula(){
-    pelicula = Object.fromEntries( (new FormData($("#forPeli").get(0))).entries());
-}
-function resetPelicula(){
-    pelicula = {id:"",nombre:"",descripcion:"",duracion:""};
-}
 
-function loadSala(){
-        sala = Object.fromEntries( (new FormData($("#forSala").get(0))).entries());
-    }
-function resetSala(){
-    sala={sala:"", asientos:""};
+
+//-----------------------------------------pelicula-------------------------------------------------
+var pelicula = {pelicula: "", descripcion: "", duracion: ""};
+
+function loadPelicula() {
+    pelicula = Object.fromEntries((new FormData($("#forPeli").get(0))).entries());
 }
 
-function Pelicula(){
+function resetPelicula() {
+    pelicula = {pelicula: "", descripcion: "", duracion: ""};
+}
+
+function Pelicula() {
 //    pelicula = {
 //        id: $("#idpeli").val(),
 //        nombre:$("#nombrepeli").val(),
@@ -26,55 +23,107 @@ function Pelicula(){
 //        duracion:$("#duracionpeli").val(),
 //    };
     loadPelicula();
-    let request = new Request(url+'api/admin/pelicula', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(pelicula)});
-        (async ()=>{
-            const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-            $('#modalPelicula').modal('hide'); 
-            resetPelicula();
-        })(); 
+    let request = new Request(url + 'api/admin/pelicula', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(pelicula)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        $('#modalPelicula').modal('hide');
+        resetPelicula();
+    })();
 }
 
-function Sala(){
+
+//-----------------------------------------sala-------------------------------------------------
+var sala = {idSala: "", asientos: ""};
+
+function loadSala() {
+    sala = Object.fromEntries((new FormData($("#forSala").get(0))).entries());
+}
+
+function resetSala() {
+    sala = {idSala: "", asientos: ""};
+}
+
+function Sala() {
     loadSala();
     console.log(sala);
-    let request = new Request(url+'api/admin/sala', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(sala)});
-        (async ()=>{
-            const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-            $('#modalSala').modal('hide');  
-            resetSala();
-        })(); 
+    let request = new Request(url + 'api/admin/sala', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(sala)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        $('#modalSala').modal('hide');
+        resetSala();
+    })();
 }
 
-function Cartelera(){
-    cartelera = {
-        fecha_funcion:$("#fecha").val(),
-        hora_inicio:$("#Hinicio").val(),
-        hora_fin:$("#Hfinal").val(),
-        pelicula:$("#idP").val(),
-        sala:$("#idS").val()
-    };
-    let request = new Request(url+'api/admin/cartelera', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(cartelera)});
-        (async ()=>{
-            const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-            $('#modalCartelera').modal('hide');           
-        })(); 
+
+//-----------------------------------------Cartelera-------------------------------------------------
+var cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+
+function loadCartelera(){
+    cartelera = Object.fromEntries((new FormData($("#forCart").get(0))).entries());
 }
-//Images/spiderman.jpg
+
+function resetCartelera(){
+    cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+}
+
+function Cartelera() {
+//    cartelera = {
+//        fecha_funcion: $("#fecha").val(),
+//        hora_inicio: $("#Hinicio").val(),
+//        hora_fin: $("#Hfinal").val(),
+//        pelicula: $("#idP").val(),
+//        sala: $("#idS").val()
+//    };
+    loadCartelera();
+    let request = new Request(url + 'api/admin/cartelera', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(cartelera)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        $('#modalCartelera').modal('hide');
+        resetCartelera();
+    })();
+}
 
 
-  function addImagen(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addImagen() {
     var imagenData = new FormData();
     imagenData.append("id_pelicula", pelicula.id_pelicula);
     imagenData.append("imagen", $("#imagen").get(0).files[0]);
-    let request = new Request(url+'api/personas/'+pelicula.id_pelicula+"/image", {method: 'POST',body: imagenData});
-    (async ()=>{
+    let request = new Request(url + 'api/personas/' + pelicula.id_pelicula + "/image", {method: 'POST', body: imagenData});
+    (async () => {
         const response = await fetch(request);
-        if (!response.ok) {errorMessage(response.status,$("#add-modal #errorDiv"));return;}
+        if (!response.ok) {
+            errorMessage(response.status, $("#add-modal #errorDiv"));
+            return;
+        }
     })();
-  }
+}
 
 
 
@@ -85,8 +134,8 @@ function Cartelera(){
 
 
 
-function load(){
-        //let request = new Request(url+'index.html', {method: 'GET'});
+function load() {
+    //let request = new Request(url+'index.html', {method: 'GET'});
 //        (async ()=>{
 //            const response = await fetch(request);
 //            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
@@ -97,11 +146,11 @@ function load(){
 //            $("#cartelera").click(cartelera);
 //            console.log("LOAD ADMINISTRADOR");
 //        })();  
-        
-        
-            $("#peliculaRegister").click(Pelicula);
-            $("#salaRegister").click(Sala);
-            $("#cartRegister").click(Cartelera);
-  }
-  
-  $(load);  
+
+
+    $("#peliculaRegister").click(Pelicula);
+    $("#salaRegister").click(Sala);
+    $("#cartRegister").click(Cartelera);
+}
+
+$(load);  
