@@ -4,7 +4,6 @@ package cine.cartelera;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,12 +33,11 @@ public class CarteleraDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(CarteleraCRUD.CMD_AGREGAR);
 
-        //stm.setString(1, p.getId());
-//        stm.setString(1,  p.getFecha_funcion());
-//        stm.setString(2, p.get);
-//        stm.setString(3, p.getHora_fin()); 
-//        stm.setString(4, p.getPelicula());
-//        stm.setString(5, p.getSala());
+        stm.setString(1, p.getFecha_funcion());
+        stm.setString(2, p.getHora_inicio());
+        stm.setString(3, p.getHora_fin()); 
+        stm.setString(4, p.getPelicula());
+        stm.setString(5, p.getSala());
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
@@ -58,12 +56,12 @@ public class CarteleraDAO {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cartelera(
-//                                rs.getString("id"),
-//                                rs.getDate("fecha_funcion"),
-//                                rs.getTime("hora_inicio"),
-//                                rs.getTime("hora_fin"),
-//                                rs.getString("pelicula"),
-//                                rs.getString("sala")      
+                                rs.getString("id"),
+                                rs.getString("fecha_funcion"),
+                                rs.getString("hora_inicio"),
+                                rs.getString("hora_fin"),
+                                rs.getString("pelicula"),
+                                rs.getString("sala")      
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -91,12 +89,12 @@ public class CarteleraDAO {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cartelera(
-//                                rs.getString("id"),
-//                                rs.getDate("fecha_funcion"),
-//                                rs.getTime("hora_inicio"),
-//                                rs.getTime("hora_fin"),
-//                                rs.getString("pelicula"),
-//                                rs.getString("sala") 
+                                rs.getString("id"),
+                                rs.getString("fecha_funcion"),
+                                rs.getString("hora_inicio"),
+                                rs.getString("hora_fin"),
+                                rs.getString("pelicula"),
+                                rs.getString("sala") 
                         );
                     }
                 }

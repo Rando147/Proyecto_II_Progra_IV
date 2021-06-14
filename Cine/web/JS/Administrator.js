@@ -2,8 +2,7 @@
 var url = "http://localhost:8080/Cine/";
 
 
-
-
+  
 //-----------------------------------------pelicula-------------------------------------------------
 var pelicula = {pelicula: "", descripcion: "", duracion: ""};
 
@@ -19,12 +18,6 @@ function resetSala() {
 }
 
 function Pelicula() {
-//    pelicula = {
-//        id: $("#idpeli").val(),
-//        nombre:$("#nombrepeli").val(),
-//        descripcion:$("#descripeli").val(),
-//        duracion:$("#duracionpeli").val(),
-//    };
     loadPelicula();
     let request = new Request(url + 'api/admin/pelicula', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(pelicula)});
     (async () => {
@@ -48,6 +41,7 @@ function loadSala() {
 
 function resetSala() {
     sala = {idSala: "", asientos: ""};
+    limpiar();
 }
 
 function Sala() {
@@ -61,6 +55,8 @@ function Sala() {
             return;
         }
         $('#modalSala').modal('hide');
+        
+       
         resetSala();
     })();
 }
@@ -78,13 +74,6 @@ function resetCartelera(){
 }
 
 function Cartelera() {
-//    cartelera = {
-//        fecha_funcion: $("#fecha").val(),
-//        hora_inicio: $("#Hinicio").val(),
-//        hora_fin: $("#Hfinal").val(),
-//        pelicula: $("#idP").val(),
-//        sala: $("#idS").val()
-//    };
     loadCartelera();
     let request = new Request(url + 'api/admin/cartelera', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(cartelera)});
     (async () => {
@@ -94,20 +83,10 @@ function Cartelera() {
             return;
         }
         $('#modalCartelera').modal('hide');
+        
         resetCartelera();
     })();
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,10 +113,6 @@ function addImagen() {
 
 
 
-
-
-
-
 function load() {
     //let request = new Request(url+'index.html', {method: 'GET'});
 //        (async ()=>{
@@ -150,6 +125,7 @@ function load() {
 //            $("#cartelera").click(cartelera);
 //            console.log("LOAD ADMINISTRADOR");
 //        })();  
+
 
     $("#peliculaRegister").click(Pelicula);
     $("#salaRegister").click(Sala);

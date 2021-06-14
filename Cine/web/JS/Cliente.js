@@ -1,5 +1,7 @@
 
 var url = "http://localhost:8080/Cine/";
+
+
 function register() {
     console.log("REGISTER");
     //if (!loginValidar()) return;
