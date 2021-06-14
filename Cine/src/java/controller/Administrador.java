@@ -1,10 +1,10 @@
-
 package controller;
 
 import cine.cartelera.Cartelera;
 import cine.cartelera.JSON_TO_CARTELERA_PARSER;
 import cine.cliente.Cliente;
 import cine.cliente.JSON_TO_CLIENTE_PARSER;
+import cine.pelicula.Image;
 import cine.pelicula.JSON_TO_PELICULA_PARSER;
 import cine.pelicula.Pelicula;
 import cine.sala.JSON_TO_SALA_PARSER;
@@ -34,78 +34,91 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 @Path("admin")
 @PermitAll
 public class Administrador {
-      String location="C:/AAA/images/";
-      
-      
+
+    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+
     @POST
     @Path("pelicula")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crearPeli(String json){
+    public void crearPeli(String json) {
         JSON_TO_PELICULA_PARSER parser = new JSON_TO_PELICULA_PARSER();
         Pelicula p = parser.parseCJSON(json);
-    try {
+        try {
             Service.instance().crearPelicula(p);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
-    
-    
-    @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA) 
-    @Path("{id}/image")
-    public void addImage(@PathParam("id") String id_pelicula, @FormDataParam("image") InputStream imageStream) {  
-        try{
-            
-            
-            Service.instance().insertarIMagen(id_pelicula, imageStream);
 
-            } catch (Exception ex) {
-                throw new NotAcceptableException(); 
-            }
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Path("{id}/image")
+    public void addImage(@PathParam("id") String id_pelicula, @FormDataParam("image") InputStream imageStream) {
+        try {
+
+            Service.instance().insertarImagen(id_pelicula, imageStream);
+
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
     }
-    
-    
+
     @GET
-    @Path("{id_pelicula}/imagen")
+    @Path("{id}/imagen")
     @Produces("image/png")
-    public Response getImge(@PathParam("id_pelicula") String id_pelicula) throws IOException {
-        
-        File file = new File(location+ id_pelicula);
-        ResponseBuilder response = Response.ok((Object) file);
-        return response.build();
-    }    
-  
-    
+    public Response getImge(@PathParam("id") String id_pelicula) throws IOException {
+        try {
+            File file = new File(location + id_pelicula+".jpg");
+            //Image image = Service.instance().getImagen("1");
+            ResponseBuilder response = Response.ok((Object) file);
+            return response.build();
+
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
+
+//    @GET
+//    @Path("{id}/imagen")
+//    //@Produces("image/png")
+//    //@Produces(MediaType.MULTIPART_FORM_DATA)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    //public Response getImge(@PathParam("id") String id_pelicula) throws IOException {
+//    public Image getImge(@PathParam("id") String id_pelicula) throws IOException {
+//        try {
+//            //File file = new File(location + id_pelicula);
+//            Image image = Service.instance().getImagen(id_pelicula);
+//        //    ResponseBuilder response = Response.ok((Object) image);
+//           // return response.build();
+//            return image;
+//        } catch (Exception ex) {
+//            throw new NotAcceptableException();
+//        }
+//    }
     @POST
     @Path("sala")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crearSala(String json){
+    public void crearSala(String json) {
         JSON_TO_SALA_PARSER parser = new JSON_TO_SALA_PARSER();
         Sala sala = parser.parseCJSON(json);
-    try {
+        try {
             Service.instance().crearSala(sala);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
-    
+
     @POST
     @Path("cartelera")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crear(String json){
+    public void crear(String json) {
         JSON_TO_CARTELERA_PARSER parser = new JSON_TO_CARTELERA_PARSER();
         Cartelera c = parser.parseCJSON(json);
-    try {
+        try {
             Service.instance().crearCartelera(c);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
-    
+
 }
-
-
-
-
-

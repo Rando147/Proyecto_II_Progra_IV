@@ -62,8 +62,11 @@ public class ModelPeli {
         dao.eliminar(id);
     }
 
-    public void insertarIMagen(String id_Pelicula, InputStream image) throws Exception {
+    public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {
         dao.insertImage(id_Pelicula, image);
+    }
+    public Image getImagen(String id_Pelicula) throws Exception {
+       return dao.getImage(id_Pelicula);
     }
 
 }

@@ -6,6 +6,7 @@ import cine.cartelera.Cartelera;
 import cine.cartelera.ModelCart;
 import cine.cliente.Cliente;
 import cine.cliente.ModelCli;
+import cine.pelicula.Image;
 import cine.pelicula.ModelPeli;
 import cine.pelicula.Pelicula;
 import cine.sala.ModelSala;
@@ -44,8 +45,12 @@ public class Service {
         return ModelPeli.instance().retornaLista();
     }
 
-    public void insertarIMagen(String id_Pelicula, InputStream image) throws Exception {
-        ModelPeli.instance().insertarIMagen(id_Pelicula, image);
+    public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {
+        ModelPeli.instance().insertarImagen(id_Pelicula, image);
+    }
+    public Image getImagen(String id_Pelicula) throws Exception {
+        
+        return ModelPeli.instance().getImagen(id_Pelicula);
     }
 
     //------------------------------------------------------Salas--------------------------------------------------------------------
