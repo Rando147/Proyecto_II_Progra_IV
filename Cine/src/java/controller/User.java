@@ -44,7 +44,7 @@ public class User {
             logged = (Cliente)Service.instance().getCliente(usuario.getId());
         } catch (Exception ex) {
             try {
-                //logged = Service.instance().getAdmin(usuario.get);
+                logged = Service.instance().getAdmin(usuario.getId());
             } catch (Exception ex2) {
                 
             }

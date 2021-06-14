@@ -78,8 +78,8 @@ public class Service {
     }
 
     //------------------------------------------------------Cliente--------------------------------------------------------------------
-    public Cliente getCliente(String nombre) throws Exception {
-        return ModelCli.instance().getCliente(nombre);
+    public Cliente getCliente(String id) throws Exception {
+        return ModelCli.instance().getCliente(id);
     }
 
     public void crearCliente(Cliente P) throws Exception {
@@ -91,8 +91,8 @@ public class Service {
     }
 
     //------------------------------------------------------Administrador-------------------------------------------------------------
-    public Administrador getAdmin(String nombre) throws Exception {
-        return ModelAdmin.instance().getAdmin(nombre);
+    public Administrador getAdmin(String id) throws Exception {
+        return ModelAdmin.instance().getAdmin(id);
     }
 
     public void crearAdmin(Administrador P) throws Exception {

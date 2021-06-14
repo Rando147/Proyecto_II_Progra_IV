@@ -2,14 +2,12 @@ var url = "http://localhost:8080/Cine/";
 
 
 function login() {
-    console.log("LOGIN");
     //if (!loginValidar()) return;
     usuario = {
         id: $("#id").val(),
         password: $("#password").val(),
         type: "LOGIN"
     };
-    console.log(usuario);
     let request = new Request(url + 'api/usuario/login', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(usuario)});
     (async () => {
         const response = await fetch(request);
@@ -22,11 +20,10 @@ function login() {
         $('#modalLogin').modal('hide');
         switch (usuario.type) {
             case 'ADMINISTRATOR':
-                console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html"; 
+                console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html";
                 break;
             case 'CLIENTE':
-                console.log("LOGIN CLIENTE");//document.location = url+"about.html"; 
-                console.log(usuario);
+                console.log("LOGIN CLIENTE");//document.location = url+"about.html";
                 break;
         }
     })();
@@ -77,24 +74,8 @@ function errorMessage(status, place) {
     return;
 }
 
-function openLoginModal(){
-    $('#modalLogin').modal('show');
-    
-    
-    $('#login-cancelar-btn').on('click', ()=>{
-        $('#modalLogin').modal('hide');
-        
-    });
-    $('#login-exit-btn').on('click', ()=>{
-        $('#modalLogin').modal('hide');
-        
-    });
-     
-     
-}
-
 function loadLogin() {
-    $('#login-aceptar-btn').click(login);
+    $('#login-aceptar-btn').click(login);//Se carga el listener para el boton de accion para hacer login
     console.log("LOAD LOGIN");
 }
 

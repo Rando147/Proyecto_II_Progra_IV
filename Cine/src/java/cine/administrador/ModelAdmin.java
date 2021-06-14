@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class ModelAdmin {
     
     private static ModelAdmin uniqueInstance;
-    HashMap<String, Administrador> admin;
-    AdministradorDAO dao;
+    private Administrador admin;
+    private AdministradorDAO dao;
     
     public static ModelAdmin instance() {
         if (uniqueInstance == null) {
@@ -21,8 +21,10 @@ public class ModelAdmin {
         this.dao = new AdministradorDAO();
     }
     
-    private void listaAdministradors() {
-        admin = dao.listarAdmin();
+   
+    
+    private void getAdministradorDB(String id) {
+        admin = dao.recuperar(id);
     }
 
     //crear, obtener por XXXX, listar, eliminar*** 
@@ -30,18 +32,12 @@ public class ModelAdmin {
         dao.crear(p);
     }
     
-    public Administrador getAdmin(String nombre) throws Exception {
-        listaAdministradors();
-        Administrador result = null;
-        for (Administrador p : admin.values()) {
-            if (p.getId().contains(nombre)) {
-                return p;
-            }
+    public Administrador getAdmin(String cedula) throws Exception {
+        getAdministradorDB(cedula);
+        if (admin == null) {
+            throw new Exception("Cliente no existe");
         }
-        if (result == null) {
-            throw new Exception("Administrador no existe");
-        }
-        return result;
+        return admin;
     }
     
     public void eliminar(String id) throws Exception{

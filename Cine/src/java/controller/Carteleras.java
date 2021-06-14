@@ -28,8 +28,9 @@ import javax.ws.rs.core.Response;
 @Path("cartelera")
 @PermitAll
 public class Carteleras {
-
-    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    
+    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    String location = "home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})

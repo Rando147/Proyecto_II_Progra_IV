@@ -23,9 +23,7 @@ public class ModelCli {
     private void getClienteDB(String id) {
         cliente = dao.recuperar(id);
     }
-
     
-
     public void insertar(Cliente p) throws Exception {
         dao.crear(p);
     }

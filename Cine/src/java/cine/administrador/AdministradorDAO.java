@@ -68,7 +68,8 @@ public class AdministradorDAO {
     
     }
     
-    public Administrador recuperar(int id) {
+    public Administrador recuperar(String cedula) {
+        int id = Integer.parseInt(cedula);
         Administrador resultado = null;
         try {
             try (Connection cnx = db.getConnection();
