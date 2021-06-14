@@ -13,9 +13,11 @@ import cine.sala.ModelSala;
 import cine.sala.Sala;
 import cine.ticket.ModelTicket;
 import cine.ticket.Ticket;
+import cine.usuario.Model;
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 public class Service {
 
@@ -45,11 +47,16 @@ public class Service {
         return ModelPeli.instance().retornaLista();
     }
 
+    public List<Pelicula> peliculasListAll() {
+        return ModelPeli.instance().peliculasListAll();
+    }
+
     public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {
         ModelPeli.instance().insertarImagen(id_Pelicula, image);
     }
+
     public Image getImagen(String id_Pelicula) throws Exception {
-        
+
         return ModelPeli.instance().getImagen(id_Pelicula);
     }
 

@@ -35,10 +35,13 @@ public class ModelPeli {
     }
 
     public HashMap retornaLista() {
-        peliculas = dao.listarPeli();
+        listaPeliculas();
         return peliculas;
     }
-
+    public List<Pelicula> peliculasListAll() {
+        listaPeliculas();
+        return new ArrayList(peliculas.values());
+    } 
     //crear, obtener por XXXX, listar, eliminar*** 
     public void insertar(Pelicula p) throws Exception {
         dao.crear(p);

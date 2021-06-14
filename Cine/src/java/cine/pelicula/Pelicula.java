@@ -7,6 +7,7 @@ public class Pelicula {
     String nombre;
     String descripcion;
     String duracion;
+    String precio;
     //final Part image;
 
     public Pelicula() {
@@ -17,6 +18,13 @@ public class Pelicula {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
+    }
+       public Pelicula(String id, String nombre,  String duracion, String descripcion,String precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.precio = precio;
     }
 
     public String getId() {

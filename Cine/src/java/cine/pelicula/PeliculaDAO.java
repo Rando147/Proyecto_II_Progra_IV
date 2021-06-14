@@ -150,12 +150,13 @@ public class PeliculaDAO {
                     PreparedStatement stm = cnx.prepareStatement(PeliculaCRUD.CMD_LISTAR)) {
                 stm.clearParameters();
                 try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
+                    while (rs.next()) {
                         resultado = new Pelicula(
                                 rs.getString("id_Pelicula"),
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
-                                rs.getString("descripcion")
+                                rs.getString("descripcion"),
+                                rs.getString("precio")
                         );
                         peliculas.put(resultado.getId(), resultado);
 
