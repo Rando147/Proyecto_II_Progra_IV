@@ -77,39 +77,48 @@
                                     us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal"
+                                <a class="nav-link" id="nav-register-btn" href="#" data-bs-toggle="modal"
                                    data-bs-target="#modalRegistro">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal"
-                                   data-bs-target="#modalLogin" id="show-login-btn" >Login</a>
+                                <a class="nav-link"  id="nav-login-btn" href="#" data-bs-toggle="modal"
+                                   data-bs-target="#modalLogin" >Login</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    Usuario
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Ver compras</a></li>
-                                    <li>
+                                <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false"></a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu">
+                                    <li id="nav-dropdown-compras">
+                                        <a class="dropdown-item" id="nav-compras-btn" href="#">Ver compras</a>
+                                    </li>
+                                    <li id="nav-dropdown-compras-divider">
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Logout</a></li>
-                                    <li>
+                                    <li id="nav-dropdown-pelicula">
+                                        <a class="dropdown-item" id="nav-dropdown-pelicula-btn" href="#" data-bs-toggle="modal"
+                                           data-bs-target="#modalPelicula">Pelicula</a>
+                                    </li>
+                                    <li id="nav-dropdown-pelicula-divider">
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalPelicula">Pelicula</a></li>
-                                    <li>
+                                    <li id="nav-dropdown-sala">
+                                        <a class="dropdown-item" id="nav-dropdown-sala-btn" href="#" data-bs-toggle="modal"
+                                           data-bs-target="#modalSala">Sala</a>
+                                    </li>
+                                    <li id="nav-dropdown-sala-divider">
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalSala">Sala</a></li>
-                                    <li>
+                                    <li id="nav-dropdown-cartelera">
+                                        <a class="dropdown-item" id="nav-dropdown-cartelera-btn" href="#" data-bs-toggle="modal"
+                                           data-bs-target="#modalCartelera">Cartelera</a>
+                                    </li>
+                                    <li id="nav-dropdown-cartelera-divider">
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalCartelera">Cartelera</a></li>
+                                    <li>
+                                        <a class="dropdown-item" id="nav-dropdown-logout" href="#">Logout</a>
+                                    </li>
+                                    
                                 </ul>
                             </li>
                         </ul>
@@ -298,7 +307,7 @@
                             </td>
                         </tr>
                         <!--form></form-->
-                        <<tr>
+                        <tr>
                             <td class="curso-izquierda">Imagen:</td>
                             <td class="curso-derecha">
                                 <input class = "curso-derecha" name="imagen" id="imagen" type="file" required>
@@ -454,8 +463,6 @@
                     </tr>
 
                 </table>
-
-
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" id="register">Registrar</button>

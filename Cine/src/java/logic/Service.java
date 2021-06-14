@@ -14,6 +14,7 @@ import cine.sala.Sala;
 import cine.ticket.ModelTicket;
 import cine.ticket.Ticket;
 import cine.usuario.Model;
+import cine.usuario.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -23,6 +24,7 @@ import java.util.List;
 public class Service {
 
     private static Service uniqueInstance;
+    private Usuario loggedUsr;
 
     public static Service instance() {
         if (uniqueInstance == null) {
@@ -138,6 +140,14 @@ public class Service {
         return ModelCart.instance().cartelerasGetArray();
     }
 
+    
+    public void login(Usuario usr){
+        loggedUsr = usr;
+    }
+    
+    public void logout(){
+        loggedUsr = null;
+    }
 //    private static Service uniqueInstance;
 //    HashMap<String,Pelicula> peliculas;
 //    HashMap<String,Usuario> usuarios;

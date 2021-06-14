@@ -65,12 +65,12 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                                 <p class="card-text">`
                 + movieDescripcion +
                 `</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+                                <div class="d-flex justify-content-between align-items-center" id="btn-group-container">
+                                    <div class="btn-group" >
                                         <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie">
                                             View
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        
                                     </div>
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>

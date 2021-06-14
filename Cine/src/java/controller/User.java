@@ -6,6 +6,7 @@ import cine.usuario.Usuario;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -55,6 +56,7 @@ public class User {
         if (!logged.getPassword().equals(usuario.getPassword())) {
             throw new NotAcceptableException("Clave incorrecta");
         }
+        Service.instance().login(logged);
         logged.setPassword(null);//Borra el password del usuario
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
@@ -89,10 +91,12 @@ public class User {
     }
 
     @DELETE
+    @Path("logout")
     public void logout() {
-//        HttpSession session = request.getSession(true);
-//        session.removeAttribute("Usuario");           
-//        session.invalidate();
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("Usuario");           
+        session.invalidate();
+        Service.instance().logout();
     }
 
 //    @GET

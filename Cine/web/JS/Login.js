@@ -20,25 +20,87 @@ function login() {
         $('#modalLogin').modal('hide');
         switch (usuario.type) {
             case 'ADMINISTRATOR':
-                console.log("LOGIN ADMINISTRATOR");//document.location = url+"listado.html";
+                showAdminOptions();
                 break;
             case 'CLIENTE':
-                console.log("LOGIN CLIENTE");//document.location = url+"about.html";
+                showClientOptions();
                 break;
         }
     })();
+}
+
+function showAdminOptions() {
+    usuario = JSON.parse(sessionStorage.getItem('Usuario'));
+    $('#nav-register-btn').hide();
+    $('#nav-login-btn').hide();
+    $('#nav-usuario-dropdown').html(`Administrador: ` + usuario.id);
+
+    $('#nav-dropdown-compras').hide();
+    $('#nav-dropdown-compras-divider').hide();
+
+    $('#nav-dropdown-pelicula').show();
+    $('#nav-dropdown-pelicula-divider').show();
+
+    $('#nav-dropdown-sala').show();
+    $('#nav-dropdown-sala-divider').show();
+
+    $('#nav-dropdown-cartelera').show();
+    $('#nav-dropdown-cartelera-divider').show();
+
+    $('#nav-usuario-dropdown').show();
+
+    //addAdminEditOption();
+}
+
+function addAdminEditOption() {
+    $('.col').children('#btn-group-container').each(() =>{
+        var element = this;
+        //this.append('<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>');
+        //newButton = this.find('#btn-group-container');
+        //newButton.append('<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>');
+        
+    });
+    //
 
 }
-function show() {
-    alert('Hola');
+
+function showClientOptions() {
+    usuario = JSON.parse(sessionStorage.getItem('Usuario'));
+    $('#nav-register-btn').hide();
+    $('#nav-login-btn').hide();
+    $('#nav-usuario-dropdown').html(usuario.id);
+
+
+    $('#nav-dropdown-compras').show();
+    $('#nav-dropdown-compras-divider').show();
+
+    $('#nav-dropdown-pelicula').hide();
+    $('#nav-dropdown-pelicula-divider').hide();
+
+    $('#nav-dropdown-sala').hide();
+    $('#nav-dropdown-sala-divider').hide();
+
+    $('#nav-dropdown-cartelera').hide();
+    $('#nav-dropdown-cartelera-divider').hide();
+
+    $('#nav-usuario-dropdown').show();
 }
+function showNotLoggedOptions() {
+    $('#nav-usuario-dropdown').hide();
+}
+function showLogoutOptions() {//Muetra las opciones despues de logout
+    $('#nav-register-btn').show();
+    $('#nav-login-btn').show();
+    $('#nav-usuario-dropdown').hide();
+}
+
 function loginValidar() {
     $("#loginForm").addClass("was-validated");
     return $("#loginForm").get(0).checkValidity();
 }
 
 function logout() {
-    let request = new Request(url + 'api/login', {method: 'DELETE', headers: {}});
+    let request = new Request(url + 'api/usuario/logout', {method: 'DELETE', headers: {}});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -46,8 +108,10 @@ function logout() {
             return;
         }
         sessionStorage.removeItem('user');
-        document.location = url + "about.html";
+        fetchAndListMovies();
+        showLogoutOptions();
     })();
+    console.log("Logged out");
 }
 
 function errorMessage(status, place) {
@@ -75,8 +139,10 @@ function errorMessage(status, place) {
 }
 
 function loadLogin() {
-    $('#login-aceptar-btn').click(login);//Se carga el listener para el boton de accion para hacer login
+    $('#login-aceptar-btn').click(login);
+    showNotLoggedOptions();
     console.log("LOAD LOGIN");
+    $('#nav-dropdown-logout').on('click', logout);
 }
 
 $(loadLogin);
