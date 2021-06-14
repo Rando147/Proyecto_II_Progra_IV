@@ -1,6 +1,8 @@
 package cine.cartelera;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModelCart {
 
@@ -20,14 +22,22 @@ public class ModelCart {
     }
 
     private void listaCarteleras() {
+        cleanHash();
         carteleras = dao.listarCart();
     }
 
     public HashMap retornaLista() {
-        carteleras = dao.listarCart();
+        listaCarteleras();
         return carteleras;
     }
-
+    void cleanHash(){
+    if(!carteleras.isEmpty())
+        carteleras.clear();
+    }
+    public List<Cartelera> cartelerasGetArray() {
+        listaCarteleras();
+        return new ArrayList(carteleras.values());
+    } 
     public void insertar(Cartelera p) throws Exception {
         dao.crear(p);
     }

@@ -36,6 +36,7 @@ public class ModelPeli {
     }
 
     public HashMap retornaLista() {
+        cleanHash();
         listaPeliculas();
         return peliculas;
     }

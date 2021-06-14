@@ -45,10 +45,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
             ];
 
     var listaPeliculasContainer = $("#movie-cards-container");
-    console.log("listaPeliculasContainer");
     resetMoviesContainer();
-    //loadImage();
-    //fetchAndListMovies();
     peliculas.forEach((item) => {
         var movieID = item.id;
         var movieName = item.nombre;
@@ -91,7 +88,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
 function fetchAndListMovies(){
     peliculas =[];
     resetMoviesContainer();
-    let request = new Request(url+'api/cartelera', {method: 'GET', headers: { }});
+    let request = new Request(url+'api/cartelera/peliculas', {method: 'GET', headers: { }});
     (async ()=>{
         const response = await fetch(request);
         if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
@@ -100,6 +97,29 @@ function fetchAndListMovies(){
         
     })();    
   } 
+  function fetchAndListCarteleras(){
+    peliculas =[];
+    resetMoviesContainer();
+    let request = new Request(url+'api/cartelera/carteleras', {method: 'GET', headers: { }});
+    (async ()=>{
+        const response = await fetch(request);
+        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+        //peliculas = await response.json();
+        loadMoviesListing();      
+    })();    
+  }
+  function fetchAndListTicketss(){
+    peliculas =[];
+    resetMoviesContainer();
+    let request = new Request(url+'api/cartelera/tickets', {method: 'GET', headers: { }});
+    (async ()=>{
+        const response = await fetch(request);
+        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+        //peliculas = await response.json();
+        loadMoviesListing(); 
+        
+    })();    
+  }
 function view(idPelicula) {
 
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID

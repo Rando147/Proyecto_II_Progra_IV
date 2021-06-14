@@ -5,7 +5,9 @@
  */
 package controller;
 
+import cine.cartelera.Cartelera;
 import cine.pelicula.Pelicula;
+import cine.ticket.Ticket;
 import logic.Service;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,14 +32,30 @@ import javax.ws.rs.core.Response;
 @PermitAll
 public class Carteleras {
     
-    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    String location = "home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    //String location = "home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
 
     @GET
+    @Path("peliculas")
     @Produces({MediaType.APPLICATION_JSON})
     public List<Pelicula> listAll() {
         return Service.instance().peliculasListAll();
     }
+    @GET
+    @Path("carteleras")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Cartelera> listAllCartelera() {
+        return Service.instance().getListaCarteleras();
+    }
+    
+    @GET
+    @Path("tickets")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Ticket> listAllTicket() {
+        return Service.instance().getListaTickets();
+    }
+    
+    
 
     @GET
     @Path("{id}/imagen")

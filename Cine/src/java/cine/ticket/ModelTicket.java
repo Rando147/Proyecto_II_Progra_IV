@@ -1,6 +1,8 @@
 package cine.ticket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModelTicket {
 
@@ -20,12 +22,24 @@ public class ModelTicket {
     }
 
     private void listaTickets() {
+        cleanHash();
         ticketes = dao.listarTicket();
     }
 
     public HashMap retornaLista() {
-        ticketes = dao.listarTicket();
+        listaTickets();
         return ticketes;
+    }
+
+    void cleanHash() {
+        if (!ticketes.isEmpty()) {
+            ticketes.clear();
+        }
+    }
+
+    public List<Ticket> retornaArrayList() {
+        listaTickets();
+        return new ArrayList(ticketes.values());
     }
 
     public void insertar(Ticket p) throws Exception {

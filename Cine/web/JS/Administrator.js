@@ -9,14 +9,12 @@ var pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
 function loadPelicula() {
     pelicula = Object.fromEntries((new FormData($("#forPeli").get(0))).entries());
 }
-
 function resetPelicula() {
     pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
 }
 function resetSala() {
     sala = {sala: "", asientos: ""};
 }
-
 function Pelicula() {
     loadPelicula();
     let request = new Request(url + 'api/admin/pelicula', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(pelicula)});
@@ -32,7 +30,6 @@ function Pelicula() {
     })();
     fetchAndListMovies();
 }
-
 
 //-----------------------------------------sala-------------------------------------------------
 var sala = {idSala: "", asientos: ""};
@@ -63,7 +60,6 @@ function Sala() {
     })();
 }
 
-
 //-----------------------------------------Cartelera-------------------------------------------------
 var cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
 
@@ -91,10 +87,6 @@ function Cartelera() {
 }
 
 
-
-
-
-
 function addImagen() {
     var imagenData = new FormData();
     imagenData.append("id_pelicula", pelicula.id);
@@ -108,9 +100,11 @@ function addImagen() {
         }
     })();
 }
+
 var image = {
     base64Image :"Images/spiderman.jpg"
 };
+
 function loadImage(){   
        //'"+url+"api/personas/"+persona.cedula+"/imagen'  
    console.log("imagenData");
@@ -159,14 +153,6 @@ function loadImage(){
 }
 
 
-
-
-
-
-
-
-
-
 function load() {
     //let request = new Request(url+'index.html', {method: 'GET'});
 //        (async ()=>{
@@ -178,7 +164,7 @@ function load() {
 //            $("#sala").click(sala);
 //            $("#cartelera").click(cartelera);
 //            console.log("LOAD ADMINISTRADOR");
-//        })();  
+//        })();
     //$("#peliculaRegister").click(loadImage);
     //$("#peliculaRegister").click(addImagen);
     $("#peliculaRegister").click(Pelicula);
@@ -186,4 +172,4 @@ function load() {
     $("#cartRegister").click(Cartelera);
 }
 
-$(load);  
+$(load);

@@ -117,8 +117,8 @@ public class Service {
         ModelTicket.instance().eliminar(id);
     }
 
-    public HashMap getListaTickets() {
-        return ModelTicket.instance().retornaLista();
+    public List<Ticket> getListaTickets() {
+        return ModelTicket.instance().retornaArrayList();
     }
 
     //------------------------------------------------------Cartelera------------------------------------------------------------------
@@ -134,8 +134,8 @@ public class Service {
         ModelCart.instance().eliminar(id);
     }
 
-    public HashMap getListaCarteleras() {
-        return ModelCart.instance().retornaLista();
+    public List<Cartelera> getListaCarteleras() {
+        return ModelCart.instance().cartelerasGetArray();
     }
 
 //    private static Service uniqueInstance;
