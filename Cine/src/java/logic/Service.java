@@ -15,6 +15,7 @@ import cine.ticket.ModelTicket;
 import cine.ticket.Ticket;
 import cine.usuario.Model;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,7 @@ public class Service {
         ModelPeli.instance().insertarImagen(id_Pelicula, image);
     }
 
-    public Image getImagen(String id_Pelicula) throws Exception {
+    public File getImagen(String id_Pelicula) throws Exception {
 
         return ModelPeli.instance().getImagen(id_Pelicula);
     }

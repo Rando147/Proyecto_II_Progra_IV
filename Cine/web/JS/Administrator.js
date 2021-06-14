@@ -4,14 +4,14 @@ var url = "http://localhost:8080/Cine/";
 
   
 //-----------------------------------------pelicula-------------------------------------------------
-var pelicula = {pelicula: "", descripcion: "", duracion: ""};
+var pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
 
 function loadPelicula() {
     pelicula = Object.fromEntries((new FormData($("#forPeli").get(0))).entries());
 }
 
 function resetPelicula() {
-    pelicula = {pelicula: "", descripcion: "", duracion: ""};
+    pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
 }
 function resetSala() {
     sala = {sala: "", asientos: ""};
@@ -23,12 +23,14 @@ function Pelicula() {
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
-            errorMessage(response.status, $("#loginDialog #errorDiv"));
-            return;
-        }
+            errorMessage(response.status, $("#loginDialog #errorDiv")); return; }
+            resetPelicula();
+            pelicula = await response.json();
         $('#modalPelicula').modal('hide');
+        addImagen();
         resetPelicula();
     })();
+    fetchAndListMovies();
 }
 
 
@@ -94,11 +96,10 @@ function Cartelera() {
 
 
 function addImagen() {
-    loadPelicula();
     var imagenData = new FormData();
-    imagenData.append("id_pelicula", pelicula.id_pelicula);
+    imagenData.append("id_pelicula", pelicula.id);
     imagenData.append("image", $("#imagen").get(0).files[0]);
-    let request = new Request(url + 'api/admin/' + pelicula.idPelicula + "/image", {method: 'POST', body: imagenData});
+    let request = new Request(url + 'api/admin/' + pelicula.id + "/image", {method: 'POST', body: imagenData});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -179,6 +180,7 @@ function load() {
 //            console.log("LOAD ADMINISTRADOR");
 //        })();  
     //$("#peliculaRegister").click(loadImage);
+    //$("#peliculaRegister").click(addImagen);
     $("#peliculaRegister").click(Pelicula);
     $("#salaRegister").click(Sala);
     $("#cartRegister").click(Cartelera);

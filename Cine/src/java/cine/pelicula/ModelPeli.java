@@ -3,6 +3,7 @@ package cine.pelicula;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,6 +39,10 @@ public class ModelPeli {
         listaPeliculas();
         return peliculas;
     }
+    void cleanHash(){
+    if(!peliculas.isEmpty())
+        peliculas.clear();
+    }
     public List<Pelicula> peliculasListAll() {
         listaPeliculas();
         return new ArrayList(peliculas.values());
@@ -52,7 +57,8 @@ public class ModelPeli {
         Pelicula result = null;
         for (Pelicula p : peliculas.values()) {
             if (p.getNombre().contains(nombre)) {
-                return p;
+                result = p;
+                return result;
             }
         }
         if (result == null) {
@@ -68,7 +74,7 @@ public class ModelPeli {
     public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {
         dao.insertImage(id_Pelicula, image);
     }
-    public Image getImagen(String id_Pelicula) throws Exception {
+    public File getImagen(String id_Pelicula) throws Exception {
        return dao.getImage(id_Pelicula);
     }
 

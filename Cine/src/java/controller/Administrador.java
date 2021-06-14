@@ -36,15 +36,27 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 public class Administrador {
 
     String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-
+    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    @GET
+    @Path("{name}/peli")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Pelicula getImge(@PathParam("name") String name) throws IOException {
+        try {       
+        return Service.instance().getPelicula(name);
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
     @POST
     @Path("pelicula")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void crearPeli(String json) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Pelicula crearPeli(String json) {
         JSON_TO_PELICULA_PARSER parser = new JSON_TO_PELICULA_PARSER();
         Pelicula p = parser.parseCJSON(json);
         try {
             Service.instance().crearPelicula(p);
+            return Service.instance().getPelicula(p.getNombre());
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
@@ -55,29 +67,32 @@ public class Administrador {
     @Path("{id}/image")
     public void addImage(@PathParam("id") String id_pelicula, @FormDataParam("image") InputStream imageStream) {
         try {
-
-            Service.instance().insertarImagen(id_pelicula, imageStream);
-
+            int read = 0;
+                byte[] bytes = new byte[10000];
+                OutputStream out = new FileOutputStream(new File(location + id_pelicula));
+                while ((read = imageStream.read(bytes)) != -1){out.write(bytes, 0, read);}
+                out.flush();
+                out.close();
+            //Service.instance().insertarImagen("2", imageStream);
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
     }
 
-    @GET
-    @Path("{id}/imagen")
-    @Produces("image/png")
-    public Response getImge(@PathParam("id") String id_pelicula) throws IOException {
-        try {
-            File file = new File(location + id_pelicula+".jpg");
-            //Image image = Service.instance().getImagen("1");
-            ResponseBuilder response = Response.ok((Object) file);
-            return response.build();
-
-        } catch (Exception ex) {
-            throw new NotAcceptableException();
-        }
-    }
-
+//    @GET
+//    @Path("{id}/imagen")
+//    @Produces("image/png")
+//    public Response getImge(@PathParam("id") String id_pelicula) throws IOException {
+////        try {
+////            File file = new File(location + id_pelicula+".jpg");
+////            FileOutputStream image = Service.instance().getImagen("1");
+////            ResponseBuilder response = Response.ok((Object) image);
+////            return response.build();
+////
+////        } catch (Exception ex) {
+////            throw new NotAcceptableException();
+////        }
+//    }
 //    @GET
 //    @Path("{id}/imagen")
 //    //@Produces("image/png")

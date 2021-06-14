@@ -34,40 +34,45 @@ public class PeliculaDAO {
 
     public void insertImage(String id_Pelicula, InputStream image) throws Exception {
         int read = 0;
-        byte[] bytes = new byte[10000];
-        read = image.read(bytes);
+        //byte[] bytes = new byte[10000];
+        //read = image.read(bytes);
 
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR_IMAGE);
 
         stm.setString(1, id_Pelicula);
-        stm.setBinaryStream(2, (InputStream) image, (int) (read));
-
+        //stm.setBinaryStream(2, (InputStream) image, (int) (read));
+        stm.setBinaryStream(2, (InputStream) image);
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
 
-    public Image getImage(String id_Pelicula) throws Exception {
+    public File getImage(String id_Pelicula) throws Exception {
         Image imagen = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try {
+            file = new File(id_Pelicula + ".png");
+            fos = new FileOutputStream(file);
+            byte imageBytes[] = new byte[10000];
+            //Blob imageBlob;
+            InputStream binaryStream;
+            PreparedStatement ps = Database.instance().prepareStatement(PeliculaCRUD.CMD_RECUPERAR_IMAGE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //imageBlob = rs.getBlob("image");
+                binaryStream = rs.getBinaryStream("image");
+                while (binaryStream.read(imageBytes) > 0) {
+                    fos.write(imageBytes);
+                }
 
-//        try {
-        //File file = new File("E:\\image1.png");
-        //FileOutputStream fos = new FileOutputStream(file);
-//            byte imageBytes[];
-//            Blob imageBlob;
-//            InputStream binaryStream;
-//            PreparedStatement ps = Database.instance().prepareStatement(PeliculaCRUD.CMD_RECUPERAR_IMAGE);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                imageBlob = rs.getBlob("image");
-//                binaryStream = imageBlob.getBinaryStream(0, imageBlob.length());
-//                imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
-//                //fos.write(imageBytes);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+                return file;
+            }
+        } catch (Exception e) {
+
+        }
+        return file;
 //        try {
 //
 //            byte imageBytes[];
@@ -88,53 +93,54 @@ public class PeliculaDAO {
 //        } catch (Exception e) {
 //
 //        }
-        try {
-
-            PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_RECUPERAR_IMAGE);
-            stm.clearParameters();
-            stm.setString(1, id_Pelicula);
-            try (ResultSet result = stm.executeQuery()) {
-                if (result.next()) {
-                    imagen = new Image();
-                    Blob blob = result.getBlob("image");
-
-                    InputStream inputStream = blob.getBinaryStream();
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[10000];
-                    int bytesRead = -1;
-
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-
-                    byte[] imageBytes = outputStream.toByteArray();
-                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
-                    inputStream.close();
-                    outputStream.close();
-
-                    imagen.setBase64Image(base64Image);
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(PeliculaDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-                return imagen;
-            }
-
-        } catch (SQLException ex) {
-            throw ex;
-        }
-        return imagen;
+//        try {
+//
+//            PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_RECUPERAR_IMAGE);
+//            stm.clearParameters();
+//            stm.setString(1, id_Pelicula);
+//            try (ResultSet result = stm.executeQuery()) {
+//                if (result.next()) {
+//                    imagen = new Image();
+//                    Blob blob = result.getBlob("image");
+//
+//                    InputStream inputStream = blob.getBinaryStream();
+//                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//                    byte[] buffer = new byte[10000];
+//                    int bytesRead = -1;
+//
+//                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                        outputStream.write(buffer, 0, bytesRead);
+//                    }
+//
+//                    byte[] imageBytes = outputStream.toByteArray();
+//                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+//
+//                    inputStream.close();
+//                    outputStream.close();
+//
+//                    imagen.setBase64Image(base64Image);
+//                }
+//            } catch (Exception ex) {
+//                Logger.getLogger(PeliculaDAO.class
+//                        .getName()).log(Level.SEVERE, null, ex);
+//                return imagen;
+//            }
+//
+//        } catch (SQLException ex) {
+//            throw ex;
+//        }
+        //       return imagen;
     }
 
     /*-------------------------------------------------------------------------------------------*/
     public void crear(Pelicula p) throws Exception {
 
-        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR_IMAGE);
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_AGREGAR);
 
         stm.setString(1, p.getNombre());
-        stm.setString(2, p.getDescripcion());
-        stm.setString(3, p.getDuracion());
+        stm.setString(2, p.getDuracion());
+        stm.setString(3, p.getDescripcion());
+
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {

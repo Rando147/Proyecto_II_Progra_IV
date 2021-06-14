@@ -62,7 +62,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                                 preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
-                                <img x="50%" y="50%" dy=".3em" src="` + url + `api/admin/` + movieID + `/imagen" class="card-img-top" alt="">
+                                <img x="50%" y="50%" dy=".3em" src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             </svg>
                             <div class="card-body">
                                 <p class="card-text">`
@@ -89,6 +89,8 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
 }
 
 function fetchAndListMovies(){
+    peliculas =[];
+    resetMoviesContainer();
     let request = new Request(url+'api/cartelera', {method: 'GET', headers: { }});
     (async ()=>{
         const response = await fetch(request);
@@ -273,8 +275,8 @@ function loadImage() {
 }
 
 function resetMoviesContainer() {//Simplemente borra lo que tiene el array del Json
-    //console.log("MovieListing");
-    $("#lista-peliculas").empty();
+    //console.log("MovieListing"); lista-peliculas
+    $("#movie-cards-container").empty();
 }
 //loadMoviesListing
 

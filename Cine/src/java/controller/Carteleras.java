@@ -8,6 +8,7 @@ package controller;
 import cine.pelicula.Pelicula;
 import logic.Service;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.security.PermitAll;
@@ -43,8 +44,12 @@ public class Carteleras {
     @Produces("image/png")
     public Response getImge(@PathParam("id") String id_pelicula) throws IOException {
         try {
-            File file = new File(location + id_pelicula + ".jpg");
+            File file = new File(location + id_pelicula);
             //Image image = Service.instance().getImagen("1");
+            //Response.ResponseBuilder response = Response.ok((Object) file);
+            //File file = new File(location + id_pelicula + ".jpg");
+            //File file = Service.instance().getImagen("2");
+            //FileOutputStream image = Service.instance().getImagen("1");
             Response.ResponseBuilder response = Response.ok((Object) file);
             return response.build();
 
