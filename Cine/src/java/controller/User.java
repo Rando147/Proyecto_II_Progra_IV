@@ -60,6 +60,7 @@ public class User {
         logged.setPassword(null);//Borra el password del usuario
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
+        
     }
 
     @POST

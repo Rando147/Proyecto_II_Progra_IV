@@ -7,15 +7,15 @@ public class PeliculaCRUD {
             + "ORDER BY id_Pelicula;";
     
     protected static final String CMD_AGREGAR
-            = "INSERT INTO Pelicula (Nombre, duracion, descripcion) "
-            + "VALUES (?, ?, ?); ";
+            = "INSERT INTO Pelicula (Nombre, duracion, descripcion, precio) "
+            + "VALUES (?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
-            = "SELECT id_Pelicula, Nombre, duracion, descripcion FROM Pelicula "
+            = "SELECT id_Pelicula, Nombre, duracion, descripcion, precio FROM Pelicula "
             + "WHERE id_Pelicula = ?; ";
     
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ?"
+            = "UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ? , precio = ?"
             + "WHERE id_Pelicula = ?;";
     
     protected static final String CMD_ELIMINAR

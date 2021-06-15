@@ -140,6 +140,7 @@ public class PeliculaDAO {
         stm.setString(1, p.getNombre());
         stm.setString(2, p.getDuracion());
         stm.setString(3, p.getDescripcion());
+        stm.setString(4, p.getPrecio());
 
 
         int count = Database.instance().executeUpdate(stm);
@@ -194,7 +195,8 @@ public class PeliculaDAO {
                                 rs.getString("id_Pelicula"),
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
-                                rs.getString("descripcion")
+                                rs.getString("descripcion"),
+                                rs.getString("precio")
                         );
 
                     }

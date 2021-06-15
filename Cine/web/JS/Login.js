@@ -27,6 +27,8 @@ function login() {
                 break;
         }
     })();
+        $('#id').val('');
+        $('#password').val('');
 }
 
 function showAdminOptions() {

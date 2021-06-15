@@ -86,11 +86,10 @@
                                data-bs-target="#modalLogin" style="color: white;">Login</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false"></a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color : white"></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu" style="color : white">
                                 <li id="nav-dropdown-compras">
-                                    <a class="dropdown-item" id="nav-compras-btn" href="#" style="color: white;">Ver compras</a>
+                                    <a class="dropdown-item" id="nav-compras-btn" href="#" >Ver compras</a>
                                 </li>
                                 <li id="nav-dropdown-compras-divider">
                                     <hr class="dropdown-divider">
@@ -314,6 +313,11 @@
                             <td class="curso-derecha"> <input class="curso-derecha" name="duracion"  id="duracionpeli" type="text">
                             </td>
                         </tr>
+                        <tr>
+                            <td class="curso-izquierda">Precio:</td>
+                            <td class="curso-derecha"> <input class="curso-derecha" name="precio"  id="preciopeli" type="text">
+                            </td>
+                        </tr>
                         <!--form></form-->
                         <tr>
                             <td class="curso-izquierda">Imagen:</td>
@@ -326,7 +330,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary" id="peliculaRegister">Aceptar</button>
+                <button class="btn btn-primary" id="peliculaRegister" style="background-color: #1d2185;">Aceptar</button>
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
 
@@ -466,7 +470,7 @@
                     </tr>
                     <tr>
                         <td class="curso-izquierda">Password:</td>
-                        <td class="curso-derecha"> <input class="curso-derecha" id="passwordR" name="passwordR" type="text">
+                        <td class="curso-derecha"> <input class="curso-derecha" id="passwordR" name="passwordR" type="password">
                         </td>
                     </tr>
 

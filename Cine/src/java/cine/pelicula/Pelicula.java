@@ -59,5 +59,13 @@ public class Pelicula {
         this.duracion = duracion;
     }
 
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
    
 }

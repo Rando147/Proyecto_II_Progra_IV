@@ -32,6 +32,7 @@ function register() {
         usuario = await response.json();
         sessionStorage.setItem('Usuario', JSON.stringify(usuario));
         $('#modalRegistro').modal('hide');
+        
         switch (cliente.type) {
             case 'ADMINISTRATOR':
                 console.log("LOGIN ADMINISTRATOR"); //document.location = url+"listado.html"; 
@@ -41,6 +42,11 @@ function register() {
                 break;
         }
     })();
+    $('#idR').val('');
+    $('#nombre').val('');
+    $('#apellidos').val('');
+    $('#numero_cuenta').val('');
+    $('#passwordR').val('');
 }
 function errorMessage(status, place) {
     switch (status) {

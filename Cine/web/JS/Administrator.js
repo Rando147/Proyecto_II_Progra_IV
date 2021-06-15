@@ -2,16 +2,21 @@
 var url = "http://localhost:8080/Cine/";
 
 
-  
+
 //-----------------------------------------pelicula------------------------------------------------------------------------------------------------------------------------------------------------------------
-var pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
+var pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
 //var image = {base64Image :"Images/spiderman.jpg"};
 
 function loadPelicula() {
     pelicula = Object.fromEntries((new FormData($("#forPeli").get(0))).entries());
 }
 function resetPelicula() {
-    pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
+    pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
+    $('#nombrepeli').val('');
+    $('#descripeli').val('');
+    $('#duracionpeli').val('');
+    $('#preciopeli').val('');
+    
 }
 function resetSala() {
     sala = {sala: "", asientos: ""};
@@ -22,14 +27,18 @@ function Pelicula() {
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
-            errorMessage(response.status, $("#loginDialog #errorDiv")); return; }
-            resetPelicula();
-            pelicula = await response.json();
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        resetPelicula();
+        pelicula = await response.json();
         $('#modalPelicula').modal('hide');
         addImagen();
         resetPelicula();
+        
     })();
-    fetchAndListMovies();
+    setTimeout(() => {  fetchAndListMovies(); }, 400);
+   
 }
 
 
@@ -45,19 +54,23 @@ function addImagen() {
             return;
         }
     })();
+    $('#imagen').val('');
 }
 
-function loadImage(){   
-       //'"+url+"api/personas/"+persona.cedula+"/imagen'  
-   console.log("imagenData");
+function loadImage() {
+    //'"+url+"api/personas/"+persona.cedula+"/imagen'  
+    console.log("imagenData");
     var imagenData = new FormData();
     var id = 1;//pelicula.idPelicula
-    let request = new Request(url + 'api/admin/' + id  + "/imagen",{method: 'GET', headers: { }});
+    let request = new Request(url + 'api/admin/' + id + "/imagen", {method: 'GET', headers: {}});
     //let request = new Request(url + '/api/admin/1/image' ,{ method: 'GET', headers: { }});
-    (async ()=>{
+    (async () => {
         const response = await fetch(request);   //   /+"data:image/jpg;base64,${imagen.base64Image}" +
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
-        image = await response.json(); 
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        image = await response.json();
     })();
 
     //document.body.appendChild(image);
@@ -80,18 +93,18 @@ function loadImage(){
 //var formDataToUpload = new FormData(form);
 //formDataToUpload.append("image", blob);
 //    
-    
-    
-   //'"+url+"api/personas/"+persona.cedula+"/imagen'  
+
+
+    //'"+url+"api/personas/"+persona.cedula+"/imagen'  
     /*var imagenData = new FormData();
-    let request = new Request(url + 'api/admin/' + pelicula.idPelicula + "/image",{method: 'GET', headers: { }});*/
+     let request = new Request(url + 'api/admin/' + pelicula.idPelicula + "/image",{method: 'GET', headers: { }});*/
     //let request = new Request(url + '/api/admin/1/image' ,{ method: 'GET', headers: { }});
     /*(async ()=>{
-        const response = await fetch(request);      /+"data:image/jpg;base64,${imagen.base64Image}" +
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
-        imagenData = await response.MULTIPART_FORM_DATA();     
-        console.log(imagenData);
-    })();*/
+     const response = await fetch(request);      /+"data:image/jpg;base64,${imagen.base64Image}" +
+     if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+     imagenData = await response.MULTIPART_FORM_DATA();     
+     console.log(imagenData);
+     })();*/
 }
 
 
@@ -104,7 +117,9 @@ function loadSala() {
 
 function resetSala() {
     sala = {idSala: "", asientos: ""};
-    limpiar();
+    $('#idsala').val('');
+    $('#cantidadAsientos').val('');
+
 }
 
 function Sala() {
@@ -118,21 +133,27 @@ function Sala() {
             return;
         }
         $('#modalSala').modal('hide');
-        
-       
+
+
+
         resetSala();
     })();
 }
 
 //-----------------------------------------Cartelera--------------------------------------------------------------------------------------------------------------------------------------------------
-var cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+var cartelera = {fecha: "", Hinicio: "", Hfinal: "", IdpeliC: "", IdSalaC: ""};
 
-function loadCartelera(){
+function loadCartelera() {
     cartelera = Object.fromEntries((new FormData($("#forCart").get(0))).entries());
 }
 
-function resetCartelera(){
-    cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+function resetCartelera() {
+    cartelera = {fecha: "", Hinicio: "", Hfinal: "", IdpeliC: "", IdSalaC: ""};
+    $('#fecha').val('');
+    $('#Hinicio').val('');
+    $('#hfinal').val('');
+    $('#idP').val('');
+    $('#idS').val('');
 }
 
 function Cartelera() {
@@ -145,7 +166,7 @@ function Cartelera() {
             return;
         }
         $('#modalCartelera').modal('hide');
-        
+
         resetCartelera();
     })();
 }
