@@ -126,11 +126,10 @@ function errorMessage(status, place) {
     return;
 }
 
-function loadLogin() {
-    $('#login-aceptar-btn').click(login);
+function loadNavVarOptions() {
     showNotLoggedOptions();
-    console.log("LOAD LOGIN");
+    $('#login-aceptar-btn').click(login);
     $('#nav-dropdown-logout').on('click', logout);
 }
 
-$(loadLogin);
+$(loadNavVarOptions);

@@ -9,41 +9,6 @@ var peliculas = new Array();
 var pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
 function loadMoviesListing() { //Dentro de este metodo deberia ir el request al API para solicitar las peliculas de la cartelera
 
-    const moviesJson =
-            [
-                {
-                    "id_pelicula": "1",
-                    "nombre": "Spiderman",
-                    "duracion": "2.5 horas",
-                    "descripcion": "Luego de sufrir la picadura de una araña genéticamente modificada, un estudiante de secundaria tímido y torpe adquiere increíbles capacidades como arácnido. Pronto comprenderá que su misión es utilizarlas para luchar contra el mal y defender a sus vecinos."
-                },
-                {
-                    "id_pelicula": "2",
-                    "nombre": "El Conjuro 1",
-                    "duracion": "2.5 horas",
-                    "descripcion": "A principios de los años 70, Ed y Lorrain Warren, reputados investigadores de fenómenos paranormales, se enfrentan a una entidad demoníaca al intentar ayudar a una familia que está siendo aterrorizada por una presencia oscura en su aislada granja."
-                },
-                {
-                    "id_pelicula": "3",
-                    "nombre": "Black Dynamite",
-                    "duracion": "2 horas",
-                    "descripcion": "Después de que un hombre mata a su hermano y envenena a una comunidad con licor adulterado, un super atleta (Michael Jai White) especializado en kung fu inicia una guerra sangrienta que lo lleva hasta la Casa Blanca de Richard Nixon.."
-                },
-                {
-                    "id_pelicula": "4",
-                    "nombre": "El Conjuro 3",
-                    "duracion": "2.5 horas",
-                    "descripcion": "The Conjuring: The Devil Made Me Do It "
-                }
-                ,
-                {
-                    "id_pelicula": "5",
-                    "nombre": "El Conjuro 2 ",
-                    "duracion": " 2 h 13 min",
-                    "descripcion": "Una mujer solicita la ayuda de los Warren cuando su hija libera sin querer a un malévolo espíritu en su casa"
-                }
-            ];
-
     var listaPeliculasContainer = $("#movie-cards-container");
     resetMoviesContainer();
     var loggedUser = sessionStorage.getItem("Usuario");
@@ -345,9 +310,7 @@ function loadImage() {
 }
 
 function resetMoviesContainer() {//Simplemente borra lo que tiene el array del Json
-    //console.log("MovieListing"); lista-peliculas
     $("#movie-cards-container").empty();
 }
-//loadMoviesListing
 
 $(fetchAndListMovies);
