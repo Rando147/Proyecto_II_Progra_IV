@@ -49,19 +49,7 @@ function showAdminOptions() {
 
     $('#nav-usuario-dropdown').show();
 
-    //addAdminEditOption();
-}
-
-function addAdminEditOption() {
-    $('.col').children('#btn-group-container').each(() =>{
-        var element = this;
-        //this.append('<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>');
-        //newButton = this.find('#btn-group-container');
-        //newButton.append('<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>');
-        
-    });
-    //
-
+    fetchAndListMovies();
 }
 
 function showClientOptions() {
@@ -84,6 +72,7 @@ function showClientOptions() {
     $('#nav-dropdown-cartelera-divider').hide();
 
     $('#nav-usuario-dropdown').show();
+    fetchAndListMovies();
 }
 function showNotLoggedOptions() {
     $('#nav-usuario-dropdown').hide();
@@ -107,11 +96,10 @@ function logout() {
             errorMessage(response.status, $("#loginDialog #errorDiv"));
             return;
         }
-        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('Usuario');
         fetchAndListMovies();
         showLogoutOptions();
     })();
-    console.log("Logged out");
 }
 
 function errorMessage(status, place) {

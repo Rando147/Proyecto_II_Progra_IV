@@ -6,7 +6,7 @@ var picAdress = "Images/spiderman.jpg";
 var imageD = new Image();
 var image = new Image();
 var peliculas = new Array();
-var pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
+var pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
 function loadMoviesListing() { //Dentro de este metodo deberia ir el request al API para solicitar las peliculas de la cartelera
 
     const moviesJson =
@@ -46,14 +46,18 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
 
     var listaPeliculasContainer = $("#movie-cards-container");
     resetMoviesContainer();
+    var loggedUser = sessionStorage.getItem("Usuario");
+    var usuario = null;
+    if (loggedUser !== null)
+        usuario = JSON.parse(loggedUser);
+    
     peliculas.forEach((item) => {
         var movieID = item.id;
         var movieName = item.nombre;
         var movieDuration = item.duracion;
         var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
         var newListItem = $("<div />");
-        newListItem.html(
-                `<div class="col">
+        var clientCard = `<div class="col">
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="0px"
                                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
@@ -65,8 +69,8 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                                 <p class="card-text">`
                 + movieDescripcion +
                 `</p>
-                                <div class="d-flex justify-content-between align-items-center" id="btn-group-container">
-                                    <div class="btn-group" >
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie" style="background-color: #1d2185; color:white;">
                                             View
                                         </button>
@@ -76,50 +80,96 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                                 </div>
                             </div>
                         </div>
-                    </div>`
-                );
-        newListItem.find("#view-movie").on("click", () => {
-            view(movieID);
-        });
+                    </div>`;
+        var adminCard = `<div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="0px"
+                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                                preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <img x="50%" y="50%" dy=".3em" src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            </svg>
+                            <div class="card-body">
+                                <p class="card-text">`
+                + movieDescripcion +
+                `</p>
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="edit-movie" style="background-color: #1d2185; color:white;">
+                                            Edit
+                                        </button>
+                                        
+                                    </div>
+                                    <small class="text-muted">` + movieDuration + `</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+        
+        if (usuario === null){
+            newListItem.html(clientCard);
+            newListItem.find("#view-movie").on("click", () => {
+                view(movieID);
+            });
+        }
+        else if (usuario.type === "ADMINISTRATOR"){
+            newListItem.html(adminCard);
+        }
+        else{
+            newListItem.html(clientCard);
+            newListItem.find("#view-movie").on("click", () => {
+                view(movieID);
+            });
+        }
         listaPeliculasContainer.append(newListItem);
     });
 }
 
-function fetchAndListMovies(){
-    peliculas =[];
+function fetchAndListMovies() {
+    peliculas = [];
     resetMoviesContainer();
-    let request = new Request(url+'api/cartelera/peliculas', {method: 'GET', headers: { }});
-    (async ()=>{
+    let request = new Request(url + 'api/cartelera/peliculas', {method: 'GET', headers: {}});
+    (async () => {
         const response = await fetch(request);
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
         peliculas = await response.json();
-        loadMoviesListing(); 
-        
-    })();    
-  } 
-  function fetchAndListCarteleras(){
-    peliculas =[];
+        loadMoviesListing();
+
+    })();
+}
+function fetchAndListCarteleras() {
+    peliculas = [];
     resetMoviesContainer();
-    let request = new Request(url+'api/cartelera/carteleras', {method: 'GET', headers: { }});
-    (async ()=>{
+    let request = new Request(url + 'api/cartelera/carteleras', {method: 'GET', headers: {}});
+    (async () => {
         const response = await fetch(request);
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
         //peliculas = await response.json();
-        loadMoviesListing();      
-    })();    
-  }
-  function fetchAndListTicketss(){
-    peliculas =[];
+        loadMoviesListing();
+    })();
+}
+function fetchAndListTicketss() {
+    peliculas = [];
     resetMoviesContainer();
-    let request = new Request(url+'api/cartelera/tickets', {method: 'GET', headers: { }});
-    (async ()=>{
+    let request = new Request(url + 'api/cartelera/tickets', {method: 'GET', headers: {}});
+    (async () => {
         const response = await fetch(request);
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
         //peliculas = await response.json();
-        loadMoviesListing(); 
-        
-    })();    
-  }
+        loadMoviesListing();
+
+    })();
+}
 function view(idPelicula) {
 
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
