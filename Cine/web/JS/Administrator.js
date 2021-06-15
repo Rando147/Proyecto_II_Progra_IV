@@ -3,8 +3,9 @@ var url = "http://localhost:8080/Cine/";
 
 
   
-//-----------------------------------------pelicula-------------------------------------------------
+//-----------------------------------------pelicula------------------------------------------------------------------------------------------------------------------------------------------------------------
 var pelicula = {id: "", nombre: "", duracion: "",descripcion:"",precio:""};
+//var image = {base64Image :"Images/spiderman.jpg"};
 
 function loadPelicula() {
     pelicula = Object.fromEntries((new FormData($("#forPeli").get(0))).entries());
@@ -31,61 +32,6 @@ function Pelicula() {
     fetchAndListMovies();
 }
 
-//-----------------------------------------sala-------------------------------------------------
-var sala = {idSala: "", asientos: ""};
-
-function loadSala() {
-    sala = Object.fromEntries((new FormData($("#forSala").get(0))).entries());
-}
-
-function resetSala() {
-    sala = {idSala: "", asientos: ""};
-    limpiar();
-}
-
-function Sala() {
-    loadSala();
-    console.log(sala);
-    let request = new Request(url + 'api/admin/sala', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(sala)});
-    (async () => {
-        const response = await fetch(request);
-        if (!response.ok) {
-            errorMessage(response.status, $("#loginDialog #errorDiv"));
-            return;
-        }
-        $('#modalSala').modal('hide');
-        
-       
-        resetSala();
-    })();
-}
-
-//-----------------------------------------Cartelera-------------------------------------------------
-var cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
-
-function loadCartelera(){
-    cartelera = Object.fromEntries((new FormData($("#forCart").get(0))).entries());
-}
-
-function resetCartelera(){
-    cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
-}
-
-function Cartelera() {
-    loadCartelera();
-    let request = new Request(url + 'api/admin/cartelera', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(cartelera)});
-    (async () => {
-        const response = await fetch(request);
-        if (!response.ok) {
-            errorMessage(response.status, $("#loginDialog #errorDiv"));
-            return;
-        }
-        $('#modalCartelera').modal('hide');
-        
-        resetCartelera();
-    })();
-}
-
 
 function addImagen() {
     var imagenData = new FormData();
@@ -100,10 +46,6 @@ function addImagen() {
         }
     })();
 }
-
-var image = {
-    base64Image :"Images/spiderman.jpg"
-};
 
 function loadImage(){   
        //'"+url+"api/personas/"+persona.cedula+"/imagen'  
@@ -151,6 +93,64 @@ function loadImage(){
         console.log(imagenData);
     })();*/
 }
+
+
+//-----------------------------------------sala---------------------------------------------------------------------------------------------------------------------------------------------------------
+var sala = {idSala: "", asientos: ""};
+
+function loadSala() {
+    sala = Object.fromEntries((new FormData($("#forSala").get(0))).entries());
+}
+
+function resetSala() {
+    sala = {idSala: "", asientos: ""};
+    limpiar();
+}
+
+function Sala() {
+    loadSala();
+    console.log(sala);
+    let request = new Request(url + 'api/admin/sala', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(sala)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        $('#modalSala').modal('hide');
+        
+       
+        resetSala();
+    })();
+}
+
+//-----------------------------------------Cartelera--------------------------------------------------------------------------------------------------------------------------------------------------
+var cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+
+function loadCartelera(){
+    cartelera = Object.fromEntries((new FormData($("#forCart").get(0))).entries());
+}
+
+function resetCartelera(){
+    cartelera = {fecha:"",Hinicio:"",Hfinal:"",IdpeliC:"",IdSalaC:""};
+}
+
+function Cartelera() {
+    loadCartelera();
+    let request = new Request(url + 'api/admin/cartelera', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(cartelera)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        $('#modalCartelera').modal('hide');
+        
+        resetCartelera();
+    })();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 function load() {

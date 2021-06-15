@@ -2,13 +2,14 @@
 
 <html>
 
-    <head>
+    <head >
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.83.1">
-        <title>Cine 2000</title>
+        <title>JRD Cinema</title>
+        <link rel="shortcut icon" href="Images/palomitas.png">
 
         <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
@@ -27,7 +28,7 @@
         <script src="JS/Cliente.js"></script>
         <script src="JS/Login.js"></script>
         <script src="JS/Administrator.js"></script>
-        
+
 
         <style>
             .bd-placeholder-img {
@@ -45,118 +46,124 @@
             }
         </style>
 
- 
-    </head>
 
-    <body>
+    </head>
+    <header > 
 
         <!--###################################################################################NAVBAR#############################################################################################################-->
 
-        <header>
-            <!--img src="http://localhost:8080/Cine/api/admin/1/image/data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/--> 
-            <!--img src="data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/-->
-            
-            
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="Images/palomitas.png" style="width:50px; height:50px; ">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">About
-                                    us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-register-btn" href="#" data-bs-toggle="modal"
-                                   data-bs-target="#modalRegistro">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"  id="nav-login-btn" href="#" data-bs-toggle="modal"
-                                   data-bs-target="#modalLogin" >Login</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false"></a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu">
-                                    <li id="nav-dropdown-compras">
-                                        <a class="dropdown-item" id="nav-compras-btn" href="#">Ver compras</a>
-                                    </li>
-                                    <li id="nav-dropdown-compras-divider">
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li id="nav-dropdown-pelicula">
-                                        <a class="dropdown-item" id="nav-dropdown-pelicula-btn" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalPelicula">Pelicula</a>
-                                    </li>
-                                    <li id="nav-dropdown-pelicula-divider">
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li id="nav-dropdown-sala">
-                                        <a class="dropdown-item" id="nav-dropdown-sala-btn" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalSala">Sala</a>
-                                    </li>
-                                    <li id="nav-dropdown-sala-divider">
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li id="nav-dropdown-cartelera">
-                                        <a class="dropdown-item" id="nav-dropdown-cartelera-btn" href="#" data-bs-toggle="modal"
-                                           data-bs-target="#modalCartelera">Cartelera</a>
-                                    </li>
-                                    <li id="nav-dropdown-cartelera-divider">
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" id="nav-dropdown-logout" href="#">Logout</a>
-                                    </li>
-                                    
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
+
+        <!--img src="http://localhost:8080/Cine/api/admin/1/image/data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/--> 
+        <!--img src="data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/-->
+
+
+        <!-- navbar navbar-dark bg-primary         navbar navbar-expand-lg navbar-light bg-light-->
+        <nav class="navbar navbar-expand-lg navbar-light  paraelnav "  style="background-color: #1d2185; ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="Images/palomitas.png" style="width:50px; height:50px; ">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout" style="color: white;">About
+                                us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-register-btn" href="#" data-bs-toggle="modal"
+                               data-bs-target="#modalRegistro" style="color: white;">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  id="nav-login-btn" href="#" data-bs-toggle="modal"
+                               data-bs-target="#modalLogin" style="color: white;">Login</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu">
+                                <li id="nav-dropdown-compras">
+                                    <a class="dropdown-item" id="nav-compras-btn" href="#" style="color: white;">Ver compras</a>
+                                </li>
+                                <li id="nav-dropdown-compras-divider">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li id="nav-dropdown-pelicula">
+                                    <a class="dropdown-item" id="nav-dropdown-pelicula-btn" href="#" data-bs-toggle="modal"
+                                       data-bs-target="#modalPelicula">Pelicula</a>
+                                </li>
+                                <li id="nav-dropdown-pelicula-divider">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li id="nav-dropdown-sala">
+                                    <a class="dropdown-item" id="nav-dropdown-sala-btn" href="#" data-bs-toggle="modal"
+                                       data-bs-target="#modalSala">Sala</a>
+                                </li>
+                                <li id="nav-dropdown-sala-divider">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li id="nav-dropdown-cartelera">
+                                    <a class="dropdown-item" id="nav-dropdown-cartelera-btn" href="#" data-bs-toggle="modal"
+                                       data-bs-target="#modalCartelera">Cartelera</a>
+                                </li>
+                                <li id="nav-dropdown-cartelera-divider">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" id="nav-dropdown-logout" href="#">Logout</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
+                        <button class="btn btn-outline-success" type="submit" style="color:white">Search</button>
+                    </form>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
+
         <!--#####################################################################################################################################################################################################-->
 
 
 
 
-
+    </header>
+    <body style="background-color: #575755;">
         <!--###################################################################################CARDS#############################################################################################################-->
-        <main>
-            <div class="album py-5 bg-light">
-                <div class="container">
 
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="movie-cards-container">
-                    </div>
+        <div class="container"> 
+
+            <section class="main" style="background-color: #575755;"> 
+
+                <div class="album py-5 bg-light" style="background-color: #575755 !important;">
+
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="movie-cards-container" style="background-color: #575755;"> </div>
+
                 </div>
-            </div>
 
-        </main>
+            </section>
 
-        <footer class="text-muted py-5">
-            <div class="container">
+        </div>
+
+        <footer class="text-muted py-5" >
+            <div class="container" >
                 <p class="float-end mb-1">
-                    <a href="#">Back to top</a>
+                    <a href="#"style="color: #1d2185;">Back to top</a>
                 </p>
-                <p class="mb-1">II Proyecto de programacion IV</p>
-                <p class="mb-0">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
-                <p class="mb-0">Prof. José A. Sánchez S.</p>
-                <p class="mb-0">JRD Inc. ©2021.</p>
+                <p class="mb-1"style="color: white;">II Proyecto de programacion IV</p>
+                <p class="mb-0"style="color: white;">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
+                <p class="mb-0"style="color: white;">Prof. José A. Sánchez S.</p>
+                <p class="mb-0"style="color: white;">JRD Inc. ©2021.</p>
 
             </div>
         </footer>
@@ -168,6 +175,7 @@
 
 
     </body>
+
     <!--################################################################################################################################################################################################-->
 
 
@@ -177,31 +185,31 @@
 
     <!--###################################################################################MODALS#############################################################################################################-->
 
-    
+
 
     <!--###################################################################################ABOUT US#############################################################################################################-->
 
-    <div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1">
+    <div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAboutLabel">About Us</h5>
+                <div class="modal-header" style="background-color: #1d2185;">
+                    <h5 class="modal-title" id="modalAboutLabel" style="color : white">About Us</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"  ">
                     <div id="login-container">
 
-                        <h5 class="curso-centro">II Proyecto de Programacion IV</h5>
-                        <h5 class="curso-centro">Integrantes:</h5>
-                        <h5 class="curso-centro">Jose Flores</h5>
-                        <h5 class="curso-centro">Roy Rojas</h5>
-                        <h5 class="curso-centro">Diego Luna</h5>
+                        <h5 class="curso-centro" >II Proyecto de Programacion IV</h5>
+                        <h5 class="curso-centro" >Integrantes:</h5>
+                        <h5 class="curso-centro" >Jose Flores</h5>
+                        <h5 class="curso-centro" >Roy Rojas</h5>
+                        <h5 class="curso-centro" >Diego Luna</h5>
 
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" >
 
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Aceptar</button>
 
                 </div>
             </div>
@@ -213,9 +221,9 @@
     <div class="modal fade" id="modalHorarios" aria-hidden="true" aria-labelledby="modalHorariosLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLoginLabel">Horarios disponibles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #1d2185;">
+                    <h5 class="modal-title" id="modalLoginLabel" style="color : white">Horarios disponibles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #1d2185;"></button>
                 </div>
                 <div class="modal-body">
                     <div id="lista-horarios-container">
@@ -224,7 +232,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -238,9 +246,9 @@
          tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2">Butacas disponibles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #1d2185;">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2" style="color : white">Butacas disponibles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #1d2185;"></button>
                 </div>
                 <div class="modal-body">
                     <div class="theather-container">
@@ -267,7 +275,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -282,15 +290,15 @@
     <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalPeliculaLabel">Pelicula</h5>
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalPeliculaLabel" style="color : white">Pelicula</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
                 <form id="forPeli">
                     <table>
-                        
+
                         <tr>
                             <td class="curso-izquierda input-number">Nombre de la Pelicula:</td>
                             <td class="curso-derecha "> <input class="curso-derecha" name="pelicula" id="nombrepeli" type="text">
@@ -320,7 +328,7 @@
             <div class="modal-footer">
                 <button class="btn btn-primary" id="peliculaRegister">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
 
             </div>
         </div>
@@ -335,8 +343,8 @@
     <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalSalalaLabel">Sala</h5>
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalSalalaLabel" style="color : white">Sala</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="forSala">
@@ -357,9 +365,9 @@
                 </div>
             </form>  
             <div class="modal-footer">
-                <button class="btn btn-primary" id="salaRegister" >Aceptar</button>
+                <button class="btn btn-primary" id="salaRegister" style="background-color: #1d2185;">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
 
             </div>
         </div>
@@ -373,46 +381,46 @@
 <div class="modal fade" id="modalCartelera" aria-hidden="true" aria-labelledby="modalCarteleraLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCarteleraLabel">Cartelera</h5>
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalCarteleraLabel" style="color : white">Cartelera</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="forCart">
-                <table>
+                    <table>
 
-                    <tr>
-                        <td class="curso-izquierda input-number">Fecha de la funcion:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="fecha" id="fecha" type="Date">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Hora de inicio:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="horaInicio" id="Hinicio" type="Time">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Hora de final:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="horaFin" id="Hfinal" type="Time">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Id de la pelicula:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="IdpeliC" id="idP" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda input-number">Id de la sala:</td>
-                        <td class="curso-derecha "> <input class="curso-derecha" name="IdSalaC" id="idS" type="text">
-                        </td>
-                    </tr>
-                </table>
-                    </form>
+                        <tr>
+                            <td class="curso-izquierda input-number">Fecha de la funcion:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="fecha" id="fecha" type="Date">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Hora de inicio:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="horaInicio" id="Hinicio" type="Time">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Hora de final:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="horaFin" id="Hfinal" type="Time">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Id de la pelicula:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="IdpeliC" id="idP" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda input-number">Id de la sala:</td>
+                            <td class="curso-derecha "> <input class="curso-derecha" name="IdSalaC" id="idS" type="text">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="cartRegister">Aceptar</button>
+                <button class="btn btn-primary" id="cartRegister" style="background-color: #1d2185;">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
 
             </div>
         </div>
@@ -428,8 +436,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!--form-->
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalRegistroLabel" style="color : white">Registrarse</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -465,8 +473,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="register">Registrar</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="register" style="background-color: #1d2185;">Registrar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
             </div>
             <!--form-->
 
@@ -483,11 +491,11 @@
         <div class="modal-content">
             <!--form!-->
 
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLoginLabel">Login</h5>
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalLoginLabel" style="color : white">Login</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <table>
                     <tr>
                         <td class="curso-izquierda input-number">ID:</td>
@@ -504,9 +512,9 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" id="login-aceptar-btn"> Aceptar </button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" id="login-aceptar-btn" style="background-color: #1d2185;"> Aceptar </button>
 
-                <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
             </div>
             <!--/form!-->
 
