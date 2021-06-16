@@ -53,15 +53,16 @@ public class CarteleraDAO {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(CarteleraCRUD.CMD_LISTAR)) {
                 stm.clearParameters();
+                //stm.setInt(7,1);
                 try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
+                    while (rs.next()) {
                         resultado = new Cartelera(
-                                rs.getString("id"),
-                                rs.getString("fecha_funcion"),
-                                rs.getString("hora_inicio"),
-                                rs.getString("hora_fin"),
-                                rs.getString("pelicula"),
-                                rs.getString("sala")      
+                                rs.getString("id_Cartelera"),
+                                rs.getString("fecha_Funcion"),
+                                rs.getString("hora_Inicio"),
+                                rs.getString("hora_Fin"),
+                                rs.getString("id_Pelicula"),
+                                rs.getString("id_Sala")   
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -89,12 +90,12 @@ public class CarteleraDAO {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Cartelera(
-                                rs.getString("id"),
-                                rs.getString("fecha_funcion"),
-                                rs.getString("hora_inicio"),
-                                rs.getString("hora_fin"),
-                                rs.getString("pelicula"),
-                                rs.getString("sala") 
+                                rs.getString("id_Cartelera"),
+                                rs.getString("fecha_Funcion"),
+                                rs.getString("hora_Inicio"),
+                                rs.getString("hora_Fin"),
+                                rs.getString("id_Pelicula"),
+                                rs.getString("id_Sala")
                         );
                     }
                 }

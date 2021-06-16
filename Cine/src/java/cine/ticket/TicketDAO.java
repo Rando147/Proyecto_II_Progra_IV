@@ -51,7 +51,7 @@ public class TicketDAO {
                     PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR)) {
                 stm.clearParameters();
                 try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
+                    while (rs.next()) {
                         resultado = new Ticket(
                                 rs.getString("id_Ticket"),
                                 rs.getString("numero_Butaca"),

@@ -13,7 +13,7 @@ import logic.Database;
 
 public class SalaDAO {
 
-    private Database db;
+    private final Database db;
     private static SalaDAO instancia;
 
     SalaDAO() {
@@ -50,7 +50,7 @@ public class SalaDAO {
                     PreparedStatement stm = cnx.prepareStatement(SalaCRUD.CMD_LISTAR)) {
                 stm.clearParameters();
                 try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
+                    while (rs.next()) {
                         resultado = new Sala(
                                 rs.getString("id_Sala"),
                                 rs.getString("total_Butacas")

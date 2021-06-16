@@ -76,7 +76,7 @@ public class Service {
         ModelSala.instance().eliminar(id);
     }
 
-    public HashMap getListaSalas() {
+    public List<Sala> getListaSalas() {
         return ModelSala.instance().retornaLista();
     }
 

@@ -6,6 +6,9 @@ var picAdress = "Images/spiderman.jpg";
 var imageD = new Image();
 var image = new Image();
 var peliculas = new Array();
+var carteleras = new Array();
+var salas = new Array();
+var tickets = new Array();
 var pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
 
 
@@ -78,7 +81,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         if (usuario === null) {
             newListItem.html(clientCard);
             newListItem.find("#view-movie").on("click", () => {
-                view(movieID);
+                view(movieID, item.precio);
             });
         } else if (usuario.type === "ADMINISTRATOR") {
             newListItem.html(adminCard);
@@ -88,7 +91,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         } else {
             newListItem.html(clientCard);
             newListItem.find("#view-movie").on("click", () => {
-                view(movieID);
+                view(movieID, item.precio);
             });
         }
         listaPeliculasContainer.append(newListItem);
@@ -96,7 +99,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
 }
 
 function fetchAndListMovies() {
-    peliculas = [];
+    resetPeliculas();
     resetMoviesContainer();
     let request = new Request(url + 'api/cartelera/peliculas', {method: 'GET', headers: {}});
     (async () => {
@@ -106,19 +109,15 @@ function fetchAndListMovies() {
             return;
         }
         peliculas = await response.json();
+        fetchAndListCarteleras();
+        fetchAndListSalas();
+        //fetchAndListTickets();
         loadMoviesListing();
-
     })();
 }
-
-
-
-
-
-
 function fetchAndListCarteleras() {
-    peliculas = [];
-    resetMoviesContainer();
+    resetCarteleras();
+    //resetMoviesContainer();
     let request = new Request(url + 'api/cartelera/carteleras', {method: 'GET', headers: {}});
     (async () => {
         const response = await fetch(request);
@@ -126,13 +125,28 @@ function fetchAndListCarteleras() {
             errorMessage(response.status, $("#buscarDiv #errorDiv"));
             return;
         }
-        //peliculas = await response.json();
-        loadMoviesListing();
+        carteleras = await response.json();
+        //loadMoviesListing();
     })();
 }
-function fetchAndListTicketss() {
-    peliculas = [];
-    resetMoviesContainer();
+function fetchAndListSalas() {
+    resetSalas();
+    //resetMoviesContainer();
+    let request = new Request(url + 'api/cartelera/salas', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        salas = await response.json();
+        //loadMoviesListing();
+
+    })();
+}
+function fetchAndListTickets() {
+    resetTickets();
+    //resetMoviesContainer();
     let request = new Request(url + 'api/cartelera/tickets', {method: 'GET', headers: {}});
     (async () => {
         const response = await fetch(request);
@@ -140,58 +154,63 @@ function fetchAndListTicketss() {
             errorMessage(response.status, $("#buscarDiv #errorDiv"));
             return;
         }
-        //peliculas = await response.json();
-        loadMoviesListing();
+        tickets = await response.json();
+        //loadMoviesListing();
 
     })();
 }
-function view(idPelicula) {
-
+function resetPeliculas() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    peliculas = [];
+}
+function resetCarteleras() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    carteleras = [];
+}
+function resetSalas() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    salas = [];
+}
+function resetTickets() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    tickets = [];
+}
+function view(idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
-    listaHorariosJSON = [
-        {
-            "Fecha": "Lunes 20 Junio",
-            "Hora": "5:00pm",
-            "sala": 01
-        },
-        {
-            "Fecha": "Martes 21 Junio",
-            "Hora": "5:00pm",
-            "sala": 01
-        },
-        {
-            "Fecha": "Miercoles 22 Junio",
-            "Hora": "5:00pm",
-            "sala": 02
-        }
-    ];
+    listaHorariosJSON = carteleras;
 
     var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia
 
     listaHorariosJSON.forEach((item) => {
-        var newListItem = $("<li></li>");
-        newListItem.html('<a href="javascript:void(0);" id="horario">' + item.Fecha + ' ' + item.Hora + '</a>');
-        newListItem.find('#horario').on('click', () => {
-            butacas(idPelicula, item);
-        });
-        listaHorarios.append(newListItem);
+        if (idPelicula === item.pelicula) {
+            var newListItem = $("<li></li>");
+            newListItem.html('<a href="javascript:void(0);" id="horario">' + item.fecha_funcion
+                    + ' Hora Inicio ' + item.hora_inicio + ' Hora fin ' + item.hora_fin + '</a>');
+            newListItem.find('#horario').on('click', () => {
+                butacas(item, precio);
+            });
+            listaHorarios.append(newListItem);
+        }
     });
-
     $('#modalHorarios').modal('show');
 }
-function butacas(idPelicula, fechaHora) {
+function butacas(movieCartelera, preciom) {
     //Aqui se deberia hacer el request al server solicitando la informacion de los tickets ya vendidos, la sala, cantidad de asientos entre otra informacion necesaria aun no definida.
-
     var informacionButacasJSON = {
-        "cantidadAsientos": 24,
-        "precio": 1500,
-        "ocupados": [
-            "0-1",
-            "0-2",
-            "0-3",
-            "0-4"
-        ]
+        cantidadAsientos: "",
+        precio: "",
+        ocupados: ["0-1", "0-2", "0-3", "0-4"]
     };
+    informacionButacasJSON.precio = preciom;
+    salas.forEach((itemS) => {
+        if (movieCartelera.sala === itemS.sala) {
+            informacionButacasJSON.cantidadAsientos = itemS.butacas;
+            //return;
+        }
+    });
+//    tickets.forEach((item) => {
+//        if (movieCartelera.id === item.id_Cartelera) {
+//            //item.numero_Butaca;
+//            informacionButacasJSON.ocupados.push(item.numero_Butaca);
+//            //return;
+//        }
+//    });
 
     loadSeats(informacionButacasJSON);
 

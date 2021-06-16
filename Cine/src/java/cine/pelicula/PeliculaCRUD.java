@@ -4,7 +4,7 @@ package cine.pelicula;
 public class PeliculaCRUD {
     protected static final String CMD_LISTAR
             = "SELECT id_Pelicula, Nombre, duracion, descripcion , precio FROM Pelicula "
-            + "ORDER BY id_Pelicula;";
+            + "WHERE estado = 1";
     
     protected static final String CMD_AGREGAR
             = "INSERT INTO Pelicula (Nombre, duracion, descripcion, precio) "

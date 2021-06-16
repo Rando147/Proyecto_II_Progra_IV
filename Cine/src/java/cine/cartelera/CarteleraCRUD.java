@@ -4,11 +4,10 @@ package cine.cartelera;
 public class CarteleraCRUD {
 
     protected static final String CMD_LISTAR
-            = "SELECT * FROM Cartelera"
-            + "WHERE id_Cartelera = ?;";
+            = "SELECT id_Cartelera, fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala , status FROM Cartelera "
+            + "WHERE status = 1;";
     
-
-    protected static final String CMD_Listar_PELICULA = "SELECT * from Cartelera WHERE pelicula = ?;";
+    protected static final String CMD_LISTAR_PELICULA = "SELECT * from Cartelera WHERE pelicula = ?;";
 
     protected static final String CMD_AGREGAR
             = "INSERT INTO Cartelera (fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala) "
@@ -30,6 +29,4 @@ public class CarteleraCRUD {
             + "SELECT * "
             + "FROM Cartelera "
             + "WHERE pelicula = ?;";
-
-
 }

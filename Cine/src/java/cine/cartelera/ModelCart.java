@@ -19,6 +19,7 @@ public class ModelCart {
 
     public ModelCart() {
         this.dao = new CarteleraDAO();
+        carteleras = new HashMap<>();
     }
 
     private void listaCarteleras() {
@@ -30,14 +31,18 @@ public class ModelCart {
         listaCarteleras();
         return carteleras;
     }
-    void cleanHash(){
-    if(!carteleras.isEmpty())
-        carteleras.clear();
+
+    void cleanHash() {
+        if (!carteleras.isEmpty()) {
+            carteleras.clear();
+        }
     }
+
     public List<Cartelera> cartelerasGetArray() {
         listaCarteleras();
         return new ArrayList(carteleras.values());
-    } 
+    }
+
     public void insertar(Cartelera p) throws Exception {
         dao.crear(p);
     }

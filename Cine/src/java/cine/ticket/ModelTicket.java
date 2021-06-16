@@ -19,6 +19,7 @@ public class ModelTicket {
 
     public ModelTicket() {
         this.dao = new TicketDAO();
+        ticketes = new HashMap<>();
     }
 
     private void listaTickets() {

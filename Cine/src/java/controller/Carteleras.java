@@ -7,6 +7,7 @@ package controller;
 
 import cine.cartelera.Cartelera;
 import cine.pelicula.Pelicula;
+import cine.sala.Sala;
 import cine.ticket.Ticket;
 import logic.Service;
 import java.io.File;
@@ -32,28 +33,52 @@ import javax.ws.rs.core.Response;
 @PermitAll
 public class Carteleras {
     
-    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
     //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
 
     @GET
     @Path("peliculas")
     @Produces({MediaType.APPLICATION_JSON})
     public List<Pelicula> listAll() {
-        return Service.instance().peliculasListAll();
+        try {
+            return Service.instance().peliculasListAll();
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
     }
+
     @GET
     @Path("carteleras")
     @Produces({MediaType.APPLICATION_JSON})
     public List<Cartelera> listAllCartelera() {
-        return Service.instance().getListaCarteleras();
+        try {
+            return Service.instance().getListaCarteleras();
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
     }
-    
+
     @GET
     @Path("tickets")
     @Produces({MediaType.APPLICATION_JSON})
     public List<Ticket> listAllTicket() {
-        return Service.instance().getListaTickets();
+        try {
+            return Service.instance().getListaTickets();
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
+
+    @GET
+    @Path("salas")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Sala> listAllSalas() {
+        try {
+            return Service.instance().getListaSalas();
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
     }
     
     
