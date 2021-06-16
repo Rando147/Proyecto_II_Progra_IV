@@ -60,24 +60,17 @@ function loadMoviesListingAdmin() { //Dentro de este metodo deberia ir el reques
         var newListItem = $("<div />");
         var adminCard = `<div class="col">
                         <div class="card shadow-sm">
-                            <div class="d-flex justify-content-end" >
-                                    <div class="btn-group">` +
-                actionButton
-                +
-                `</div>
-                            </div>
+                            
                             <img  src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             <div class="card-body">
                                 <p class="card-text">`
                 + movieDescripcion +
                 `</p>
                                 <div class="d-flex justify-content-between align-items-center" >
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="edit-movie" style="background-color: #1d2185; color:white;">
-                                            Edit
-                                        </button>
+                                    <div class="btn-group">`
                                         
-                                    </div>
+                                        +actionButton+
+                                    `</div>
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>
                             </div>
