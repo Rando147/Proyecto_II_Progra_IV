@@ -214,8 +214,9 @@ public class PeliculaDAO {
     }
 
     public void eliminar(String p) throws Exception {
+        int id = Integer.parseInt(p);
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ELIMINAR);
-        stm.setString(1, p);
+        stm.setInt(1, id);
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");

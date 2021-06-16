@@ -14,9 +14,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.NotAcceptableException;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,8 +39,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 public class Administrador {
 
     //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
-    String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
     
     @GET
     @Path("{name}/peli")
@@ -135,6 +138,17 @@ public class Administrador {
             Service.instance().crearCartelera(c);
         } catch (Exception ex) {
             throw new NotAcceptableException();
+        }
+    }
+    
+    @DELETE
+    @Path("borrar/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void borrarPelicula(@PathParam("id") String idPelicula){
+        try {
+            Service.instance().eliminarPelicula(idPelicula);
+        } catch (Exception ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

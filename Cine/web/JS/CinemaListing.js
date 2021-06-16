@@ -14,7 +14,12 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
 
     var listaPeliculasContainer = $("#movie-cards-container");
     resetMoviesContainer();
-    var loggedUser = sessionStorage.getItem("Usuario");
+    var loggedUser = null;
+    try {
+        sessionStorage.getItem("Usuario");
+    } catch (exception) {
+        console.log(exception);
+    }
     var usuario = null;
     if (loggedUser !== null)
         usuario = JSON.parse(loggedUser);
@@ -49,7 +54,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                             <div class="d-flex justify-content-end" >
                                     <div class="btn-group">
                                         <button class="btn-close-icon" id="delete-movie">
-                                            <img  src="Images/Close.png" class="close">
+                                            <img  src="Images/close.png" class="close">
                                         </button>
                                     </div>
                             </div>
@@ -70,18 +75,17 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                             </div>
                         </div>
                     </div>`;
-        if (usuario === null){
+        if (usuario === null) {
             newListItem.html(clientCard);
             newListItem.find("#view-movie").on("click", () => {
                 view(movieID);
             });
         } else if (usuario.type === "ADMINISTRATOR") {
             newListItem.html(adminCard);
-            newListItem.find('#delete-movie').on("click", ()=>{
+            newListItem.find('#delete-movie').on("click", () => {
                 loadDeleteMovieModal(movieID, movieName);
             });
-        }
-        else{
+        } else {
             newListItem.html(clientCard);
             newListItem.find("#view-movie").on("click", () => {
                 view(movieID);
@@ -319,44 +323,55 @@ function resetMoviesContainer() {//Simplemente borra lo que tiene el array del J
     $("#movie-cards-container").empty();
 }
 
-function loadDeleteMovieModal(idPelicula, movieName){
+function loadDeleteMovieModal(idPelicula, movieName) {
     $('#modalDeleteMovie').find('.modal-body').empty();//Borra el body del modal
     var modal = $('#modalDeleteMovie');
-    var mensaje = "<p>Esta segudo que desea borrar la pelicula "+ movieName +"?</p>";
+    var mensaje = "<p>Esta segudo que desea borrar la pelicula " + movieName + "?</p>";
     modal.find('.modal-body').append(mensaje); //Busca el modal-body y agrega el mensaje
     $('#modalDeleteMovie').modal('show');
-    
+
     //Cargar listener para boton de aceptar
     var btnAceptar = modal.find('#delete-movie-aceptar-btn');
-    btnAceptar.on("click",()=>{
+    btnAceptar.on("click", () => {
         deleteMovie(idPelicula);
         btnAceptar.off("click");
         modal.modal("hide");
     });
 }
 
-function deleteMovie(idPelicula){
+function deleteMovie(id) {
     //Todo ejecutar request para borrar pelicula
-    alert(idPelicula);
+
+
+    let request = new Request(url + 'api/admin/borrar/' + id, {method: 'DELETE', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        //resultado = await response.json();
+        loadMoviesListing();
+    })();
 }
 
 
 
 function buscar() {
-    var usuario =null;
+    var usuario = null;
     var listaPeliculasContainer = $("#movie-cards-container");
     var x = $("#textoB").val();
     var low = x.toUpperCase();
-    
-    
+
+
     resetMoviesContainer();
     peliculas.forEach((item) => {
-        var a=item.nombre.toUpperCase();
+        var a = item.nombre.toUpperCase();
         if (a.includes(low)) {
 
             var movieID = item.id;
             var movieName = item.nombre;
-           
+
             var movieDuration = item.duracion;
             var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
             var newListItem = $("<div />");
@@ -415,7 +430,7 @@ function buscar() {
                 });
             }
             listaPeliculasContainer.append(newListItem);
-        } else if (x === "" || x === " "){
+        } else if (x === "" || x === " ") {
             loadMoviesListing();
         }
     });
@@ -424,7 +439,6 @@ function buscar() {
 }
 
 function load() {
-
     fetchAndListMovies();
     $("#buscaboton").click(buscar);
 
