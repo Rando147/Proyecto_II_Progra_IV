@@ -35,7 +35,6 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                                         <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie" style="background-color: #1d2185; color:white;">
                                             View
                                         </button>
-                                        
                                     </div>
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>
@@ -44,6 +43,13 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                     </div>`;
         var adminCard = `<div class="col">
                         <div class="card shadow-sm">
+                            <div class="d-flex justify-content-end" >
+                                    <div class="btn-group">
+                                        <button class="btn-close-icon" id="delete-movie">
+                                            <img  src="Images/Close.png" class="close">
+                                        </button>
+                                    </div>
+                            </div>
                             <img  src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             <div class="card-body">
                                 <p class="card-text">`
@@ -61,8 +67,6 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                             </div>
                         </div>
                     </div>`;
-
-        
         if (usuario === null){
             newListItem.html(clientCard);
             newListItem.find("#view-movie").on("click", () => {
@@ -71,6 +75,9 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         }
         else if (usuario.type === "ADMINISTRATOR"){
             newListItem.html(adminCard);
+            newListItem.find('#delete-movie').on("click", ()=>{
+                loadDeleteMovieModal(movieID, movieName);
+            });
         }
         else{
             newListItem.html(clientCard);
@@ -303,5 +310,18 @@ function loadImage() {
 function resetMoviesContainer() {//Simplemente borra lo que tiene el array del Json
     $("#movie-cards-container").empty();
 }
+
+function loadDeleteMovieModal(idPelicula, movieName){
+    $('#modalDeleteMovie').find('.modal-body').empty();//Borra el body del modal
+    var modal = $('#modalDeleteMovie');
+    var mensaje = "<p>Esta segudo que desea borrar la pelicula "+ movieName +"?</p>";
+    modal.find('.modal-body').append(mensaje); //Busca el modal-body y agrega el mensaje
+    $('#modalDeleteMovie').modal('show');
+}
+
+function deleteMovie(idPelicula){
+    
+}
+
 
 $(fetchAndListMovies);
