@@ -42,16 +42,17 @@ public class User {
     public Usuario login(Usuario usuario) {
         Usuario logged = null;
         try {
-            logged = (Cliente)Service.instance().getCliente(usuario.getId());
+            logged = (Cliente) Service.instance().getCliente(usuario.getId());
         } catch (Exception ex) {
             try {
                 logged = Service.instance().getAdmin(usuario.getId());
             } catch (Exception ex2) {
-                
+
             }
         }
-        if (logged == null)
+        if (logged == null) {
             throw new NotFoundException("Usuario no existe");
+        }
 
         if (!logged.getPassword().equals(usuario.getPassword())) {
             throw new NotAcceptableException("Clave incorrecta");
@@ -60,7 +61,7 @@ public class User {
         logged.setPassword(null);//Borra el password del usuario
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
-        
+
     }
 
     @POST
@@ -81,6 +82,22 @@ public class User {
         return user;
     }
 
+    @POST
+    @Path("comprar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void comprar(String json) {
+//        HttpSession session = request.getSession(true);
+//        JSON_TO_CLIENTE_PARSER parser = new JSON_TO_CLIENTE_PARSER();//crea una clase para parsear el objeto
+//        Cliente cliente = parser.parseCJSON(json);//llamado a un metodo que crea un objeto cliete a mano a partir del string
+//        Usuario user = null;
+//        try {
+//            Service.instance().crearCliente(cliente);
+//            
+//        } catch (Exception ex) {
+//            throw new NotAcceptableException();
+//        }
+    }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(Cliente cliente) {
@@ -95,7 +112,7 @@ public class User {
     @Path("logout")
     public void logout() {
         HttpSession session = request.getSession(true);
-        session.removeAttribute("Usuario");           
+        session.removeAttribute("Usuario");
         session.invalidate();
         Service.instance().logout();
     }

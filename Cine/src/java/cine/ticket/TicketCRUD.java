@@ -5,8 +5,8 @@ package cine.ticket;
 public class TicketCRUD {
 
     protected static final String CMD_LISTAR
-            = "SELECT id_Ticket, numero_Butaca, id_Cliente, id_Cartelera FROM Ticket"
-            + "WHERE id_Ticket = ?;";
+            = "SELECT id_Ticket, numero_Butaca, id_Cliente, id_Cartelera FROM Ticket";
+            //+ "WHERE id_Ticket = ?;";
 
     protected static final String CMD_AGREGAR
             = "INSERT INTO Ticket (id_Ticket, numero_Butaca, id_Cliente, id_Cartelera) "
@@ -28,6 +28,4 @@ public class TicketCRUD {
             + "SELECT * "
             + "FROM Ticket "
             + "WHERE id_Cliente = ?;";
-   
-
 }

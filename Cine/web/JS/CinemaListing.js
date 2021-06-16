@@ -68,8 +68,10 @@ function fetchAndListMovies() {
         peliculas = await response.json();
         fetchAndListCarteleras();
         fetchAndListSalas();
-        //fetchAndListTickets();
-        loadMoviesListing();
+        fetchAndListTickets();
+        setTimeout(() => {
+            loadMoviesListing();
+        }, 400);
     })();
 }
 function fetchAndListCarteleras() {
@@ -128,6 +130,9 @@ function resetSalas() { //Esta funcion solo se utiliza para volver a poner el ar
 function resetTickets() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
     tickets = [];
 }
+function resetSeatsArray() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    seatsArray = [];
+}
 function view(idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
     listaHorariosJSON = carteleras;
@@ -147,27 +152,36 @@ function view(idPelicula, precio) {
     });
     $('#modalHorarios').modal('show');
 }
+var precioSeat = 0;
+var seatSelected = 0;
+function resetPrecioSeat() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    precioSeat = 0;
+}
+function resetSeatSelected() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    seatSelected = 0;
+}
 function butacas(movieCartelera, preciom) {
     //Aqui se deberia hacer el request al server solicitando la informacion de los tickets ya vendidos, la sala, cantidad de asientos entre otra informacion necesaria aun no definida.
     var informacionButacasJSON = {
         cantidadAsientos: "",
         precio: "",
-        ocupados: ["0-1", "0-2", "0-3", "0-4"]
+        ocupados: []
     };
     informacionButacasJSON.precio = preciom;
+    precioSeat = preciom;
     salas.forEach((itemS) => {
         if (movieCartelera.sala === itemS.sala) {
             informacionButacasJSON.cantidadAsientos = itemS.butacas;
             //return;
         }
     });
-//    tickets.forEach((item) => {
-//        if (movieCartelera.id === item.id_Cartelera) {
-//            //item.numero_Butaca;
-//            informacionButacasJSON.ocupados.push(item.numero_Butaca);
-//            //return;
-//        }
-//    });
+    tickets.forEach((item) => {
+        if (movieCartelera.id === item.cartelera) {
+            //item.numero_Butaca;
+            informacionButacasJSON.ocupados.push(item.butaca);
+            //return;
+        }
+    });
 
     loadSeats(informacionButacasJSON);
 
@@ -263,7 +277,21 @@ function setSelected_Unselected() {
         addSeatToArray(id);
     }
 }
+function comprar() {
+    
+    let request = new Request(url + 'api/usuario/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return;
+        }
+        resetPrecioSeat();resetSeatSelected();resetSeatsArray();
+        //$('#modalButacas').modal('hide');
+    })();
+    setTimeout(() => {  fetchAndListMovies(); }, 400);
 
+}
 
 function loadImage() {
     //'"+url+"api/personas/"+persona.cedula+"/imagen'  
@@ -352,7 +380,7 @@ function buscar() {
 function load() {
     fetchAndListMovies();
     $("#buscaboton").click(buscar);
-
+    $("#comprar").click(comprar);
 }
 
 $(load);
