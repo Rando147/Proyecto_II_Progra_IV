@@ -317,10 +317,19 @@ function loadDeleteMovieModal(idPelicula, movieName){
     var mensaje = "<p>Esta segudo que desea borrar la pelicula "+ movieName +"?</p>";
     modal.find('.modal-body').append(mensaje); //Busca el modal-body y agrega el mensaje
     $('#modalDeleteMovie').modal('show');
+    
+    //Cargar listener para boton de aceptar
+    var btnAceptar = modal.find('#delete-movie-aceptar-btn');
+    btnAceptar.on("click",()=>{
+        deleteMovie(idPelicula);
+        btnAceptar.off("click");
+        modal.modal("hide");
+    });
 }
 
 function deleteMovie(idPelicula){
-    
+    //Todo ejecutar request para borrar pelicula
+    alert(idPelicula);
 }
 
 
