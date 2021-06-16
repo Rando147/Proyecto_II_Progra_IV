@@ -114,12 +114,17 @@
                                     <a class="dropdown-item" id="nav-dropdown-cartelera-btn" href="#" data-bs-toggle="modal"
                                        data-bs-target="#modalCartelera">Cartelera</a>
                                 </li>
+                                <li id="nav-dropdown-cartelera">
+                                    <a class="dropdown-item" id="nav-dropdown-tickets-btn" href="#" data-bs-toggle="modal"
+                                       data-bs-target="#modalTickets">Historial de Tickets</a>
+                                </li>
                                 <li id="nav-dropdown-cartelera-divider">
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
                                     <a class="dropdown-item" id="nav-dropdown-logout" href="#">Logout</a>
                                 </li>
+                                
 
                             </ul>
                         </li>
@@ -551,6 +556,42 @@
         </div>
     </div>
 </div>
+
+
+<!--###################################################################################Historial Tickets#############################################################################################################-->
+
+
+
+<div class="modal fade" id="modalTickets" aria-hidden="true" aria-labelledby="modalTicketsLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!--form-->
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalTicketsLabel" style="color : white">Historial de Tickets</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+                <input type="search" placeholder="Id del cliente" aria-label="Search" id="buscarT" name="buscarT" style="width:50%; height:50%;" class="curso-derecha">
+                <button class="btn btn-primary" id="busca-ticket-btn" style="background-color: #1d2185;" class="curso-derecha"> Buscar </button>
+
+                <table>
+                    <tr>
+                        <td class="curso-izquierda input-number ">aqui va lo que sea se quiera imprimir :</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="imprimir" style="background-color: #1d2185;">Imprimir</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+            </div>
+            <!--form-->
+
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <!--################################################################################### Shopping cart #############################################################################################################-->

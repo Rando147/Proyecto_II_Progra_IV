@@ -149,7 +149,17 @@ tr th{
 }
 
 
+.round-button 
+{
+ width:20px;
+ display: table-cell;
+}
 
+.lblname{
+  display: table-cell;
+  padding: 0 5px;
+  vertical-align: middle;
+}
 
 
 
