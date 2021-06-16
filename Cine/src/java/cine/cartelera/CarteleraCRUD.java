@@ -6,6 +6,7 @@ public class CarteleraCRUD {
     protected static final String CMD_LISTAR
             = "SELECT * FROM Cartelera"
             + "WHERE id_Cartelera = ?;";
+    
 
     protected static final String CMD_Listar_PELICULA = "SELECT * from Cartelera WHERE pelicula = ?;";
 

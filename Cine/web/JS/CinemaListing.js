@@ -7,6 +7,9 @@ var imageD = new Image();
 var image = new Image();
 var peliculas = new Array();
 var pelicula = {id: "", nombre: "", duracion: "", descripcion: "", precio: ""};
+
+
+
 function loadMoviesListing() { //Dentro de este metodo deberia ir el request al API para solicitar las peliculas de la cartelera
 
     var listaPeliculasContainer = $("#movie-cards-container");
@@ -15,7 +18,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
     var usuario = null;
     if (loggedUser !== null)
         usuario = JSON.parse(loggedUser);
-    
+
     peliculas.forEach((item) => {
         var movieID = item.id;
         var movieName = item.nombre;
@@ -72,8 +75,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
             newListItem.find("#view-movie").on("click", () => {
                 view(movieID);
             });
-        }
-        else if (usuario.type === "ADMINISTRATOR"){
+        } else if (usuario.type === "ADMINISTRATOR") {
             newListItem.html(adminCard);
             newListItem.find('#delete-movie').on("click", ()=>{
                 loadDeleteMovieModal(movieID, movieName);
@@ -104,6 +106,12 @@ function fetchAndListMovies() {
 
     })();
 }
+
+
+
+
+
+
 function fetchAndListCarteleras() {
     peliculas = [];
     resetMoviesContainer();
@@ -333,4 +341,93 @@ function deleteMovie(idPelicula){
 }
 
 
-$(fetchAndListMovies);
+
+function buscar() {
+    var usuario =null;
+    var listaPeliculasContainer = $("#movie-cards-container");
+    var x = $("#textoB").val();
+    var low = x.toUpperCase();
+    
+    
+    resetMoviesContainer();
+    peliculas.forEach((item) => {
+        var a=item.nombre.toUpperCase();
+        if (a.includes(low)) {
+
+            var movieID = item.id;
+            var movieName = item.nombre;
+           
+            var movieDuration = item.duracion;
+            var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
+            var newListItem = $("<div />");
+            var clientCard = `<div class="col">
+                        <div class="card shadow-sm">
+                            
+                            <img   src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <p class="card-text">`
+                    + movieDescripcion +
+                    `</p>
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie" style="background-color: #1d2185; color:white;">
+                                            View
+                                        </button>
+                                        
+                                    </div>
+                                    <small class="text-muted">` + movieDuration + `</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            var adminCard = `<div class="col">
+                        <div class="card shadow-sm">
+                            <img  src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <p class="card-text">`
+                    + movieDescripcion +
+                    `</p>
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="edit-movie" style="background-color: #1d2185; color:white;">
+                                            Edit
+                                        </button>
+                                        
+                                    </div>
+                                    <small class="text-muted">` + movieDuration + `</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+
+            if (usuario === null) {
+                newListItem.html(clientCard);
+                newListItem.find("#view-movie").on("click", () => {
+                    view(movieID);
+                });
+            } else if (usuario.type === "ADMINISTRATOR") {
+                newListItem.html(adminCard);
+            } else {
+                newListItem.html(clientCard);
+                newListItem.find("#view-movie").on("click", () => {
+                    view(movieID);
+                });
+            }
+            listaPeliculasContainer.append(newListItem);
+        } else if (x === "" || x === " "){
+            loadMoviesListing();
+        }
+    });
+
+
+}
+
+function load() {
+
+    fetchAndListMovies();
+    $("#buscaboton").click(buscar);
+
+}
+
+$(load);
