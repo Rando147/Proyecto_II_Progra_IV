@@ -1,6 +1,6 @@
 
 var url = "http://localhost:8080/Cine/";
-
+var peliculas = [];
 
 
 //-----------------------------------------pelicula------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ function resetPelicula() {
     $('#descripeli').val('');
     $('#duracionpeli').val('');
     $('#preciopeli').val('');
-    
+
 }
 function resetSala() {
     sala = {sala: "", asientos: ""};
@@ -35,12 +35,149 @@ function Pelicula() {
         $('#modalPelicula').modal('hide');
         addImagen();
         resetPelicula();
-        
+
     })();
-    setTimeout(() => {  fetchAndListMovies(); }, 400);
-   
+    setTimeout(() => {
+        fetchAndListMovies();
+    }, 400);
+
 }
 
+function loadMoviesListingAdmin() { //Dentro de este metodo deberia ir el request al API para solicitar las peliculas de la cartelera
+
+    var listaPeliculasContainer = $("#movie-cards-container");
+    resetMoviesContainer();
+
+    peliculas.forEach((item) => {
+        var movieID = item.id;
+        var movieName = item.nombre;
+        var movieDuration = item.duracion;
+        var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
+        var movieStatus = item.estado;
+        var buttonDelete = `<button id="admin-movie-action" type="button" class="btn btn-danger movie-action">Borrar</button>`;
+        var buttonAdd = `<button id="admin-movie-action" type="button" class="btn btn-success movie-action">Agregar</button>`;
+        var actionButton = (movieStatus === "0") ? buttonAdd : buttonDelete;
+        var newListItem = $("<div />");
+        var adminCard = `<div class="col">
+                        <div class="card shadow-sm">
+                            <div class="d-flex justify-content-end" >
+                                    <div class="btn-group">` +
+                actionButton
+                +
+                `</div>
+                            </div>
+                            <img  src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <p class="card-text">`
+                + movieDescripcion +
+                `</p>
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="edit-movie" style="background-color: #1d2185; color:white;">
+                                            Edit
+                                        </button>
+                                        
+                                    </div>
+                                    <small class="text-muted">` + movieDuration + `</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+        newListItem.html(adminCard);
+
+        if (movieStatus === "1") {
+            newListItem.find('#admin-movie-action').on("click", () => {
+                loadDeleteMovieModal(movieID, movieName);
+            });
+        }
+        else{
+            newListItem.find('#admin-movie-action').on("click", () => {
+                loadActivateMovieModal(movieID, movieName);
+            });
+        }
+        listaPeliculasContainer.append(newListItem);
+    });
+}
+function fetchAndListMoviesAdmin() {
+    peliculas = [];
+    resetMoviesContainer();
+    let request = new Request(url + 'api/admin/peliculas', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        peliculas = await response.json();
+        loadMoviesListingAdmin();
+
+    })();
+}
+
+
+function loadDeleteMovieModal(idPelicula, movieName) { //Desactiva la pelicula para que esta no aparezca en cartelera
+    $('#modalDeleteMovie').find('.modal-body').empty();//Borra el body del modal
+    var modal = $('#modalDeleteMovie');
+    var mensaje = "<p>Esta seguro que desea borrar la pelicula " + movieName + "?</p>";
+    modal.find('.modal-body').append(mensaje); //Busca el modal-body y agrega el mensaje
+    $('#modalDeleteMovie').modal('show');
+
+    //Cargar listener para boton de aceptar
+    var btnAceptar = modal.find('#action-movie-aceptar-btn');
+    btnAceptar.on("click", () => {
+        deleteMovie(idPelicula);
+        btnAceptar.off("click");
+        modal.modal("hide");
+    });
+}
+
+function deleteMovie(id) {
+    //Todo... ejecutar request para borrar pelicula
+    let request = new Request(url + 'api/admin/borrar/' + id, {method: 'DELETE', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        //resultado = await response.json();
+        fetchAndListMoviesAdmin();
+    })();
+}
+
+function loadActivateMovieModal(idPelicula, movieName) {//Activa la pelicula para que esta aparezca en cartelera
+    $('#modalDeleteMovie').find('.modal-body').empty();//Borra el body del modal
+    var modal = $('#modalDeleteMovie');
+    var mensaje = "<p>Esta seguro que desea agregar la pelicula " + movieName + " a la cartelera?</p>";
+    modal.find('.modal-body').append(mensaje); //Busca el modal-body y agrega el mensaje
+    $('#modalDeleteMovie').modal('show');
+
+    //Cargar listener para boton de aceptar
+    var btnAceptar = modal.find('#action-movie-aceptar-btn');
+    btnAceptar.on("click", () => {
+        activateMovie(idPelicula);
+        //Una vez que se ejecuta el comando anterior se ejecutan las siguientes dos acciones para quitar el listener y ademas ocultar el modal
+        btnAceptar.off("click");
+        modal.modal("hide");
+    });
+}
+
+function activateMovie(id) {
+    //Todo... ejecutar request para activar pelicula
+
+    p = {idPelicula:id};
+    pJson = JSON.stringify(p);
+    let request = new Request(url + 'api/admin/activar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        //resultado = await response.json();
+        fetchAndListMoviesAdmin();
+    })();
+}
 
 function addImagen() {
     var imagenData = new FormData();

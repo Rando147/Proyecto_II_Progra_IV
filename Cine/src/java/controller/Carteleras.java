@@ -33,19 +33,15 @@ import javax.ws.rs.core.Response;
 @PermitAll
 public class Carteleras {
     
-    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
     //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
 
     @GET
     @Path("peliculas")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Pelicula> listAll() {
-        try {
-            return Service.instance().peliculasListAll();
-        } catch (Exception ex) {
-            throw new NotAcceptableException();
-        }
+    public List<Pelicula> listDisp() {
+        return Service.instance().peliculasListDisp();
     }
 
     @GET

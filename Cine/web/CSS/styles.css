@@ -203,8 +203,17 @@ td{
     height: 25px;
 }
 
-.btn-close-icon{
-    outline: 0;
-    border: none;
-    background: none;
+.btn.btn-danger.movie-action{
+    width: 60px;
+    height: 25px;
+    font-size: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.btn.btn-success.movie-action{
+    width: 60px;
+    height: 25px;
+    font-size: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

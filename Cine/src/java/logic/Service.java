@@ -45,13 +45,23 @@ public class Service {
     public void eliminarPelicula(String id) throws Exception {
         ModelPeli.instance().eliminar(id);
     }
+    public void activarPelicula(String id) throws Exception {
+        ModelPeli.instance().activar(id);
+    }
 
     public HashMap getListapeliculas() {
         return ModelPeli.instance().retornaLista();
     }
+    
+    public HashMap getListapeliculasDisp() {
+        return ModelPeli.instance().retornaListaDisp();
+    }
 
     public List<Pelicula> peliculasListAll() {
         return ModelPeli.instance().peliculasListAll();
+    }
+    public List<Pelicula> peliculasListDisp() {
+        return ModelPeli.instance().peliculasListDisp();
     }
 
     public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {

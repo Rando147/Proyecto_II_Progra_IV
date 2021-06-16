@@ -51,7 +51,7 @@ function showAdminOptions() {
 
     $('#nav-usuario-dropdown').show();
 
-    fetchAndListMovies();
+    fetchAndListMoviesAdmin();
 }
 
 function showClientOptions() {

@@ -142,7 +142,6 @@ public class PeliculaDAO {
         stm.setString(3, p.getDescripcion());
         stm.setString(4, p.getPrecio());
 
-
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
@@ -163,7 +162,42 @@ public class PeliculaDAO {
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
                                 rs.getString("descripcion"),
-                                rs.getString("precio")
+                                rs.getString("precio"),
+                                String.valueOf(rs.getInt("estado"))
+                        );
+                        peliculas.put(resultado.getId(), resultado);
+
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(PeliculaDAO.class
+                        .getName()).log(Level.SEVERE, null, ex);
+                return peliculas;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return peliculas;
+        }
+        return peliculas;
+
+    }
+
+    public HashMap listarPeliDisponibles() {
+        Pelicula resultado = null;
+        HashMap<String, Pelicula> peliculas = new HashMap<>();
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(PeliculaCRUD.CMD_LISTAR_DISPINIBLES)) {
+                stm.clearParameters();
+                try (ResultSet rs = stm.executeQuery()) {
+                    while (rs.next()) {
+                        resultado = new Pelicula(
+                                rs.getString("id_Pelicula"),
+                                rs.getString("Nombre"),
+                                rs.getString("duracion"),
+                                rs.getString("descripcion"),
+                                rs.getString("precio"),
+                                String.valueOf(rs.getInt("estado"))
                         );
                         peliculas.put(resultado.getId(), resultado);
 
@@ -191,12 +225,14 @@ public class PeliculaDAO {
                 stm.setString(1, id);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
+                        int estado = rs.getInt("estado");
                         resultado = new Pelicula(
                                 rs.getString("id_Pelicula"),
                                 rs.getString("Nombre"),
                                 rs.getString("duracion"),
                                 rs.getString("descripcion"),
-                                rs.getString("precio")
+                                rs.getString("precio"),
+                                Integer.toString(rs.getInt("estado"))
                         );
 
                     }
@@ -212,17 +248,39 @@ public class PeliculaDAO {
         }
         return resultado;
     }
+    
+    public void actualizarEstado(String id, String estado) throws SQLException, Exception{ //Argumentos= id de la pelicula y nuevo estado de esta pelicula
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ACTUALIZAR_ESTADO);
 
-    public void eliminar(String p) throws Exception {
-        int id = Integer.parseInt(p);
-        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ELIMINAR);
-        stm.setInt(1, id);
+        //"UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ? , precio = ?, estado = ?"
+        stm.clearParameters();
+        int state = Integer.parseInt(estado);
+        stm.setInt(1, state);
+        stm.setString(2, id);
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
 
+    public void actualizar(Pelicula p) throws SQLException, Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ACTUALIZAR);
+
+        //"UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ? , precio = ?, estado = ?"
+        stm.clearParameters();
+        stm.setString(1, p.getId());
+        stm.setString(2, p.getNombre());
+        stm.setString(3, p.getDuracion());
+        stm.setString(4, p.getDescripcion());
+        stm.setString(5, p.getPrecio());
+        stm.setString(6, p.getEstado());
+        stm.setString(7, p.getId());
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
 }
 /*
 

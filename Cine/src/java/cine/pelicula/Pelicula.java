@@ -8,6 +8,7 @@ public class Pelicula {
     String descripcion;
     String duracion;
     String precio;
+    String estado;
     //final Part image;
 
     public Pelicula() {
@@ -19,12 +20,13 @@ public class Pelicula {
         this.descripcion = descripcion;
         this.duracion = duracion;
     }
-       public Pelicula(String id, String nombre,  String duracion, String descripcion,String precio) {
+       public Pelicula(String id, String nombre,  String duracion, String descripcion,String precio, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.precio = precio;
+        this.estado = estado;
     }
 
     public String getId() {
@@ -65,6 +67,14 @@ public class Pelicula {
 
     public void setPrecio(String precio) {
         this.precio = precio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
    

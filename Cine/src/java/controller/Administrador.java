@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.NotAcceptableException;
@@ -38,8 +39,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 @PermitAll
 public class Administrador {
 
-    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
     //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
     
     @GET
@@ -65,6 +66,15 @@ public class Administrador {
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
+    }
+    
+    
+    //Carga las peliculas en la pagina principal en caso que el admin este loggeado
+    @GET
+    @Path("peliculas")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Pelicula> listDisp() {
+        return Service.instance().peliculasListAll();
     }
 
     @POST
@@ -149,6 +159,19 @@ public class Administrador {
             Service.instance().eliminarPelicula(idPelicula);
         } catch (Exception ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @POST
+    @Path("activar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void activarPelicula(String json) {
+        JSON_TO_PELICULA_PARSER parser = new JSON_TO_PELICULA_PARSER();
+        Pelicula pelicula = parser.parseCJSON(json);
+        try {
+            Service.instance().activarPelicula(pelicula.getId());
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
         }
     }
 

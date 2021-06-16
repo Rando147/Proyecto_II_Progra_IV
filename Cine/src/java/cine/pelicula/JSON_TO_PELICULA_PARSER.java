@@ -19,7 +19,8 @@ public class JSON_TO_PELICULA_PARSER {
             String descripcion = (String) jo.get("descripcion");
             String duracion = (String) jo.get("duracion");
             String precio = (String) jo.get("precio");
-            aux = new Pelicula(id,nombre,duracion,descripcion,precio);
+            String estado = (String) jo.get("estado");
+            aux = new Pelicula(id,nombre,duracion,descripcion,precio, estado);
             } catch (Exception ec) {
 
         }

@@ -34,7 +34,16 @@ public class ModelPeli {
     private void listaPeliculas() {
         peliculas = dao.listarPeli();
     }
-
+    
+    private void listaPeliculasDisponibles(){
+        peliculas = dao.listarPeliDisponibles();
+    }
+    
+    public HashMap retornaListaDisp(){
+        cleanHash();
+        listaPeliculasDisponibles();
+        return peliculas;
+    }
     public HashMap retornaLista() {
         cleanHash();
         listaPeliculas();
@@ -48,6 +57,11 @@ public class ModelPeli {
         listaPeliculas();
         return new ArrayList(peliculas.values());
     } 
+    public List<Pelicula> peliculasListDisp(){
+        //cleanHash();
+        listaPeliculasDisponibles();
+        return new ArrayList(peliculas.values());
+    }
     //crear, obtener por XXXX, listar, eliminar*** 
     public void insertar(Pelicula p) throws Exception {
         dao.crear(p);
@@ -69,7 +83,11 @@ public class ModelPeli {
     }
 
     public void eliminar(String id) throws Exception {
-        dao.eliminar(id);
+        dao.actualizarEstado(id, "0");
+    }
+    
+    public void activar(String id) throws Exception{
+        dao.actualizarEstado(id, "1");
     }
 
     public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {
