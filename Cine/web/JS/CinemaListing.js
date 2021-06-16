@@ -16,7 +16,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
     resetMoviesContainer();
     var loggedUser = null;
     try {
-        sessionStorage.getItem("Usuario");
+        loggedUser = sessionStorage.getItem("Usuario");
     } catch (exception) {
         console.log(exception);
     }
