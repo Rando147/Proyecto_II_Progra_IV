@@ -23,7 +23,7 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         var movieName = item.nombre;
         var movieDuration = item.duracion;
         var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
-        var movieStatus = "1";//item.estado;
+        //var movieStatus = "1";//item.estado;
 
         var newListItem = $("<div />");
         var clientCard = `<div class="col">

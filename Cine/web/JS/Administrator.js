@@ -1,6 +1,7 @@
 
 var url = "http://localhost:8080/Cine/";
 var peliculas = [];
+var salas = [];
 
 
 //-----------------------------------------pelicula------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,6 +309,69 @@ function Cartelera() {
     })();
 }
 
+function loadCarteleraForm(){
+    setTimeout(() => {
+            fetchAndListSalas();
+        }, 400);
+    
+    var moviesSelector = $('#idP');
+    var salasSelector = $('#idS');
+    moviesSelector.empty();
+    salasSelector.empty();
+    moviesSelector.append($('<option selected>Seleccionar pelicula</option>'));
+    salasSelector.append($('<option selected>Seleccionar sala</option>'));
+    peliculas.forEach((item)=>{
+        var movieID = item.id;
+        var movieName = item.nombre;
+        moviesSelector.append($('<option></option>').attr('value', movieID).text(movieName));
+    });
+    salas.forEach((item)=>{
+        var salaID = item.sala;
+        salasSelector.append($('<option></option>').attr('value', salaID).text(salaID));
+    });
+    
+}
+
+function fetchAndListSalas() {
+    resetSalas();
+    //resetMoviesContainer();
+    let request = new Request(url + 'api/cartelera/salas', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        salas = await response.json();
+        //loadMoviesListing();
+
+    })();
+}
+
+function resetSalas() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    salas = [];
+}
+
+//function fetchMovies() {
+//    resetPeliculas();
+//    let request = new Request(url + 'api/cartelera/peliculas', {method: 'GET', headers: {}});
+//    (async () => {
+//        const response = await fetch(request);
+//        if (!response.ok) {
+//            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+//            return;
+//        }
+//        peliculas = await response.json();
+//        setTimeout(() => {
+//            loadCarteleraForm();
+//        }, 400);
+//    })();
+//}
+
+function resetPeliculas() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    peliculas = [];
+}
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -328,6 +392,7 @@ function load() {
     $("#peliculaRegister").click(Pelicula);
     $("#salaRegister").click(Sala);
     $("#cartRegister").click(Cartelera);
+    $("#nav-dropdown-cartelera-btn").click(loadCarteleraForm);
 }
 
 $(load);
