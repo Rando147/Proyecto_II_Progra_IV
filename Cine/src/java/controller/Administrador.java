@@ -17,8 +17,10 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.security.DenyAll;
 import javax.ws.rs.NotAcceptableException;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -36,7 +38,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 @Path("admin")
-@PermitAll
+@DenyAll
 public class Administrador {
 
     //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
@@ -45,6 +47,7 @@ public class Administrador {
     
     @GET
     @Path("{name}/peli")
+    @RolesAllowed("ADMINISTRATOR")
     @Produces(MediaType.APPLICATION_JSON)
     public Pelicula getImge(@PathParam("name") String name) throws IOException {
         try {       
@@ -55,6 +58,7 @@ public class Administrador {
     }
     @POST
     @Path("pelicula")
+    @RolesAllowed("ADMINISTRATOR")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Pelicula crearPeli(String json) {
@@ -72,6 +76,7 @@ public class Administrador {
     //Carga las peliculas en la pagina principal en caso que el admin este loggeado
     @GET
     @Path("peliculas")
+    @RolesAllowed("ADMINISTRATOR")
     @Produces({MediaType.APPLICATION_JSON})
     public List<Pelicula> listDisp() {
         return Service.instance().peliculasListAll();
@@ -80,6 +85,7 @@ public class Administrador {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("{id}/image")
+    @RolesAllowed("ADMINISTRATOR")
     public void addImage(@PathParam("id") String id_pelicula, @FormDataParam("image") InputStream imageStream) {
         try {
             int read = 0;
@@ -127,6 +133,7 @@ public class Administrador {
 //    }
     @POST
     @Path("sala")
+    @RolesAllowed("ADMINISTRATOR")
     @Consumes(MediaType.APPLICATION_JSON)
     public void crearSala(String json) {
         JSON_TO_SALA_PARSER parser = new JSON_TO_SALA_PARSER();
@@ -140,6 +147,7 @@ public class Administrador {
 
     @POST
     @Path("cartelera")
+    @RolesAllowed("ADMINISTRATOR")
     @Consumes(MediaType.APPLICATION_JSON)
     public void crear(String json) {
         JSON_TO_CARTELERA_PARSER parser = new JSON_TO_CARTELERA_PARSER();
@@ -153,8 +161,9 @@ public class Administrador {
     
     @DELETE
     @Path("borrar/{id}")
+    @RolesAllowed("ADMINISTRATOR")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void borrarPelicula(@PathParam("id") String idPelicula){
+    public void borrarPelicula(@PathParam("id") String idPelicula){ //Metodo que se encarga de cambiar el status de la pelicula a 'no disponible'
         try {
             Service.instance().eliminarPelicula(idPelicula);
         } catch (Exception ex) {
@@ -164,8 +173,9 @@ public class Administrador {
     
     @POST
     @Path("activar")
+    @RolesAllowed("ADMINISTRATOR")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void activarPelicula(String json) {
+    public void activarPelicula(String json) { //Metodo que se encarga de cambiar el status de la pelicula a 'disponible'
         JSON_TO_PELICULA_PARSER parser = new JSON_TO_PELICULA_PARSER();
         Pelicula pelicula = parser.parseCJSON(json);
         try {

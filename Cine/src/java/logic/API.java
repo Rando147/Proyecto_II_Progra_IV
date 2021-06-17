@@ -3,6 +3,7 @@ package logic;
 import controller.Administrador;
 import controller.Carteleras;
 import controller.User;
+import filter.RestfulSecurityFilter;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -20,6 +21,7 @@ public class API extends Application {
         classes.add(Administrador.class);
         classes.add(Carteleras.class);
         classes.add(User.class);
+        classes.add(RestfulSecurityFilter.class);
         
         return classes;
     }   

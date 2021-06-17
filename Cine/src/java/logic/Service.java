@@ -20,11 +20,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 public class Service {
 
     private static Service uniqueInstance;
-    private Usuario loggedUsr;
+    HttpServletRequest request;
 
     public static Service instance() {
         if (uniqueInstance == null) {
@@ -152,11 +153,23 @@ public class Service {
 
     
     public void login(Usuario usr){
-        loggedUsr = usr;
+        request.getSession().setAttribute("user", usr);
     }
     
     public void logout(){
-        loggedUsr = null;
+        request.getSession().removeAttribute("user");
+    }
+    
+    private boolean isAuthenticated() {
+        return  request.getSession().getAttribute("user") != null;
+    }
+    
+    public String getUserRole(){//Retorna el rol que tiene el usuario loggeado
+        if (isAuthenticated()){
+            Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+            return usuario.getType();
+        }
+        return null;
     }
 //    private static Service uniqueInstance;
 //    HashMap<String,Pelicula> peliculas;
