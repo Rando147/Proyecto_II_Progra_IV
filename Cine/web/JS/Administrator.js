@@ -68,9 +68,9 @@ function loadMoviesListingAdmin() { //Dentro de este metodo deberia ir el reques
                 `</p>
                                 <div class="d-flex justify-content-between align-items-center" >
                                     <div class="btn-group">`
-                                        
-                                        +actionButton+
-                                    `</div>
+
+                + actionButton +
+                `</div>
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>
                             </div>
@@ -78,16 +78,23 @@ function loadMoviesListingAdmin() { //Dentro de este metodo deberia ir el reques
                     </div>`;
         newListItem.html(adminCard);
 
+        var btn = newListItem.find("#admin-movie-action");
         if (movieStatus === "1") {
-            newListItem.find('#admin-movie-action').on("click", () => {
+            btn.on("click", () => {
                 loadDeleteMovieModal(movieID, movieName);
             });
-        }
-        else{
-            newListItem.find('#admin-movie-action').on("click", () => {
+        } else {
+            btn.on("click", () => {
                 loadActivateMovieModal(movieID, movieName);
             });
         }
+        btn.hide();
+        newListItem.on("mouseover", () => {
+            btn.show();
+        });
+        newListItem.on("mouseleave", () => {
+            btn.hide();
+        });
         listaPeliculasContainer.append(newListItem);
     });
 }
@@ -158,7 +165,7 @@ function loadActivateMovieModal(idPelicula, movieName) {//Activa la pelicula par
 function activateMovie(id) {
     //Todo... ejecutar request para activar pelicula
 
-    p = {idPelicula:id};
+    p = {idPelicula: id};
     pJson = JSON.stringify(p);
     let request = new Request(url + 'api/admin/activar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p)});
     (async () => {

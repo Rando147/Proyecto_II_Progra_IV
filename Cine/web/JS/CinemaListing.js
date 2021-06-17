@@ -51,9 +51,18 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         newListItem.find("#view-movie").on("click", () => {
             view(movieID);
         });
+        var btn = newListItem.find("#view-movie");
+        btn.hide();
+        newListItem.on("mouseover", ()=>{
+            btn.show();
+        });
+        newListItem.on("mouseleave", ()=>{
+            btn.hide();
+        });
         listaPeliculasContainer.append(newListItem);
     });
 }
+
 
 function fetchAndListMovies() {
     resetPeliculas();
