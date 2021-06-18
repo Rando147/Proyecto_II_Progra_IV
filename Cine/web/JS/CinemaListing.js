@@ -330,7 +330,11 @@ function comprar(idCartelera) {
             //fetchAndListMovies();
         }, 400);
         $('#modalButacas').modal('hide');
-        $('#modalHorarioss').modal('hide');
+        $('#modalHorarios').modal('hide');
+        resetSeatsArray(); //movieName
+        resetPrecioSeat();
+        resetSeatSelected();
+        resetTotalPagar();
     } else {
         // while (usuario === null) {
         $('#modalRegistro').modal('show');
