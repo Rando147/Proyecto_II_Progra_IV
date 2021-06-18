@@ -114,4 +114,38 @@ public class TicketDAO {
         }
     }
     
+    
+    
+    public HashMap listadoTickets(String id){
+    Ticket resultado = null;
+        HashMap<String,Ticket> peliculas = new HashMap<>();
+        int x = Integer.parseInt(id);
+        
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR_TICKET_CLIENTE)) {
+                stm.clearParameters();
+                stm.setInt(1, x);
+                try (ResultSet rs = stm.executeQuery()) {
+                    while (rs.next()) {
+                        resultado = new Ticket(
+                                rs.getString("id_Ticket"),
+                                rs.getString("numero_Butaca"),
+                                rs.getString("id_Cliente"),
+                                rs.getString("id_Cartelera")
+                                
+                        );
+                        peliculas.put(resultado.getId(), resultado);
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return peliculas;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return peliculas;
+        }
+        return peliculas;
+    }
 }

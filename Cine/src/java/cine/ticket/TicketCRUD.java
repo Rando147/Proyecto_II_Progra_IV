@@ -24,8 +24,7 @@ public class TicketCRUD {
             = "DELETE FROM Ticket "
             + "WHERE id_Ticket = ?; ";
 
-    protected static final String CMD_LISTAR_TICKET_CLIENTE = ""
-            + "SELECT * "
-            + "FROM Ticket "
-            + "WHERE id_Cliente = ?;";
+    protected static final String CMD_LISTAR_TICKET_CLIENTE 
+            = "SELECT id_Ticket, numero_Butaca, id_Cliente, id_Cartelera FROM Ticket "
+            + "WHERE id_Cliente = ?; ";
 }

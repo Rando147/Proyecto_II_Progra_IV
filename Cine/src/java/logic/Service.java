@@ -13,11 +13,13 @@ import cine.sala.ModelSala;
 import cine.sala.Sala;
 import cine.ticket.ModelTicket;
 import cine.ticket.Ticket;
+import cine.ticket.TicketListado;
 import cine.usuario.Model;
 import cine.usuario.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -132,6 +134,40 @@ public class Service {
     public List<Ticket> getListaTickets() {
         return ModelTicket.instance().retornaArrayList();
     }
+    
+     public List<TicketListado> listadoTickets(String json) throws Exception {
+         List<Ticket> CT = ModelTicket.instance().listadoTickets(json);
+         List<TicketListado> LTL = new ArrayList<>();
+         TicketListado tl = null;
+         Pelicula p;
+         Cliente c;
+         Cartelera Cart;
+         c= ModelCli.instance().getCliente(json);
+         
+         for (int i =0; i<CT.size();i++){
+             tl= new TicketListado();
+             
+             String idt = CT.get(i).getId();
+             String BCart = CT.get(i).getCartelera();
+             Cart = ModelCart.instance().getCart(BCart);
+             p = ModelPeli.instance().getPeliculaID(Cart.getPelicula());
+             String asiento=CT.get(i).getButaca();
+             
+             tl.setId(idt);
+             tl.setNombre(c.getNombre());
+             tl.setApellido(c.getApellido());
+             tl.setSala(Cart.getSala());
+             tl.setPelicula(p.getNombre());
+             tl.setFecha(Cart.getFecha_funcion());
+             tl.setHora(Cart.getHora_inicio());
+             tl.setAsiento(asiento);
+             LTL.add(tl);
+         }
+         
+        return LTL;
+    }
+    
+     
 
     //------------------------------------------------------Cartelera------------------------------------------------------------------
     public Cartelera getCartelera(String nombre) throws Exception {
@@ -232,4 +268,9 @@ public class Service {
 //            throw new Exception ("404-pelicula no existe");
 //        }
 //    }
+
+   
+    
+    
+    
 }

@@ -146,7 +146,7 @@ function view(idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
     listaHorariosJSON = carteleras;
 
-    var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia
+    var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia //table
 
     listaHorariosJSON.forEach((item) => {
         if (idPelicula === item.pelicula) {

@@ -374,6 +374,71 @@ function resetPeliculas() { //Esta funcion solo se utiliza para volver a poner e
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+var listadoT = [];
+function buscaTicket(){
+    var t = $("#buscarT").val();
+let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        listadoT = await response.json();
+        leerTickets();
+    })();
+}
+
+function leerTickets(){
+    var lista= $("#tablaTicktes");
+    listadoT.forEach((item) => {
+        var id =item.id;
+        var n = item.nombre;
+        var a = item.apellido;
+        var s = item.sala;
+        var p = item.pelicula;
+        var f = item.fecha;
+        var h = item.hora;
+        var as = item.asiento;
+        var tr = $("<tr><td>Ticket Numero: "+id+" </td></tr>");
+        var tr1 = $("<tr><td>Cliente: "+n+" "+a+" </td></tr>");
+        var tr2 = $("<tr><td>Sala: "+s+" </td></tr>");
+        var tr3 = $("<tr><td>Pelicula "+p+" </td></tr>");
+        var tr4 = $("<tr><td>Aseinto "+as+" </td></tr>");
+        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
+        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
+        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
+        
+        lista.append(tr);
+        lista.append(tr1);
+        lista.append(tr2);
+        lista.append(tr3);
+        lista.append(tr4);
+        lista.append(tr5);
+        lista.append(tr6);
+        lista.append(l2);
+        
+        $('#modalTickets').modal('show');
+        
+    });
+}
+
+
+
+// var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia //table
+//
+//    listaHorariosJSON.forEach((item) => {
+//        if (idPelicula === item.pelicula) {
+//            var newListItem = $("<li></li>");
+//            newListItem.html('<a href="javascript:void(0);" id="horario">' + item.fecha_funcion
+//                    + ' Hora Inicio ' + item.hora_inicio + ' Hora fin ' + item.hora_fin + '</a>');
+//            newListItem.find('#horario').on('click', () => {
+//                butacas(item, precio);
+//            });
+//            listaHorarios.append(newListItem);
+//        }
+//    });
+
 
 function load() {
     //let request = new Request(url+'index.html', {method: 'GET'});
@@ -392,7 +457,11 @@ function load() {
     $("#peliculaRegister").click(Pelicula);
     $("#salaRegister").click(Sala);
     $("#cartRegister").click(Cartelera);
+    $("#ticketCliente").click(buscaTicket);
     $("#nav-dropdown-cartelera-btn").click(loadCarteleraForm);
+//     $('#modalTickets').find("#ticketCliente").on("click", () => {
+//                buscaTicket();
+//            });
 }
 
 $(load);

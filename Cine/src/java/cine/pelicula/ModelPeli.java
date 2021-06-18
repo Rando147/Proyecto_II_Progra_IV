@@ -82,6 +82,22 @@ public class ModelPeli {
         return result;
     }
 
+    public Pelicula getPeliculaID(String id) throws Exception {
+        listaPeliculas();
+        Pelicula result = null;
+        for (Pelicula p : peliculas.values()) {
+            if (p.getId().contains(id)) {
+                result = p;
+                return result;
+            }
+        }
+        if (result == null) {
+            throw new Exception("Pelicula no existe");
+        }
+        return result;
+    }
+    
+    
     public void eliminar(String id) throws Exception {
         dao.actualizarEstado(id, "0");
     }

@@ -9,11 +9,14 @@ import cine.pelicula.JSON_TO_PELICULA_PARSER;
 import cine.pelicula.Pelicula;
 import cine.sala.JSON_TO_SALA_PARSER;
 import cine.sala.Sala;
+import cine.ticket.Ticket;
+import cine.ticket.TicketListado;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +43,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 public class Administrador {
 
     //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
-    String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
-    //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
+    String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
     
     @GET
     @Path("{name}/peli")
@@ -175,4 +178,21 @@ public class Administrador {
         }
     }
 
+    
+    @GET 
+    @Path("{t}/ticketsListado")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<TicketListado> listadoTickets(@PathParam("t") String json) {
+        try {
+            List<TicketListado> tl = new ArrayList<>();
+            tl =Service.instance().listadoTickets(json);
+            System.out.print(tl);
+            return tl;
+            
+            
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
+    
 }

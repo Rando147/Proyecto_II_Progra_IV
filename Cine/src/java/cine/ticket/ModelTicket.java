@@ -64,4 +64,11 @@ public class ModelTicket {
     public void eliminar(String id) throws Exception {
         dao.eliminar(id);
     }
+    
+    public ArrayList listadoTickets(String id){
+    cleanHash();
+    ticketes=dao.listadoTickets(id);
+    return new ArrayList(ticketes.values());
+    
+    }
 }
