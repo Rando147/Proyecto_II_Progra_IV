@@ -383,7 +383,7 @@ let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET'
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
-            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            errorMessage(response.status, $("#modalTickets #errorBT"));
             return;
         }
         listadoT = await response.json();
@@ -442,19 +442,32 @@ function leerTickets(){
 
 
 
-// var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia //table
-//
-//    listaHorariosJSON.forEach((item) => {
-//        if (idPelicula === item.pelicula) {
-//            var newListItem = $("<li></li>");
-//            newListItem.html('<a href="javascript:void(0);" id="horario">' + item.fecha_funcion
-//                    + ' Hora Inicio ' + item.hora_inicio + ' Hora fin ' + item.hora_fin + '</a>');
-//            newListItem.find('#horario').on('click', () => {
-//                butacas(item, precio);
-//            });
-//            listaHorarios.append(newListItem);
-//        }
-//    });
+
+
+
+function errorMessage(status, place) {
+    switch (status) {
+        case 404:
+            error = "Registro no encontrado";
+            break;
+        case 403:
+        case 405:
+            error = "Usuario no autorizado";
+            break;
+        case 406:
+        case 405:
+            error = "Usuario ya existe";
+            break;
+        case 500:
+            error = "Usuario no existe";
+            break;
+    }
+    ;
+    place.html('<div class="alert alert-danger fade show">' +
+            '<button type="button" class="close" data-dismiss="alert">' +
+            '&times;</button><h4 class="alert-heading">Error!</h4>' + error + '</div>');
+    return;
+}
 
 
 function load() {

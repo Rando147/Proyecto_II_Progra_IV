@@ -73,6 +73,76 @@ function errorMessage(status, place) {
     return;
 }
 
+ var listadoTU=[];
+function fetchTUsuarios(){
+    
+     listadoTU=[];
+    $("#tablaTicktesUsuario").empty();
+    //var t = sessionStorage.getItem("Usuario");
+    //var id= t.id();
+    usuario = JSON.parse(sessionStorage.getItem('Usuario'));
+    
+let request = new Request(url + 'api/usuario/'+usuario.id+'/ticketsListado', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#modalTicketsUsuario #errorUT"));
+            return;
+        }
+        listadoTU = await response.json();
+        leerTicketsUsuario();
+        //$("#buscarT").val('');
+    })();
+    
+}
+
+
+
+function leerTicketsUsuario(){
+    var lista= $("#tablaTicktesUsuario");
+    listadoTU.forEach((item) => {
+        var id =item.id;
+        var n = item.nombre;
+        var a = item.apellido;
+        var s = item.sala;
+        var p = item.pelicula;
+        var f = item.fecha;
+        var h = item.hora;
+        var as = item.asiento;
+//        var tr = $("<tr><td>Ticket Numero: "+id+" </td></tr>");
+//        var tr1 = $("<tr><td>Cliente: "+n+" "+a+" </td></tr>");
+//        var tr2 = $("<tr><td>Sala: "+s+" </td></tr>");
+//        var tr3 = $("<tr><td>Pelicula "+p+" </td></tr>");
+//        var tr4 = $("<tr><td>Aseinto "+as+" </td></tr>");
+//        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
+//        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
+//        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
+        var tr = $("<div>Ticket Numero: "+id+" </div>");
+        var tr1 = $("<div>Cliente: "+n+" "+a+" ></div>");
+        var tr2 = $("<div>Sala: "+s+" </div>");
+        var tr3 = $("<div>Pelicula: "+p+" </div>");
+        var tr4 = $("<div>Asiento: "+as+" </div>");
+        var tr5 = $("<div>Fecha de la funcion: "+f+" </div>");
+        var tr6 = $("<div>Hora de la Funcion: "+h+" </div>");
+        var l2 = $("<div>-----------------------------------------------------</div>");
+        
+        lista.append(tr);
+        lista.append(tr1);
+        lista.append(tr2);
+        lista.append(tr3);
+        lista.append(tr4);
+        lista.append(tr5);
+        lista.append(tr6);
+        lista.append(l2);
+        
+        $('#modalTicketsUsuario').modal('show');
+        
+    });
+}
+
+
+
+
 function load() {
     let request = new Request(url + 'registro.html', {method: 'GET'});
     (async () => {
@@ -84,9 +154,10 @@ function load() {
         content = await response.text();
         $('body').append(content);
         $("#register").click(register);
+        $("#nav-compras-btn").click(fetchTUsuarios);
         //$("#logout").click(logout);
         console.log("LOAD CLIENTE");
     })();
-}
+} 
 
 $(load);

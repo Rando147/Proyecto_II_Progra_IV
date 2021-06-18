@@ -91,7 +91,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color : white"></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu" style="color : white">
                                 <li id="nav-dropdown-compras">
-                                    <a class="dropdown-item" id="nav-compras-btn" href="#" >Ver compras</a>
+                                    <a class="dropdown-item" id="nav-compras-btn" href="#" data-bs-toggle="modal" data-bs-target="#modalTicketsUsuario" >Ver compras</a>
                                 </li>
                                 <li id="nav-dropdown-compras-divider">
                                     <hr class="dropdown-divider">
@@ -584,7 +584,7 @@
                 <button class="btn btn-primary" style="background-color: #1d2185;" class="curso-derecha" id="ticketCliente" name="ticketCliente"> Buscar </button>
                 
                 <table id="tablaTicktes" class="tablaTicktes">
-                    
+                    <div id="errorBT"></div>
                 </table>
             </div>
             <div class="modal-footer">
@@ -601,6 +601,37 @@
 
 
 
+<!--###################################################################################Historial Compras#############################################################################################################-->
+
+
+
+<div class="modal fade" id="modalTicketsUsuario" aria-hidden="true" aria-labelledby="modalTicketsUsuarioLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!--form-->
+            <div class="modal-header" style="background-color: #1d2185;">
+                <h5 class="modal-title" id="modalTicketsUsuarioLabel" style="color : white">Historial de Compras me cago en todos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+                <!--<input type="search" placeholder="Id del cliente" aria-label="Search" id="buscarTU" name="buscarTU" style="width:50%; height:50%;" class="curso-derecha">
+                <button class="btn btn-primary" style="background-color: #1d2185;" class="curso-derecha" id="ticketClientePersonales" name="ticketClientePersonales"> Buscar </button>-->
+                
+                <table id="tablaTicktesUsuario" class="tablaTicktesUsuario">
+                    <div id="errorUT"></div>
+                </table>
+            </div>
+            <div class="modal-footer">
+                
+
+                <!--<button class="btn btn-primary" id="imprimir" style="background-color: #1d2185;">Imprimir</button>-->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+            </div>
+            <!--form-->
+
+        </div>
+    </div>
+</div>
 
 
 <!--################################################################################### Shopping cart #############################################################################################################-->

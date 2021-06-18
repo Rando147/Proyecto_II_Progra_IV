@@ -192,6 +192,7 @@ public class Administrador {
     @GET 
     @Path("{t}/ticketsListado")
     @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed("ADMINISTRATOR")
     public List<TicketListado> listadoTickets(@PathParam("t") String json) {
         try {
             List<TicketListado> tl = new ArrayList<>();

@@ -66,6 +66,10 @@ function showClientOptions() {
 
     $('#nav-dropdown-pelicula').hide();
     $('#nav-dropdown-pelicula-divider').hide();
+    
+    
+    $('#nav-dropdown-tickets-btn').hide();
+    
 
     $('#nav-dropdown-sala').hide();
     $('#nav-dropdown-sala-divider').hide();
@@ -74,7 +78,7 @@ function showClientOptions() {
     $('#nav-dropdown-cartelera-divider').hide();
 
     $('#nav-usuario-dropdown').show();
-    fetchAndListMovies();
+    //fetchAndListMovies();
 }
 function showNotLoggedOptions() {
     $('#nav-usuario-dropdown').hide();
@@ -83,6 +87,8 @@ function showLogoutOptions() {//Muetra las opciones despues de logout
     $('#nav-register-btn').show();
     $('#nav-login-btn').show();
     $('#nav-usuario-dropdown').hide();
+    
+    
 }
 
 function loginValidar() {

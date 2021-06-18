@@ -4,7 +4,9 @@ import cine.cliente.Cliente;
 import cine.cliente.JSON_TO_CLIENTE_PARSER;
 import cine.ticket.JSON_TO_TICKET_PARSER;
 import cine.ticket.Ticket;
+import cine.ticket.TicketListado;
 import cine.usuario.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
@@ -157,6 +159,25 @@ public class User {
         session.invalidate();
         //Service.instance().logout();
     }
+    
+    @GET 
+    @Path("{id}/ticketsListado")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"CLIENTE"})
+    public List<TicketListado> listadoTickets(@PathParam("id") String json) {
+        try {
+            List<TicketListado> tl = new ArrayList<>();
+            tl =Service.instance().VersionMejorada(json);
+            System.out.print(tl);
+            return tl;
+            
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
+    }
+    
+    
+    
 
 //    @GET
 //    @Path("login")
