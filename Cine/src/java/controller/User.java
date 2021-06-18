@@ -91,6 +91,7 @@ public class User {
 
     @POST
     @Path("{idCartelera}/comprar")
+   // @RolesAllowed("CLIENTE")
     @Consumes(MediaType.APPLICATION_JSON)
     public void comprar(String json, @PathParam("idCartelera") String idCartelera) {//idCartelera
 
