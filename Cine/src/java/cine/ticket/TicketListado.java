@@ -1,6 +1,10 @@
 
 package cine.ticket;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class TicketListado {
     String id;
@@ -10,7 +14,7 @@ public class TicketListado {
     String pelicula;
     String fecha;
     String hora;
-    String asiento;
+    List<String> asiento;
 
     public TicketListado(String id, String nombre, String apellido, String sala, String pelicula, String fecha, String hora,String asiento) {
         this.id = id;
@@ -20,10 +24,19 @@ public class TicketListado {
         this.pelicula = pelicula;
         this.fecha = fecha;
         this.hora = hora;
-        this.asiento = asiento;
+        this.asiento = loadSeats(asiento);
     }
 
     public TicketListado() {
+        asiento = new ArrayList<String>();
+    }
+    
+    private List<String> loadSeats(String asiento){//Parsea el string de asientos en un arreglo
+        List<String> asientos = new ArrayList<>();
+        asiento = asiento.replace("\"", "");//Borra el caracter '"' de la cadena
+        String[] asientosArray = asiento.split(","); //Divido el array por las ","
+        asientos = Arrays.asList(asientosArray);
+        return asientos;
     }
 
     public void setId(String id) {
@@ -55,7 +68,7 @@ public class TicketListado {
     }
 
     public void setAsiento(String asiento) {
-        this.asiento = asiento;
+        this.asiento = loadSeats(asiento);
     }
 
     public String getId() {
@@ -86,7 +99,7 @@ public class TicketListado {
         return hora;
     }
 
-    public String getAsiento() {
+    public List<String> getAsiento() {
         return asiento;
     }
     

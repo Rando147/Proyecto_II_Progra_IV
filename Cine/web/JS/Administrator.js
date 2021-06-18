@@ -397,6 +397,7 @@ function mostarH(){
     $("#tablaTicktes").empty();
 }
 
+
 function leerTickets(){
     var lista= $("#tablaTicktes");
     listadoT.forEach((item) => {
@@ -417,10 +418,10 @@ function leerTickets(){
 //        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
 //        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
         var tr = $("<div>Ticket Numero: "+id+" </div>");
-        var tr1 = $("<div>Cliente: "+n+" "+a+" ></div>");
+        var tr1 = $("<div>Cliente: "+n+" "+a+" </div>");
         var tr2 = $("<div>Sala: "+s+" </div>");
         var tr3 = $("<div>Pelicula: "+p+" </div>");
-        var tr4 = $("<div>Asiento: "+as+" </div>");
+        var tr4 = $("<div>Asientos: "+as+" </div>");
         var tr5 = $("<div>Fecha de la funcion: "+f+" </div>");
         var tr6 = $("<div>Hora de la Funcion: "+h+" </div>");
         var l2 = $("<div>-----------------------------------------------------</div>");

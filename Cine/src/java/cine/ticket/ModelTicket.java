@@ -75,9 +75,9 @@ public class ModelTicket {
         dao.eliminar(id);
     }
     
-    public ArrayList listadoTickets(String id){
+    public ArrayList listadoTickets(String idCliete){
     cleanHash();
-    ticketes=dao.listadoTickets(id);
+    ticketes=dao.listadoTickets(idCliete);
     return new ArrayList(ticketes.values());
     
     }

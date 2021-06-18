@@ -172,8 +172,7 @@ public class TicketDAO {
                                 rs.getString("Nombre"),
                                 rs.getString("fecha_Funcion"),
                                 rs.getString("hora_Inicio"),
-                                rs.getString("numero_Butaca")      
-                                
+                                rs.getString("numero_Butaca")
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
