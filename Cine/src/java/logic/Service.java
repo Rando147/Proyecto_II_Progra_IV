@@ -48,6 +48,7 @@ public class Service {
     public void eliminarPelicula(String id) throws Exception {
         ModelPeli.instance().eliminar(id);
     }
+
     public void activarPelicula(String id) throws Exception {
         ModelPeli.instance().activar(id);
     }
@@ -55,7 +56,7 @@ public class Service {
     public HashMap getListapeliculas() {
         return ModelPeli.instance().retornaLista();
     }
-    
+
     public HashMap getListapeliculasDisp() {
         return ModelPeli.instance().retornaListaDisp();
     }
@@ -63,6 +64,7 @@ public class Service {
     public List<Pelicula> peliculasListAll() {
         return ModelPeli.instance().peliculasListAll();
     }
+
     public List<Pelicula> peliculasListDisp() {
         return ModelPeli.instance().peliculasListDisp();
     }
@@ -127,9 +129,11 @@ public class Service {
     public void crearTicket(Ticket P) throws Exception {
         ModelTicket.instance().insertar(P);
     }
-    public void crearTickets(List<Ticket> LT) throws Exception {
-        ModelTicket.instance().insertarTickets(LT);
+
+    public int crearTickets(List<Ticket> LT) throws Exception {
+        return ModelTicket.instance().insertarTickets(LT);
     }
+
     public void eliminarTicket(String id) throws Exception {
         ModelTicket.instance().eliminar(id);
     }
@@ -137,49 +141,17 @@ public class Service {
     public List<Ticket> getListaTickets() {
         return ModelTicket.instance().retornaArrayList();
     }
-    
-    public List<TicketListado> VersionMejorada(String json){
-    List<TicketListado> LTL = new ArrayList<>();
-    LTL= ModelTicket.instance().mejorado(json);
-    return LTL;
+
+    public List<TicketListado> VersionMejorada(String json) {
+        List<TicketListado> LTL = new ArrayList<>();
+        LTL = ModelTicket.instance().mejorado(json);
+        return LTL;
     }
-    
-//     public List<TicketListado> listadoTickets(String json) throws Exception {
-//         List<Ticket> CT = ModelTicket.instance().listadoTickets(json);
-//         List<TicketListado> LTL = new ArrayList<>();
-//         long a=System.currentTimeMillis();
-//         
-//         TicketListado tl = null;
-//         Pelicula p;
-//         Cliente c;
-//         Cartelera Cart;
-//         System.out.print(System.currentTimeMillis()-a);
-//         c= ModelCli.instance().getCliente(json);
-//         System.out.print(System.currentTimeMillis()-a);
-//         for (int i =0; i<CT.size();i++){
-//             tl= new TicketListado();
-//             
-//             String idt = CT.get(i).getId();
-//             String BCart = CT.get(i).getCartelera();
-//             Cart = ModelCart.instance().getCart(BCart);
-//             p = ModelPeli.instance().getPeliculaID(Cart.getPelicula());
-//             String asiento=CT.get(i).getButaca();
-//             
-//             tl.setId(idt);
-//             tl.setNombre(c.getNombre());
-//             tl.setApellido(c.getApellido());
-//             tl.setSala(Cart.getSala());
-//             tl.setPelicula(p.getNombre());
-//             tl.setFecha(Cart.getFecha_funcion());
-//             tl.setHora(Cart.getHora_inicio());
-//             tl.setAsiento(asiento);
-//             LTL.add(tl);
-//         }
-//         System.out.print(System.currentTimeMillis()-a);
-//        return LTL;
-//    }
-    
-     
+    public List<TicketListado> obtenerTicket(String ticketNumber) {
+        List<TicketListado> LTL = new ArrayList<>();
+        LTL = ModelTicket.instance().obtenerTicket(ticketNumber);
+        return LTL;
+    }
 
     //------------------------------------------------------Cartelera------------------------------------------------------------------
     public Cartelera getCartelera(String nombre) throws Exception {
@@ -198,21 +170,20 @@ public class Service {
         return ModelCart.instance().cartelerasGetArray();
     }
 
-    
-    public void login(Usuario usr){
+    public void login(Usuario usr) {
         request.getSession().setAttribute("user", usr);
     }
-    
-    public void logout(){
+
+    public void logout() {
         request.getSession().removeAttribute("user");
     }
-    
+
     private boolean isAuthenticated() {
-        return  request.getSession().getAttribute("user") != null;
+        return request.getSession().getAttribute("user") != null;
     }
-    
-    public String getUserRole(){//Retorna el rol que tiene el usuario loggeado
-        if (isAuthenticated()){
+
+    public String getUserRole() {//Retorna el rol que tiene el usuario loggeado
+        if (isAuthenticated()) {
             Usuario usuario = (Usuario) request.getSession().getAttribute("user");
             return usuario.getType();
         }
@@ -293,8 +264,4 @@ public class Service {
 //        }
 //    }
 
-   
-    
-    
-    
 }

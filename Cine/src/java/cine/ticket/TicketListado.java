@@ -33,6 +33,8 @@ public class TicketListado {
     
     private List<String> loadSeats(String asiento){//Parsea el string de asientos en un arreglo
         List<String> asientos = new ArrayList<>();
+        asiento = asiento.replace("[", "");
+        asiento = asiento.replace("]", "");
         asiento = asiento.replace("\"", "");//Borra el caracter '"' de la cadena
         String[] asientosArray = asiento.split(","); //Divido el array por las ","
         asientos = Arrays.asList(asientosArray);

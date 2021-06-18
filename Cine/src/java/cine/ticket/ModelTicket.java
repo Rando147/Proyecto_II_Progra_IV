@@ -24,14 +24,20 @@ public class ModelTicket {
         ticketes = new HashMap<>();
     }
 
-    public ArrayList mejorado(String id){
-    cleanHash();
-    ticketListado = dao.listadoTicketsMejorado(id);
-    return new ArrayList (ticketListado.values());
-    
+    public ArrayList mejorado(String id) {
+        cleanHash();
+        ticketListado = dao.listadoTicketsMejorado(id);
+        return new ArrayList(ticketListado.values());
+
     }
     
-    
+    public ArrayList obtenerTicket(String id) {//Retorna un ticket utilizando el id
+        cleanHash();
+        ticketListado = dao.obtenerTicket(id);
+        return new ArrayList(ticketListado.values());
+
+    }
+
     private void listaTickets() {
         cleanHash();
         ticketes = dao.listarTicket();
@@ -53,8 +59,8 @@ public class ModelTicket {
         return new ArrayList(ticketes.values());
     }
 
-    public void insertar(Ticket p) throws Exception {
-        dao.crear(p);
+    public int insertar(Ticket p) throws Exception {
+        return dao.crear(p);
     }
 
     public Ticket getTicket(String nombre) throws Exception {
@@ -74,22 +80,25 @@ public class ModelTicket {
     public void eliminar(String id) throws Exception {
         dao.eliminar(id);
     }
-    
-    public ArrayList listadoTickets(String idCliete){
-    cleanHash();
-    ticketes=dao.listadoTickets(idCliete);
-    return new ArrayList(ticketes.values());
-    
+
+    public ArrayList listadoTickets(String idCliete) {
+        cleanHash();
+        ticketes = dao.listadoTickets(idCliete);
+        return new ArrayList(ticketes.values());
+
     }
 
-    public void insertarTickets(List<Ticket> LT) throws Exception{
+    public int insertarTickets(List<Ticket> LT) throws Exception {
+        int idTicket = -1;
         try {
             Iterator<Ticket> TicketIterator = LT.iterator();
             while (TicketIterator.hasNext()) {
-                insertar(TicketIterator.next());
+                idTicket = insertar(TicketIterator.next());
             }
+            
         } catch (Exception x) {
 
         }
+        return idTicket;
     }
 }

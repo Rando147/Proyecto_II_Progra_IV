@@ -2,6 +2,17 @@
 var url = "http://localhost:8080/Cine/";
 var peliculas = [];
 var salas = [];
+var ticketHeaders = {
+    id: 'Ticket #',
+    nombre: 'Nombre cliente',
+    apellido: 'Apellido cliente',
+    sala: 'Pelicula',
+    pelicula: 'Sala',
+    fecha: 'Fecha',
+    hora: 'Hora',
+    asiento: 'Asientos'
+};
+var ticketKeys = ['id', 'nombre', 'apellido','pelicula', 'sala', 'fecha', 'hora', 'asiento'];
 
 
 //-----------------------------------------pelicula------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -309,27 +320,27 @@ function Cartelera() {
     })();
 }
 
-function loadCarteleraForm(){
+function loadCarteleraForm() {
     setTimeout(() => {
-            fetchAndListSalas();
-        }, 400);
-    
+        fetchAndListSalas();
+    }, 400);
+
     var moviesSelector = $('#idP');
     var salasSelector = $('#idS');
     moviesSelector.empty();
     salasSelector.empty();
     moviesSelector.append($('<option selected>Seleccionar pelicula</option>'));
     salasSelector.append($('<option selected>Seleccionar sala</option>'));
-    peliculas.forEach((item)=>{
+    peliculas.forEach((item) => {
         var movieID = item.id;
         var movieName = item.nombre;
         moviesSelector.append($('<option></option>').attr('value', movieID).text(movieName));
     });
-    salas.forEach((item)=>{
+    salas.forEach((item) => {
         var salaID = item.sala;
         salasSelector.append($('<option></option>').attr('value', salaID).text(salaID));
     });
-    
+
 }
 
 function fetchAndListSalas() {
@@ -375,11 +386,11 @@ function resetPeliculas() { //Esta funcion solo se utiliza para volver a poner e
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 var listadoT = [];
-function buscaTicket(){
-    listadoT=[];
+function buscaTicket() {
+    listadoT = [];
     $("#tablaTicktes").empty();
     var t = $("#buscarT").val();
-let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET', headers: {}});
+    let request = new Request(url + 'api/admin/' + t + '/ticketsListado', {method: 'GET', headers: {}});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -392,16 +403,17 @@ let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET'
     })();
 }
 
-function mostarH(){
+function mostarH() {
     $("#modalTickets").modal('show');
     $("#tablaTicktes").empty();
 }
 
 
-function leerTickets(){
-    var lista= $("#tablaTicktes");
+function leerTickets() {
+    var lista = $("#tablaTicktes");
+
     listadoT.forEach((item) => {
-        var id =item.id;
+        var id = item.id;
         var n = item.nombre;
         var a = item.apellido;
         var s = item.sala;
@@ -417,15 +429,17 @@ function leerTickets(){
 //        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
 //        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
 //        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
-        var tr = $("<div>Ticket Numero: "+id+" </div>");
-        var tr1 = $("<div>Cliente: "+n+" "+a+" </div>");
-        var tr2 = $("<div>Sala: "+s+" </div>");
-        var tr3 = $("<div>Pelicula: "+p+" </div>");
-        var tr4 = $("<div>Asientos: "+as+" </div>");
-        var tr5 = $("<div>Fecha de la funcion: "+f+" </div>");
-        var tr6 = $("<div>Hora de la Funcion: "+h+" </div>");
+        var tr = $("<div>Ticket Numero: " + id + " </div>");
+        var tr1 = $("<div>Cliente: " + n + " " + a + " </div>");
+        var tr2 = $("<div>Sala: " + s + " </div>");
+        var tr3 = $("<div>Pelicula: " + p + " </div>");
+        var tr4 = $("<div>Asientos: " + as + " </div>");
+        var tr5 = $("<div>Fecha de la funcion: " + f + " </div>");
+        var tr6 = $("<div>Hora de la Funcion: " + h + " </div>");
+        var imprimir = $("<button>Imprimir ticket</button>");
+
         var l2 = $("<div>-----------------------------------------------------</div>");
-        
+
         lista.append(tr);
         lista.append(tr1);
         lista.append(tr2);
@@ -433,10 +447,16 @@ function leerTickets(){
         lista.append(tr4);
         lista.append(tr5);
         lista.append(tr6);
+        lista.append(imprimir);
         lista.append(l2);
-        
+
+
+        imprimir.on("click", () => {
+            generatePDF(item, ticketHeaders, ticketKeys)
+        });
+
         $('#modalTickets').modal('show');
-        
+
     });
 }
 
@@ -490,7 +510,7 @@ function load() {
     $("#ticketCliente").click(buscaTicket);
     $("#nav-dropdown-cartelera-btn").click(loadCarteleraForm);
     $("#nav-dropdown-tickets-btn").click(mostarH);
-  
+
 //     $('#modalTickets').find("#ticketCliente").on("click", () => {
 //                buscaTicket();
 //            });

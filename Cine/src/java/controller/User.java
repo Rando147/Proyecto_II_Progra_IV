@@ -116,7 +116,8 @@ public class User {
     @Path("{idCartelera}/comprar")
     @RolesAllowed("CLIENTE")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void comprar(String json, @PathParam("idCartelera") String idCartelera) {//idCartelera
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TicketListado> comprar(String json, @PathParam("idCartelera") String idCartelera) {//idCartelera
         
         try {
             HttpSession session = request.getSession(true);
@@ -132,8 +133,12 @@ public class User {
                 }
             }
             //hay que valñidar el usuario aquí
-            Service.instance().crearTickets(parser.parseCJSON(idCartelera, json, user));
-
+            
+            List<Ticket> ticket = parser.parseCJSON(idCartelera, json, user);
+            
+            int ticketID = Service.instance().crearTickets(ticket);
+            List<TicketListado> tic =  Service.instance().obtenerTicket(Integer.toString(ticketID));
+            return tic;
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }

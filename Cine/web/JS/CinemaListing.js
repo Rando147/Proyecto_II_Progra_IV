@@ -177,7 +177,6 @@ function butacas(movieName, movieCartelera, preciom) {
     $("#exampleModalToggleLabel2").empty();
     $("#exampleModalToggleLabel2").text(movieName + Array(20).fill('\xa0').join('') + '  Butacas disponibles');
     //exampleModalToggleLabel2
-    //Aqui se deberia hacer el request al server solicitando la informacion de los tickets ya vendidos, la sala, cantidad de asientos entre otra informacion necesaria aun no definida.
     var informacionButacasJSON = {
         idCartelera: "",
         cantidadAsientos: "",
@@ -254,6 +253,7 @@ function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesa
     }
     $('#modalButacas').find("#comprar").on("click", () => {
         comprar(informacionButacasJSON.idCartelera);//pase el id de la cartelera al cual se hace la compra
+        $('#modalButacas').find("#comprar").off('click');
     });
     // $("#comprar").click(comprar(informacionButacasJSON.idCartelera));
     $(".theather-container").append(container);
@@ -310,6 +310,7 @@ function comprar(idCartelera) {
     }
 
     if (usuario !== null) {
+       // var ticket;
         let request = new Request(url + 'api/usuario/' + idCartelera + '/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
         (async () => {
             const response = await fetch(request);
@@ -317,14 +318,11 @@ function comprar(idCartelera) {
                 errorMessage(response.status, $("#loginDialog #errorDiv"));
                 return;
             }
-//        resetPrecioSeat();
-//        resetSeatSelected();
-//        resetSeatsArray();
-//        resetTotalPagar();
-            //$('#modalButacas').modal('hide');
-            //$('#modalHorarios').modal('hide');
-            //$("#modalButacas").empty();
+            ticket = await response.json();
+            generatePDF(ticket[0], ticketHeaders, ticketKeys);
+            
         })();
+        //generatePDF(ticket, ticketHeaders, ticketKeys);
         setTimeout(() => {
             fetchAndListTickets();
             //fetchAndListMovies();

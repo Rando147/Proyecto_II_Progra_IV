@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -28,19 +29,23 @@ public class TicketDAO {
         return instancia;
     }
 
-    public void crear(Ticket p) throws Exception {
+    public int crear(Ticket p) throws Exception {
 
-        PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_AGREGAR);
-
+        Connection cnx = db.getConnection();
+        PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_AGREGAR, Statement.RETURN_GENERATED_KEYS);
         stm.setString(1, p.getId());
         stm.setString(2, p.getButaca());
         stm.setString(3, p.getCliente());
         stm.setString(4, p.getCartelera());
-
-        int count = Database.instance().executeUpdate(stm);
+        int count = stm.executeUpdate();
         if (count == 0) {
             throw new Exception("duplicado");
         }
+        int n = -1;
+        ResultSet rs = stm.getGeneratedKeys();
+        if (rs.next())
+                n = rs.getInt(1);
+        return n;
     }
 
     public HashMap listarTicket() {
@@ -169,7 +174,43 @@ public class TicketDAO {
                                 rs.getString("nombre"),
                                 rs.getString("apellido"),
                                 rs.getString("id_Sala"),
-                                rs.getString("Nombre"),
+                                rs.getString(5),
+                                rs.getString("fecha_Funcion"),
+                                rs.getString("hora_Inicio"),
+                                rs.getString("numero_Butaca")
+                        );
+                        peliculas.put(resultado.getId(), resultado);
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return peliculas;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return peliculas;
+        }
+        return peliculas;
+    }
+
+    public HashMap obtenerTicket(String ticketNumber) {
+        TicketListado resultado = null;
+        HashMap<String, TicketListado> peliculas = new HashMap<>();
+        int x = Integer.parseInt(ticketNumber);
+
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_RECUPERAR_TICKET)) {
+                stm.clearParameters();
+                stm.setInt(1, x);
+                try (ResultSet rs = stm.executeQuery()) {
+                    while (rs.next()) {
+                        resultado = new TicketListado(
+                                rs.getString("id_Ticket"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getString("id_Sala"),
+                                rs.getString(5),
                                 rs.getString("fecha_Funcion"),
                                 rs.getString("hora_Inicio"),
                                 rs.getString("numero_Butaca")
