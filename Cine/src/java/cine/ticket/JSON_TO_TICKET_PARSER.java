@@ -35,7 +35,7 @@ public class JSON_TO_TICKET_PARSER {
             String cartelera = idCartelera;//(String) jo.get("idCartelera");
             String id, butaca, cliente;
 //            JSONArray jsonArray = (JSONArray) jo.get("seatsArray");
-            // iterating seatsArray       String str = "{ \"number\": [3, 4, 5, 6] }";
+            // iterating seatsArray       String str = "{ \"number\": [3-0, 0-4, 0-5, 4-6] }";
             //Iterator itr1 = ja.iterator();
 
             StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[],'\"'");

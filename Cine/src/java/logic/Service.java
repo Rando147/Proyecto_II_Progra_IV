@@ -141,6 +141,7 @@ public class Service {
      public List<TicketListado> listadoTickets(String json) throws Exception {
          List<Ticket> CT = ModelTicket.instance().listadoTickets(json);
          List<TicketListado> LTL = new ArrayList<>();
+         
          TicketListado tl = null;
          Pelicula p;
          Cliente c;
