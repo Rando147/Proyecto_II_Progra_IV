@@ -376,6 +376,8 @@ function resetPeliculas() { //Esta funcion solo se utiliza para volver a poner e
 
 var listadoT = [];
 function buscaTicket(){
+    listadoT=[];
+    $("#tablaTicktes").empty();
     var t = $("#buscarT").val();
 let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET', headers: {}});
     (async () => {
@@ -386,7 +388,13 @@ let request = new Request(url + 'api/admin/'+t+'/ticketsListado', {method: 'GET'
         }
         listadoT = await response.json();
         leerTickets();
+        $("#buscarT").val('');
     })();
+}
+
+function mostarH(){
+    $("#modalTickets").modal('show');
+    $("#tablaTicktes").empty();
 }
 
 function leerTickets(){
@@ -400,14 +408,22 @@ function leerTickets(){
         var f = item.fecha;
         var h = item.hora;
         var as = item.asiento;
-        var tr = $("<tr><td>Ticket Numero: "+id+" </td></tr>");
-        var tr1 = $("<tr><td>Cliente: "+n+" "+a+" </td></tr>");
-        var tr2 = $("<tr><td>Sala: "+s+" </td></tr>");
-        var tr3 = $("<tr><td>Pelicula "+p+" </td></tr>");
-        var tr4 = $("<tr><td>Aseinto "+as+" </td></tr>");
-        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
-        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
-        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
+//        var tr = $("<tr><td>Ticket Numero: "+id+" </td></tr>");
+//        var tr1 = $("<tr><td>Cliente: "+n+" "+a+" </td></tr>");
+//        var tr2 = $("<tr><td>Sala: "+s+" </td></tr>");
+//        var tr3 = $("<tr><td>Pelicula "+p+" </td></tr>");
+//        var tr4 = $("<tr><td>Aseinto "+as+" </td></tr>");
+//        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
+//        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
+//        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
+        var tr = $("<div>Ticket Numero: "+id+" </div>");
+        var tr1 = $("<div>Cliente: "+n+" "+a+" ></div>");
+        var tr2 = $("<div>Sala: "+s+" </div>");
+        var tr3 = $("<div>Pelicula: "+p+" </div>");
+        var tr4 = $("<div>Asiento: "+as+" </div>");
+        var tr5 = $("<div>Fecha de la funcion: "+f+" </div>");
+        var tr6 = $("<div>Hora de la Funcion: "+h+" </div>");
+        var l2 = $("<div>-----------------------------------------------------</div>");
         
         lista.append(tr);
         lista.append(tr1);
@@ -459,6 +475,8 @@ function load() {
     $("#cartRegister").click(Cartelera);
     $("#ticketCliente").click(buscaTicket);
     $("#nav-dropdown-cartelera-btn").click(loadCarteleraForm);
+    $("#nav-dropdown-tickets-btn").click(mostarH);
+  
 //     $('#modalTickets').find("#ticketCliente").on("click", () => {
 //                buscaTicket();
 //            });
