@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Database;
@@ -42,10 +43,9 @@ public class TicketDAO {
         }
     }
 
-    
-    public HashMap listarTicket(){
+    public HashMap listarTicket() {
         Ticket resultado = null;
-        HashMap<String,Ticket> peliculas = new HashMap<>();
+        HashMap<String, Ticket> peliculas = new HashMap<>();
         try {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR)) {
@@ -54,10 +54,9 @@ public class TicketDAO {
                     while (rs.next()) {
                         resultado = new Ticket(
                                 rs.getString("id_Ticket"),
-                                rs.getString("numero_Butaca"),
+                                tokenizer(rs.getString("numero_Butaca")),
                                 rs.getString("id_Cliente"),
                                 rs.getString("id_Cartelera")
-                                
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -71,10 +70,19 @@ public class TicketDAO {
             return peliculas;
         }
         return peliculas;
-    
+
     }
-    
-    
+
+    private String tokenizer(String butacas) {
+        String butaca = "";
+        StringTokenizer multiTokenizer = new StringTokenizer(butacas, "://.[]'\"'");
+        //StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[]");
+        while (multiTokenizer.hasMoreTokens()) {
+            butaca += multiTokenizer.nextToken();
+        }
+        return butaca;
+    }
+
     public Ticket recuperar(int id) {
         Ticket resultado = null;
         try {
@@ -102,9 +110,7 @@ public class TicketDAO {
         }
         return resultado;
     }
-    
-    
-    
+
     public void eliminar(String p) throws Exception {
         PreparedStatement stm = Database.instance().prepareStatement(TicketCRUD.CMD_ELIMINAR);
         stm.setString(1, p);
@@ -113,14 +119,12 @@ public class TicketDAO {
             throw new Exception("duplicado");
         }
     }
-    
-    
-    
-    public HashMap listadoTickets(String id){
-    Ticket resultado = null;
-        HashMap<String,Ticket> peliculas = new HashMap<>();
+
+    public HashMap listadoTickets(String id) {
+        Ticket resultado = null;
+        HashMap<String, Ticket> peliculas = new HashMap<>();
         int x = Integer.parseInt(id);
-        
+
         try {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR_TICKET_CLIENTE)) {
@@ -133,7 +137,6 @@ public class TicketDAO {
                                 rs.getString("numero_Butaca"),
                                 rs.getString("id_Cliente"),
                                 rs.getString("id_Cartelera")
-                                
                         );
                         peliculas.put(resultado.getId(), resultado);
                     }
@@ -148,15 +151,12 @@ public class TicketDAO {
         }
         return peliculas;
     }
-    
-    
-    
-    
-     public HashMap listadoTicketsMejorado(String id){
-    TicketListado resultado = null;
-        HashMap<String,TicketListado> peliculas = new HashMap<>();
+
+    public HashMap listadoTicketsMejorado(String id) {
+        TicketListado resultado = null;
+        HashMap<String, TicketListado> peliculas = new HashMap<>();
         int x = Integer.parseInt(id);
-        
+
         try {
             try (Connection cnx = db.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR_MEJORADO)) {

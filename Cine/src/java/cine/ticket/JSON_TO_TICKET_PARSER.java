@@ -29,50 +29,18 @@ public class JSON_TO_TICKET_PARSER {
         Ticket aux = null;
         ArrayList<Ticket> tickets = new ArrayList<>();
         try {
-//            String auxJSON = "{ \"seatsArray\":" + json + "}";
-//            Object obj = new JSONParser().parse(json);
-//            JSONObject jo = (JSONObject) obj;
-            String cartelera = idCartelera;//(String) jo.get("idCartelera");
-            String id, butaca = json, cliente;
-//            JSONArray jsonArray = (JSONArray) jo.get("seatsArray");
-            // iterating seatsArray       String str = "{ \"number\": [3-0, 0-4, 0-5, 4-6] }";
-            //Iterator itr1 = ja.iterator();
-            //StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[],'\"'");
-            //StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[]");
-            //while (multiTokenizer.hasMoreTokens()) {
-            //    butaca += multiTokenizer.nextToken();               
-                //System.out.println(multiTokenizer.nextToken());
-            //}
-        tickets.add(new Ticket(butaca, u.getId(), cartelera));
 
-//            String str = "What are you doing today?";
-//            String split[] = str.split(" ", 0);
-//            for (String s : split) {
-//                System.out.println(s);
+            String cartelera = idCartelera;
+            //String id, butaca = "", cliente;
+            String id, butaca = json, cliente;      
+            // iterating seatsArray       
+            //String str = "{ \"number\": [3-0, 0-4, 0-5, 4-6] }";
+//            StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[]'\"'");
+//            while (multiTokenizer.hasMoreTokens()) {
+//                butaca += multiTokenizer.nextToken();         
 //            }
-//
-//            String s = " ;String; String; String; String, String; String;;String;String; String; String; ;String;String;String;String";
-//            //String[] strs = s.split("[,\\s\\;]"); 
-//            String[] strs = s.split("[,\\;]");
-//
-//            System.out.println("Substrings length:" + strs.length);
-//            for (int i = 0;
-//                    i < strs.length;
-//                    i++) {
-//                System.out.println("Str[" + i + "]:" + strs[i]);
-//            }
-//
-//            if (jsonArray
-//                    != null) {
-//
-//                //Iterating JSON array  
-//                for (int i = 0; i < jsonArray.size(); i++) {
-//                    butaca = (String) jsonArray.get(i);
-//                    //Adding each element of JSON array into ArrayList  
-//                    //Ticket(String butaca, String cliente, String cartelera)
-//                    tickets.add(new Ticket(butaca, u.getId(), cartelera));
-//                }
-//            }
+            tickets.add(new Ticket(butaca, u.getId(), cartelera));
+          
         } catch (Exception ec) {
 
         }

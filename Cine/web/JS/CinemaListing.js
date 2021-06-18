@@ -196,10 +196,10 @@ function butacas(movieName, movieCartelera, preciom) {
     tickets.forEach((item) => {
         if (movieCartelera.id === item.cartelera) {
             var seat = [];
-            seat = item.butaca;
-            //item.numero_Butaca;
+            seat = item.butaca.split(",");
             for (var i = 0; i < seat.length; i++) {
-                informacionButacasJSON.ocupados.push(seat[i]);
+                var butaka = seat[i];
+                informacionButacasJSON.ocupados.push(butaka);
             }
             //return;
         }
@@ -326,8 +326,11 @@ function comprar(idCartelera) {
             //$("#modalButacas").empty();
         })();
         setTimeout(() => {
-            fetchAndListMovies();
+            fetchAndListTickets();
+            //fetchAndListMovies();
         }, 400);
+        $('#modalButacas').modal('hide');
+        $('#modalHorarioss').modal('hide');
     } else {
         // while (usuario === null) {
         $('#modalRegistro').modal('show');
