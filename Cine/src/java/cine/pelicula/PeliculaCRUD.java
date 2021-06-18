@@ -22,11 +22,14 @@ public class PeliculaCRUD {
     protected static final String CMD_ACTUALIZAR
             = "UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ? , precio = ?, estado = ? "
             + "WHERE id_Pelicula = ?;";
-    
+
     protected static final String CMD_ACTUALIZAR_ESTADO
             = "UPDATE Pelicula SET estado = ? "
             + "WHERE id_Pelicula = ?;";
-
+    
+    protected static final String CMD_ACTUALIZAR_ESTADO_CARTELERA
+            = "UPDATE Cartelera SET estado = ? "
+            + "WHERE id_Pelicula = ?;";
     /**
      * ****************************IMAGES*****************************************************************************************************
      */

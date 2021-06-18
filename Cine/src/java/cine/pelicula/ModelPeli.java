@@ -100,10 +100,12 @@ public class ModelPeli {
     
     public void eliminar(String id) throws Exception {
         dao.actualizarEstado(id, "0");
+        dao.actualizarEstadoCartelera(id,"0");
     }
     
     public void activar(String id) throws Exception{
         dao.actualizarEstado(id, "1");
+        dao.actualizarEstadoCartelera(id,"1");
     }
 
     public void insertarImagen(String id_Pelicula, InputStream image) throws Exception {

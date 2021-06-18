@@ -251,8 +251,6 @@ public class PeliculaDAO {
     
     public void actualizarEstado(String id, String estado) throws SQLException, Exception{ //Argumentos= id de la pelicula y nuevo estado de esta pelicula
         PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ACTUALIZAR_ESTADO);
-
-        //"UPDATE Pelicula SET id_Pelicula = ?, Nombre = ?, duracion = ?, descripcion = ? , precio = ?, estado = ?"
         stm.clearParameters();
         int state = Integer.parseInt(estado);
         stm.setInt(1, state);
@@ -260,6 +258,22 @@ public class PeliculaDAO {
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
+        }
+    }
+    public void actualizarEstadoCartelera(String id, String estado){ //Argumentos= id de la pelicula y nuevo estado de esta pelicula
+      
+        try{
+        PreparedStatement stm = Database.instance().prepareStatement(PeliculaCRUD.CMD_ACTUALIZAR_ESTADO_CARTELERA);
+        stm.clearParameters();
+        int state = Integer.parseInt(estado);
+        stm.setInt(1, state);
+        stm.setString(2, id);
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+        } catch (Exception ex){
+        
         }
     }
 

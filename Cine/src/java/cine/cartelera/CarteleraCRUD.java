@@ -4,8 +4,9 @@ package cine.cartelera;
 public class CarteleraCRUD {
 
     protected static final String CMD_LISTAR
-            = "SELECT id_Cartelera, fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala , status FROM Cartelera "
-            + "WHERE status = 1;";
+            = "SELECT id_Cartelera, fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala , estado FROM Cartelera "
+            + "WHERE estado = 1 "
+            +"and fecha_Funcion > current_date()";
     
     protected static final String CMD_LISTAR_PELICULA = "SELECT * from Cartelera WHERE pelicula = ?;";
 
