@@ -1,11 +1,10 @@
-
 package cine.ticket;
 
 import cine.cartelera.Cartelera;
 import cine.cliente.Cliente;
 
-
 public class Ticket {
+
     String id;
     String butaca;
     String cliente;
@@ -16,6 +15,13 @@ public class Ticket {
 
     public Ticket(String id, String butaca, String cliente, String cartelera) {
         this.id = id;
+        this.butaca = butaca;
+        this.cliente = cliente;
+        this.cartelera = cartelera;
+    }
+
+    public Ticket(String butaca, String cliente, String cartelera) {
+        this.id = null;
         this.butaca = butaca;
         this.cliente = cliente;
         this.cartelera = cartelera;
@@ -52,5 +58,5 @@ public class Ticket {
     public void setCartelera(String cartelera) {
         this.cartelera = cartelera;
     }
-    
+
 }

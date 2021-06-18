@@ -127,7 +127,9 @@ public class Service {
     public void crearTicket(Ticket P) throws Exception {
         ModelTicket.instance().insertar(P);
     }
-
+    public void crearTickets(List<Ticket> LT) throws Exception {
+        ModelTicket.instance().insertarTickets(LT);
+    }
     public void eliminarTicket(String id) throws Exception {
         ModelTicket.instance().eliminar(id);
     }

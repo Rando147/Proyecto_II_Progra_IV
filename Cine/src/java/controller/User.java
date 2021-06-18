@@ -2,7 +2,10 @@ package controller;
 
 import cine.cliente.Cliente;
 import cine.cliente.JSON_TO_CLIENTE_PARSER;
+import cine.ticket.JSON_TO_TICKET_PARSER;
+import cine.ticket.Ticket;
 import cine.usuario.Usuario;
+import java.util.List;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -15,7 +18,9 @@ import javax.ws.rs.NotAcceptableException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import logic.Service;
@@ -85,19 +90,20 @@ public class User {
     }
 
     @POST
-    @Path("comprar")
+    @Path("{idCartelera}/comprar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void comprar(String json) {
-//        HttpSession session = request.getSession(true);
-//        JSON_TO_CLIENTE_PARSER parser = new JSON_TO_CLIENTE_PARSER();//crea una clase para parsear el objeto
-//        Cliente cliente = parser.parseCJSON(json);//llamado a un metodo que crea un objeto cliete a mano a partir del string
-//        Usuario user = null;
-//        try {
-//            Service.instance().crearCliente(cliente);
-//            
-//        } catch (Exception ex) {
-//            throw new NotAcceptableException();
-//        }
+    public void comprar(String json, @PathParam("idCartelera") String idCartelera) {//idCartelera
+
+        try {
+            HttpSession session = request.getSession(true);
+            JSON_TO_TICKET_PARSER parser = new JSON_TO_TICKET_PARSER();//crea una clase para parsear el objeto
+            Usuario user = new Usuario("111","111");
+            //hay que valñidar el usuario aquí
+            Service.instance().crearTickets(parser.parseCJSON(idCartelera,json,user));
+
+        } catch (Exception ex) {
+            throw new NotAcceptableException();
+        }
     }
 
     @PUT
@@ -124,7 +130,7 @@ public class User {
 //    @GET
 //    @Path("login")
 //    @Produces({MediaType.APPLICATION_JSON})
-//    public Usuario login(@DefaultValue("") @QueryParam("id") String id, @QueryParam("password") String password) { 
+//    public Usuario login(@DefaultValue("") seatsArray String id, @QueryParam("password") String password) { 
 //        Usuario usuario = new Usuario("01","hoysecome");
 //        System.out.print("hoy no se come perros");
 //        return usuario;

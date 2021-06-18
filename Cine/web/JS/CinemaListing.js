@@ -53,10 +53,10 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
         });
         var btn = newListItem.find("#view-movie");
         btn.hide();
-        newListItem.on("mouseover", ()=>{
+        newListItem.on("mouseover", () => {
             btn.show();
         });
-        newListItem.on("mouseleave", ()=>{
+        newListItem.on("mouseleave", () => {
             btn.hide();
         });
         listaPeliculasContainer.append(newListItem);
@@ -142,6 +142,9 @@ function resetTickets() { //Esta funcion solo se utiliza para volver a poner el 
 function resetSeatsArray() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
     seatsArray = [];
 }
+function resetTotalPagar() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
+    totalPagar = 0;
+}
 function view(idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
     listaHorariosJSON = carteleras;
@@ -170,8 +173,13 @@ function resetSeatSelected() { //Esta funcion solo se utiliza para volver a pone
     seatSelected = 0;
 }
 function butacas(movieCartelera, preciom) {
+    resetSeatsArray();
+    resetPrecioSeat();
+    resetSeatSelected();
+    resetTotalPagar();
     //Aqui se deberia hacer el request al server solicitando la informacion de los tickets ya vendidos, la sala, cantidad de asientos entre otra informacion necesaria aun no definida.
     var informacionButacasJSON = {
+        idCartelera: "",
         cantidadAsientos: "",
         precio: "",
         ocupados: []
@@ -181,6 +189,7 @@ function butacas(movieCartelera, preciom) {
     salas.forEach((itemS) => {
         if (movieCartelera.sala === itemS.sala) {
             informacionButacasJSON.cantidadAsientos = itemS.butacas;
+            informacionButacasJSON.idCartelera = movieCartelera.id;
             //return;
         }
     });
@@ -201,10 +210,9 @@ function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesa
     resetSeats(); //Lo unico que hace es borrar el arreglo donde guardan los asientos seleccionados por el usuario
     $("#screen-seats-container").remove();//Borra el 'body' del modal para que este no se duplique cada vez que se abre la pestaña de butacas
 
-
     //Carga de variables desde JSON
     var cantidadAsientos = informacionButacasJSON.cantidadAsientos;
-    var precioSeat = informacionButacasJSON.precio;
+    precioSeat = informacionButacasJSON.precio;
     var ocupiedSeats = informacionButacasJSON.ocupados;
 
     var totalColumnas = 8; //Total de columnas de la sala
@@ -240,7 +248,10 @@ function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesa
         }
         container.append(newRow);
     }
-
+    $('#modalButacas').find("#comprar").on("click", () => {
+        comprar(informacionButacasJSON.idCartelera);//pase el id de la cartelera al cual se hace la compra
+    });
+    // $("#comprar").click(comprar(informacionButacasJSON.idCartelera));
     $(".theather-container").append(container);
     $(".seat:not(.occupied)").click(setSelected_Unselected);//Agrega listener para poder cambiar los seleccionados
 }
@@ -286,19 +297,27 @@ function setSelected_Unselected() {
         addSeatToArray(id);
     }
 }
-function comprar() {
-    
-    let request = new Request(url + 'api/usuario/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
+function comprar(idCartelera) {
+
+    let request = new Request(url + 'api/usuario/' + idCartelera + '/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#loginDialog #errorDiv"));
             return;
         }
-        resetPrecioSeat();resetSeatSelected();resetSeatsArray();
-        //$('#modalButacas').modal('hide');
+        resetPrecioSeat();
+        resetSeatSelected();
+        resetSeatsArray();
+        resetTotalPagar();
+        $('#modalButacas').modal('hide');
+        $('#modalHorarios').modal('hide');
+        $("#modalButacas").empty();
+
     })();
-    setTimeout(() => {  fetchAndListMovies(); }, 400);
+    setTimeout(() => {
+        fetchAndListMovies();
+    }, 400);
 
 }
 
@@ -336,13 +355,14 @@ function resetMoviesContainer() {//Simplemente borra lo que tiene el array del J
     $("#movie-cards-container").empty();
 }
 
-
-
 function buscar() {
     var listaPeliculasContainer = $("#movie-cards-container");
     var x = $("#textoB").val();
     var low = x.toUpperCase();
-
+        resetPrecioSeat();
+        resetSeatSelected();
+        resetSeatsArray();
+        resetTotalPagar();
     resetMoviesContainer();
     peliculas.forEach((item) => {
         var a = item.nombre.toUpperCase();
@@ -389,7 +409,7 @@ function buscar() {
 function load() {
     fetchAndListMovies();
     $("#buscaboton").click(buscar);
-    $("#comprar").click(comprar);
+
 }
 
 $(load);

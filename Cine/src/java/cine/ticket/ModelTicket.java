@@ -2,6 +2,7 @@ package cine.ticket;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class ModelTicket {
@@ -70,5 +71,16 @@ public class ModelTicket {
     ticketes=dao.listadoTickets(id);
     return new ArrayList(ticketes.values());
     
+    }
+
+    public void insertarTickets(List<Ticket> LT) throws Exception{
+        try {
+            Iterator<Ticket> TicketIterator = LT.iterator();
+            while (TicketIterator.hasNext()) {
+                insertar(TicketIterator.next());
+            }
+        } catch (Exception x) {
+
+        }
     }
 }
