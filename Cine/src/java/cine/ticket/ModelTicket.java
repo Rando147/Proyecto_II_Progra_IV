@@ -9,6 +9,7 @@ public class ModelTicket {
 
     private static ModelTicket uniqueInstance;
     HashMap<String, Ticket> ticketes;
+    HashMap<String, TicketListado> ticketListado;
     TicketDAO dao;
 
     public static ModelTicket instance() {
@@ -23,6 +24,14 @@ public class ModelTicket {
         ticketes = new HashMap<>();
     }
 
+    public ArrayList mejorado(String id){
+    cleanHash();
+    ticketListado = dao.listadoTicketsMejorado(id);
+    return new ArrayList (ticketListado.values());
+    
+    }
+    
+    
     private void listaTickets() {
         cleanHash();
         ticketes = dao.listarTicket();

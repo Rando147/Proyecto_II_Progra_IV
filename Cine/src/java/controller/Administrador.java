@@ -44,9 +44,9 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 @DenyAll
 public class Administrador {
 
-    String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    //String location = "C:\\Users\\boyro\\Documents\\GitHub\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
     //String location = "/home/josedf/Documentos/Programacion IV/Proyecto II/Proyecto_II_Progra_IV/Cine/web/Images/";
-    //String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
+    String location = "C:\\Users\\Diego\\Documents\\Z I semestre\\1 Programacion\\proyecto 2\\Proyecto_II_Progra_IV\\Cine\\web\\Images/";
     
     @GET
     @Path("{name}/peli")
@@ -195,10 +195,9 @@ public class Administrador {
     public List<TicketListado> listadoTickets(@PathParam("t") String json) {
         try {
             List<TicketListado> tl = new ArrayList<>();
-            tl =Service.instance().listadoTickets(json);
+            tl =Service.instance().VersionMejorada(json);
             System.out.print(tl);
             return tl;
-            
             
         } catch (Exception ex) {
             throw new NotAcceptableException();

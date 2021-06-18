@@ -148,4 +148,44 @@ public class TicketDAO {
         }
         return peliculas;
     }
+    
+    
+    
+    
+     public HashMap listadoTicketsMejorado(String id){
+    TicketListado resultado = null;
+        HashMap<String,TicketListado> peliculas = new HashMap<>();
+        int x = Integer.parseInt(id);
+        
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(TicketCRUD.CMD_LISTAR_MEJORADO)) {
+                stm.clearParameters();
+                stm.setInt(1, x);
+                try (ResultSet rs = stm.executeQuery()) {
+                    while (rs.next()) {
+                        resultado = new TicketListado(
+                                rs.getString("id_Ticket"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getString("id_Sala"),
+                                rs.getString("Nombre"),
+                                rs.getString("fecha_Funcion"),
+                                rs.getString("hora_Inicio"),
+                                rs.getString("numero_Butaca")      
+                                
+                        );
+                        peliculas.put(resultado.getId(), resultado);
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return peliculas;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return peliculas;
+        }
+        return peliculas;
+    }
 }

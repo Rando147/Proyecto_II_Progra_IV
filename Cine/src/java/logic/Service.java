@@ -138,38 +138,46 @@ public class Service {
         return ModelTicket.instance().retornaArrayList();
     }
     
-     public List<TicketListado> listadoTickets(String json) throws Exception {
-         List<Ticket> CT = ModelTicket.instance().listadoTickets(json);
-         List<TicketListado> LTL = new ArrayList<>();
-         
-         TicketListado tl = null;
-         Pelicula p;
-         Cliente c;
-         Cartelera Cart;
-         c= ModelCli.instance().getCliente(json);
-         
-         for (int i =0; i<CT.size();i++){
-             tl= new TicketListado();
-             
-             String idt = CT.get(i).getId();
-             String BCart = CT.get(i).getCartelera();
-             Cart = ModelCart.instance().getCart(BCart);
-             p = ModelPeli.instance().getPeliculaID(Cart.getPelicula());
-             String asiento=CT.get(i).getButaca();
-             
-             tl.setId(idt);
-             tl.setNombre(c.getNombre());
-             tl.setApellido(c.getApellido());
-             tl.setSala(Cart.getSala());
-             tl.setPelicula(p.getNombre());
-             tl.setFecha(Cart.getFecha_funcion());
-             tl.setHora(Cart.getHora_inicio());
-             tl.setAsiento(asiento);
-             LTL.add(tl);
-         }
-         
-        return LTL;
+    public List<TicketListado> VersionMejorada(String json){
+    List<TicketListado> LTL = new ArrayList<>();
+    LTL= ModelTicket.instance().mejorado(json);
+    return LTL;
     }
+    
+//     public List<TicketListado> listadoTickets(String json) throws Exception {
+//         List<Ticket> CT = ModelTicket.instance().listadoTickets(json);
+//         List<TicketListado> LTL = new ArrayList<>();
+//         long a=System.currentTimeMillis();
+//         
+//         TicketListado tl = null;
+//         Pelicula p;
+//         Cliente c;
+//         Cartelera Cart;
+//         System.out.print(System.currentTimeMillis()-a);
+//         c= ModelCli.instance().getCliente(json);
+//         System.out.print(System.currentTimeMillis()-a);
+//         for (int i =0; i<CT.size();i++){
+//             tl= new TicketListado();
+//             
+//             String idt = CT.get(i).getId();
+//             String BCart = CT.get(i).getCartelera();
+//             Cart = ModelCart.instance().getCart(BCart);
+//             p = ModelPeli.instance().getPeliculaID(Cart.getPelicula());
+//             String asiento=CT.get(i).getButaca();
+//             
+//             tl.setId(idt);
+//             tl.setNombre(c.getNombre());
+//             tl.setApellido(c.getApellido());
+//             tl.setSala(Cart.getSala());
+//             tl.setPelicula(p.getNombre());
+//             tl.setFecha(Cart.getFecha_funcion());
+//             tl.setHora(Cart.getHora_inicio());
+//             tl.setAsiento(asiento);
+//             LTL.add(tl);
+//         }
+//         System.out.print(System.currentTimeMillis()-a);
+//        return LTL;
+//    }
     
      
 
