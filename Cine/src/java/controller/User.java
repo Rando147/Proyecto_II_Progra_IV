@@ -5,6 +5,7 @@ import cine.cliente.JSON_TO_CLIENTE_PARSER;
 import cine.usuario.Usuario;
 import javax.ws.rs.PUT;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -40,6 +41,7 @@ public class User {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario login(Usuario usuario) {
+        HttpSession sesion = request.getSession(true);
         Usuario logged = null;
         try {
             logged = (Cliente) Service.instance().getCliente(usuario.getId());
@@ -57,8 +59,8 @@ public class User {
         if (!logged.getPassword().equals(usuario.getPassword())) {
             throw new NotAcceptableException("Clave incorrecta");
         }
-        Service.instance().login(logged);
-        logged.setPassword(null);//Borra el password del usuario
+        //Service.instance().login(logged);
+        //logged.setPassword(null);//Borra el password del usuario
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
 
@@ -108,13 +110,15 @@ public class User {
         }
     }
 
+    
     @DELETE
     @Path("logout")
+    @RolesAllowed({"CLIENTE", "ADMINISTRATOR"})
     public void logout() {
         HttpSession session = request.getSession(true);
         session.removeAttribute("Usuario");
         session.invalidate();
-        Service.instance().logout();
+        //Service.instance().logout();
     }
 
 //    @GET
