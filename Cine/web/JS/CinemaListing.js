@@ -143,7 +143,7 @@ function view(movieName,idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
     listaHorariosJSON = carteleras;
     $("#modalLoginLabel").empty();
-    $("#modalLoginLabel").text(movieName + "       Horarios disponibles");
+    $("#modalLoginLabel").text(movieName +  Array(20).fill('\xa0').join('')+' Horarios disponibles');
     var listaHorarios = $("#lista-horarios").empty();//Lista de horarios del modal se limpia //table
 
     listaHorariosJSON.forEach((item) => {
@@ -173,7 +173,7 @@ function butacas(movieName,movieCartelera, preciom) {
     resetSeatSelected();
     resetTotalPagar();
     $("#exampleModalToggleLabel2").empty();
-    $("#exampleModalToggleLabel2").text(movieName + "        Butacas disponibles");
+    $("#exampleModalToggleLabel2").text(movieName + Array(20).fill('\xa0').join('')+'  Butacas disponibles');
     //exampleModalToggleLabel2
     //Aqui se deberia hacer el request al server solicitando la informacion de los tickets ya vendidos, la sala, cantidad de asientos entre otra informacion necesaria aun no definida.
     var informacionButacasJSON = {
