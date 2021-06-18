@@ -38,6 +38,7 @@ function register() {
                 console.log("LOGIN ADMINISTRATOR"); //document.location = url+"listado.html"; 
                 break;
             case 'CLIENTE':
+                showClientOptions();
                 console.log("LOGIN REGISTER CLIENTE"); //document.location = url+"about.html"; 
                 break;
         }

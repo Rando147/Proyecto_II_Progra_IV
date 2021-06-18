@@ -68,7 +68,6 @@ public class User {
         //logged.setPassword(null);//Borra el password del usuario
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
-
     }
 
     @POST
@@ -82,25 +81,56 @@ public class User {
         try {
             Service.instance().crearCliente(cliente);
             user = new Usuario(cliente.getId(), cliente.getPassword(), "CLIENTE");
+
         } catch (Exception ex) {
             throw new NotAcceptableException();
         }
 
-        return user;
+        HttpSession sesion = request.getSession(true);
+        Usuario logged = null;
+        try {
+            logged = (Cliente) Service.instance().getCliente(user.getId());
+        } catch (Exception ex) {
+            try {
+                logged = Service.instance().getAdmin(user.getId());
+            } catch (Exception ex2) {
+
+            }
+        }
+        if (logged == null) {
+            throw new NotFoundException("Usuario no existe");
+        }
+
+        if (!logged.getPassword().equals(user.getPassword())) {
+            throw new NotAcceptableException("Clave incorrecta");
+        }
+        //Service.instance().login(logged);
+        //logged.setPassword(null);//Borra el password del usuario
+        request.getSession(true).setAttribute("Usuario", logged);
+        return logged;
     }
 
     @POST
     @Path("{idCartelera}/comprar")
-   // @RolesAllowed("CLIENTE")
+    @RolesAllowed("CLIENTE")
     @Consumes(MediaType.APPLICATION_JSON)
     public void comprar(String json, @PathParam("idCartelera") String idCartelera) {//idCartelera
-
+        
         try {
             HttpSession session = request.getSession(true);
+            Usuario user= (Usuario) request.getSession().getAttribute("Usuario");
             JSON_TO_TICKET_PARSER parser = new JSON_TO_TICKET_PARSER();//crea una clase para parsear el objeto
-            Usuario user = new Usuario("111","111");
+            try {
+                user = (Cliente) Service.instance().getCliente(user.getId());
+            } catch (Exception ex) {
+                try {
+                    user = Service.instance().getAdmin(user.getId());
+                } catch (Exception ex2) {
+
+                }
+            }
             //hay que valñidar el usuario aquí
-            Service.instance().crearTickets(parser.parseCJSON(idCartelera,json,user));
+            Service.instance().crearTickets(parser.parseCJSON(idCartelera, json, user));
 
         } catch (Exception ex) {
             throw new NotAcceptableException();
@@ -109,6 +139,7 @@ public class User {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+        @RolesAllowed("CLIENTE")
     public void update(Cliente cliente) {
         try {
             //Service.instance().clienteUpdate(p);
@@ -117,7 +148,6 @@ public class User {
         }
     }
 
-    
     @DELETE
     @Path("logout")
     @RolesAllowed({"CLIENTE", "ADMINISTRATOR"})

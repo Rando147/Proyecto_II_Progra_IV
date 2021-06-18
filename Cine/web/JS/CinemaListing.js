@@ -195,8 +195,12 @@ function butacas(movieName, movieCartelera, preciom) {
     });
     tickets.forEach((item) => {
         if (movieCartelera.id === item.cartelera) {
+            var seat = [];
+            seat = item.butaca;
             //item.numero_Butaca;
-            informacionButacasJSON.ocupados.push(item.butaca);
+            for (var i = 0; i < seat.length; i++) {
+                informacionButacasJSON.ocupados.push(seat[i]);
+            }
             //return;
         }
     });
@@ -299,13 +303,13 @@ function setSelected_Unselected() {
 }
 function comprar(idCartelera) {
 
-//    try {
-//        usuario = sessionStorage.getItem("Usuario");
-//    } catch (exception) {
-//        console.log(exception);
-//    }
-//
-//    if (usuario !== null) {
+    try {
+        usuario = sessionStorage.getItem("Usuario");
+    } catch (exception) {
+        //console.log(exception);
+    }
+
+    if (usuario !== null) {
         let request = new Request(url + 'api/usuario/' + idCartelera + '/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
         (async () => {
             const response = await fetch(request);
@@ -324,8 +328,20 @@ function comprar(idCartelera) {
         setTimeout(() => {
             fetchAndListMovies();
         }, 400);
-//    }else{}
-
+    } else {
+        // while (usuario === null) {
+        $('#modalRegistro').modal('show');
+        //$('#modalLogin').modal('show');
+        //sessionStorage.setItem('Usuario', JSON.stringify(usuario));
+        try {
+            usuario = sessionStorage.getItem("Usuario");
+        } catch (exception) {
+            //console.log(exception);
+        }
+//            sessionStorage.setItem('Usuario', JSON.stringify(usuario));
+//            $('#modalLogin').modal('hide');
+        // }
+    }
 }
 
 function loadImage() {

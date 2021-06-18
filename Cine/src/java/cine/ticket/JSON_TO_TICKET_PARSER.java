@@ -33,16 +33,17 @@ public class JSON_TO_TICKET_PARSER {
 //            Object obj = new JSONParser().parse(json);
 //            JSONObject jo = (JSONObject) obj;
             String cartelera = idCartelera;//(String) jo.get("idCartelera");
-            String id, butaca = "", cliente;
+            String id, butaca = json, cliente;
 //            JSONArray jsonArray = (JSONArray) jo.get("seatsArray");
             // iterating seatsArray       String str = "{ \"number\": [3-0, 0-4, 0-5, 4-6] }";
             //Iterator itr1 = ja.iterator();
             //StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[],'\"'");
-            StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[]");
-            while (multiTokenizer.hasMoreTokens()) {
-                butaca += multiTokenizer.nextToken();               
+            //StringTokenizer multiTokenizer = new StringTokenizer(json, "://.[]");
+            //while (multiTokenizer.hasMoreTokens()) {
+            //    butaca += multiTokenizer.nextToken();               
                 //System.out.println(multiTokenizer.nextToken());
-            }tickets.add(new Ticket(butaca, u.getId(), cartelera));
+            //}
+        tickets.add(new Ticket(butaca, u.getId(), cartelera));
 
 //            String str = "What are you doing today?";
 //            String split[] = str.split(" ", 0);
