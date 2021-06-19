@@ -66,8 +66,8 @@ function loadMoviesListingAdmin() { //Dentro de este metodo deberia ir el reques
         var movieDuration = item.duracion;
         var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
         var movieStatus = item.estado;
-        var buttonDelete = `<button id="admin-movie-action" type="button" class="btn btn-danger movie-action">Borrar</button>`;
-        var buttonAdd = `<button id="admin-movie-action" type="button" class="btn btn-success movie-action">Agregar</button>`;
+        var buttonDelete = `<button id="admin-movie-action" type="button" class="btn btn-danger movie-action">Quitar de cartelera</button>`;
+        var buttonAdd = `<button id="admin-movie-action" type="button" class="btn btn-success movie-action">Agregar a cartelera</button>`;
         var actionButton = (movieStatus === "0") ? buttonAdd : buttonDelete;
         var newListItem = $("<div />");
         var adminCard = `<div class="col">
@@ -436,7 +436,7 @@ function leerTickets() {
         var tr4 = $("<div>Asientos: " + as + " </div>");
         var tr5 = $("<div>Fecha de la funcion: " + f + " </div>");
         var tr6 = $("<div>Hora de la Funcion: " + h + " </div>");
-        var imprimir = $("<button>Imprimir ticket</button>");
+        var imprimir = $(`<button class = "btn btn-primary custom-btn">Imprimir ticket</button>`);
 
         var l2 = $("<div>-----------------------------------------------------</div>");
 

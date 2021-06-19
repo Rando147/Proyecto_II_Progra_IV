@@ -134,7 +134,6 @@ p.text span {
 
 table {
     border-radius: 15px;
-    box-shadow: 10px 15px 20px rgba(0,0,0,0.1);
     border-collapse: collapse;
     width: 100%;
     color: black;
@@ -216,11 +215,8 @@ td{
 }
 
 
-.close{
-    width: 25px;
-    height: 25px;
-}
 
+/*
 .btn.btn-danger.movie-action{
     width: 60px;
     height: 25px;
@@ -235,7 +231,7 @@ td{
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
+*/
 .card:hover{
     transform: scale(1.05);
     transition-duration: 1s;
@@ -268,6 +264,33 @@ td{
 }
 
 .btn-primary.custom-btn {
-    background-color: #C1121F !important;
-    border-color: #C1121F !important;
+    background-color: #B4B8AB !important;
+    border-color: #B4B8AB !important;
+    color: #000;
+}
+
+.btn-primary.custom-btn:hover{
+    background-color: #B4B8AB !important;
+    border-color: #B4B8AB !important;
+    color: #000;
+}
+
+.btn-primary.custom-btn:focus{
+    background-color: #B4B8AB !important;
+    border-color: #B4B8AB !important;
+    color: #000;
+}
+
+.modal-header{
+    background-color: #284B63 !important; 
+    color: white !important;
+}
+
+input[type=text], input[type=password], input[type=number], input[type=search], input[type=date], input[type=time], select, option{
+    height: 35px !important;
+    border-radius: 5px;
+    border-style:solid;
+    border:none;
+    border-width:1px;
+    border:1px solid #cccccc;
 }
