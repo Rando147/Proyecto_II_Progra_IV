@@ -78,8 +78,6 @@ function fetchTUsuarios(){
     
      listadoTU=[];
     $("#tablaTicktesUsuario").empty();
-    //var t = sessionStorage.getItem("Usuario");
-    //var id= t.id();
     usuario = JSON.parse(sessionStorage.getItem('Usuario'));
     
 let request = new Request(url + 'api/usuario/'+usuario.id+'/ticketsListado', {method: 'GET', headers: {}});
@@ -109,14 +107,7 @@ function leerTicketsUsuario(){
         var f = item.fecha;
         var h = item.hora;
         var as = item.asiento;
-//        var tr = $("<tr><td>Ticket Numero: "+id+" </td></tr>");
-//        var tr1 = $("<tr><td>Cliente: "+n+" "+a+" </td></tr>");
-//        var tr2 = $("<tr><td>Sala: "+s+" </td></tr>");
-//        var tr3 = $("<tr><td>Pelicula "+p+" </td></tr>");
-//        var tr4 = $("<tr><td>Aseinto "+as+" </td></tr>");
-//        var tr5 = $("<tr><td>Fecha de la funcion: "+f+" </td></tr>");
-//        var tr6 = $("<tr><td>Hora de la Funcion "+h+" </td></tr>");
-//        var l2 = $("<tr><td>-----------------------------------------------------</td></tr>");
+
         var tr = $("<div>Ticket Numero: "+id+" </div>");
         var tr1 = $("<div>Cliente: "+n+" "+a+" ></div>");
         var tr2 = $("<div>Sala: "+s+" </div>");
@@ -144,7 +135,7 @@ function leerTicketsUsuario(){
 
 
 function load() {
-        $('body').append(content);
+     
         $("#register").click(register);
         $("#nav-compras-btn").click(fetchTUsuarios);
         //$("#logout").click(logout);

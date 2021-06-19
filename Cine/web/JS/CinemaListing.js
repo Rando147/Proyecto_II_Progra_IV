@@ -163,6 +163,7 @@ function butacas(movieName, movieCartelera, preciom) {
     resetPrecioSeat();
     resetSeatSelected();
     resetTotalPagar();
+    
     $("#exampleModalToggleLabel2").empty();
     $("#exampleModalToggleLabel2").text(movieName + Array(20).fill('\xa0').join('') + '  Butacas disponibles');
     //exampleModalToggleLabel2
@@ -199,7 +200,13 @@ function butacas(movieName, movieCartelera, preciom) {
 }
 function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesaria
 
+    
     resetSeats(); //Lo unico que hace es borrar el arreglo donde guardan los asientos seleccionados por el usuario
+    resetSeatsArray(); //movieName
+    resetPrecioSeat();
+    resetSeatSelected();
+    resetTotalPagar();
+    
     $("#screen-seats-container").remove();//Borra el 'body' del modal para que este no se duplique cada vez que se abre la pestaña de butacas
 
     //Carga de variables desde JSON
@@ -311,13 +318,14 @@ function comprar(idCartelera) {
             generatePDF(ticket[0], ticketHeaders, ticketKeys);
             
         })();
-        //generatePDF(ticket, ticketHeaders, ticketKeys);
+     
         setTimeout(() => {
             fetchAndListTickets();
-            //fetchAndListMovies();
         }, 400);
+        
         $('#modalButacas').modal('hide');
         $('#modalHorarios').modal('hide');
+        $('#modalButacas').empty();
         resetSeatsArray(); //movieName
         resetPrecioSeat();
         resetSeatSelected();
