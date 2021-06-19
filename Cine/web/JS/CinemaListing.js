@@ -373,32 +373,40 @@ function resetMoviesContainer() {//Simplemente borra lo que tiene el array del J
 }
 
 function buscar() {
-    var listaPeliculasContainer = $("#movie-cards-container");
-    var x = $("#textoB").val();
-    var low = x.toUpperCase();
-    resetPrecioSeat();
-    resetSeatSelected();
-    resetSeatsArray();
-    resetTotalPagar();
-    resetMoviesContainer();
-    peliculas.forEach((item) => {
-        var a = item.nombre.toUpperCase();
-        if (a.includes(low)) {
 
-            var movieID = item.id;
-            var movieName = item.nombre;
+    try {
+        usuario = sessionStorage.getItem("Usuario");
+    } catch (exception) {
+        
+    }
+    if(usuario === null || usuario.type === "CLIENTE"){
 
-            var movieDuration = item.duracion;
-            var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
-            var newListItem = $("<div />");
-            var clientCard = `<div class="col">
+        var listaPeliculasContainer = $("#movie-cards-container");
+        var x = $("#textoB").val();
+        var low = x.toUpperCase();
+        resetPrecioSeat();
+        resetSeatSelected();
+        resetSeatsArray();
+        resetTotalPagar();
+        resetMoviesContainer();
+        peliculas.forEach((item) => {
+            var a = item.nombre.toUpperCase();
+            if (a.includes(low)) {
+
+                var movieID = item.id;
+                var movieName = item.nombre;
+
+                var movieDuration = item.duracion;
+                var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
+                var newListItem = $("<div />");
+                var clientCard = `<div class="col">
                         <div class="card shadow-sm">
                             
                             <img   src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             <div class="card-body">
                                 <p class="card-text">`
-                    + movieDescripcion +
-                    `</p>
+                        + movieDescripcion +
+                        `</p>
                                 <div class="d-flex justify-content-between align-items-center" >
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie" style="background-color: #1d2185; color:white;">
@@ -412,15 +420,18 @@ function buscar() {
                         </div>
                     </div>`;
 
-            newListItem.html(clientCard);
-            newListItem.find("#view-movie").on("click", () => {
-                view(movieID);
-            });
-            listaPeliculasContainer.append(newListItem);
-        } else if (x === "" || x === " ") {
-            loadMoviesListing();
-        }
-    });
+                newListItem.html(clientCard);
+                newListItem.find("#view-movie").on("click", () => {
+                   view(movieName, movieID, item.precio);
+                });
+                listaPeliculasContainer.append(newListItem);
+            } else if (x === "" || x === " ") {
+                loadMoviesListing();
+            }
+        });
+    }else if (usuario.type === "ADMINISTRADOR") {
+        loadMoviesListingAdmin();
+    } 
 }
 
 function load() {
