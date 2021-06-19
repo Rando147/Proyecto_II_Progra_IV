@@ -11,8 +11,8 @@ public class CarteleraCRUD {
     protected static final String CMD_LISTAR_PELICULA = "SELECT * from Cartelera WHERE pelicula = ?;";
 
     protected static final String CMD_AGREGAR
-            = "INSERT INTO Cartelera (fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala) "
-            + "VALUES (?, ?, ?, ?, ?); ";
+            = "INSERT INTO Cartelera (fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala, estado) "
+            + "VALUES (?, ?, ?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
             = "SELECT id_Cartelera, fecha_Funcion, hora_Inicio, hora_Fin, id_Pelicula, id_Sala FROM Cartelera "

@@ -38,6 +38,8 @@ public class CarteleraDAO {
         stm.setString(3, p.getHora_fin()); 
         stm.setString(4, p.getPelicula());
         stm.setString(5, p.getSala());
+        stm.setInt(6, 1);
+        
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
