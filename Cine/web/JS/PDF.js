@@ -39,7 +39,7 @@ function generateTicket(data, headers, keys) {
 
 function generatePDF(data, headers, keys) { //data = informacion ticket, headers = titulos de los campos del tiquete, keys = keys del map 'data' y 'headers' (tienen que ser las mismas keys en ambos)
     var docDefinition = generateTicket(data, headers, keys);
-    pdfMake.createPdf(docDefinition).open();
+    pdfMake.createPdf(docDefinition).open({}, window);
 }
 
 

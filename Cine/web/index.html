@@ -24,29 +24,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/pdfmake.js" 
+        integrity="sha512-Oc99inaHXKvZwW4YR0hcGWu54EFdC7MKflHqEoJpQp4O8+l+TYDrCnsgz0+m3eeiLyZhTfTCxWOjilxc00qnvw==" crossorigin="anonymous" 
+        referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/vfs_fonts.js" integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script src="JS/CinemaListing.js"></script>
         <script src="JS/Cliente.js"></script>
         <script src="JS/Login.js"></script>
         <script src="JS/Administrator.js"></script>
-        <script src="JS/ShoppingCart.js"></script>
-
-
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
-            }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
-            }
-        </style>
+        <script src="JS/PDF.js"></script>
 
 
     </head>
@@ -54,13 +41,7 @@
 
         <!--###################################################################################NAVBAR#############################################################################################################-->
 
-
-        <!--img src="http://localhost:8080/Cine/api/admin/1/image/data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/--> 
-        <!--img src="data:image/jpg;base64,${imagen.base64Image}" width="240" height="300"/-->
-
-
-        <!-- navbar navbar-dark bg-primary         navbar navbar-expand-lg navbar-light bg-light-->
-        <nav class="navbar navbar-expand-lg navbar-light  paraelnav "  style="background-color: #1d2185; ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="Images/palomitas.png" style="width:50px; height:50px; ">
@@ -73,23 +54,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout" style="color: white;">About
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">About
                                 us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="nav-register-btn" href="#" data-bs-toggle="modal"
-                               data-bs-target="#modalRegistro" style="color: white;">Register</a>
+                               data-bs-target="#modalRegistro">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  id="nav-login-btn" href="#" data-bs-toggle="modal"
-                               data-bs-target="#modalLogin" style="color: white;">Login</a>
+                               data-bs-target="#modalLogin">Login</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color : white"></a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu" style="color : white">
+                            <a class="nav-link dropdown-toggle" href="#" id="nav-usuario-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-usuario-dropdown-menu">
                                 <li id="nav-dropdown-compras">
                                     <a class="dropdown-item" id="nav-compras-btn" href="#" data-bs-toggle="modal" data-bs-target="#modalTicketsUsuario" >Ver compras</a>
                                 </li>
@@ -119,7 +100,7 @@
                                 </li>
                                 <li id="nav-dropdown-tickets">
                                     <a class="dropdown-item" id="nav-dropdown-tickets-btn" href="#" data-bs-toggle="modal"
-                                      data-bs-target="#modalTickets" >Historial de Tickets</a>
+                                       data-bs-target="#modalTickets" >Historial de Tickets</a>
                                 </li> <!--data-bs-target="#modalTickets"-->
                                 <li id="nav-dropdown-tickets-divider">
                                     <hr class="dropdown-divider">
@@ -134,7 +115,7 @@
                     </ul>
                     <!--<form class="d-flex" id="busca" name="busca">-->
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="textoB" name="textoB" style="width:10%;  ">
-                    <button class="btn btn-outline-success" type="submit" style="color:white" id="buscaboton">Search</button>
+                    <button class="btn btn-outline-success" type="submit" id="buscaboton">Search</button>
                     <!--</form>-->
                 </div>
             </div>
@@ -148,17 +129,17 @@
 
 
     </header>
-    <body style="background-color: #575755;">
+    <body>
         <!--###################################################################################CARDS#############################################################################################################-->
 
         <div class="container"> 
 
-            <section class="main" style="background-color: #575755;"> 
+            <section class="main"> 
 
-                <div class="album py-5 bg-light" style="background-color: #575755 !important;">
+                <div class="album py-5 bg-light">
 
 
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="movie-cards-container" style="background-color: #575755;"> </div>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="movie-cards-container"> </div>
 
                 </div>
 
@@ -169,12 +150,12 @@
         <footer class="text-muted py-5" >
             <div class="container" >
                 <p class="float-end mb-1">
-                    <a href="#"style="color: #1d2185;">Back to top</a>
+                    <a href="#">Back to top</a>
                 </p>
-                <p class="mb-1"style="color: white;">II Proyecto de programacion IV</p>
-                <p class="mb-0"style="color: white;">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
-                <p class="mb-0"style="color: white;">Prof. José A. Sánchez S.</p>
-                <p class="mb-0"style="color: white;">JRD Inc. ©2021.</p>
+                <p class="mb-1">II Proyecto de programacion IV</p>
+                <p class="mb-0">Realizado por Jose Flores, Roy Rojas y Diego Brenes.</p>
+                <p class="mb-0">Prof. José A. Sánchez S.</p>
+                <p class="mb-0">JRD Inc. ©2021.</p>
 
             </div>
         </footer>
@@ -203,8 +184,8 @@
     <div class="modal fade" id="modalAbout" aria-hidden="true" aria-labelledby="modalAboutLabel" tabindex="-1" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #1d2185;">
-                    <h5 class="modal-title" id="modalAboutLabel" style="color : white">About Us</h5>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAboutLabel">About Us</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body"  ">
@@ -220,7 +201,7 @@
                 </div>
                 <div class="modal-footer" >
 
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Aceptar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Aceptar</button>
 
                 </div>
             </div>
@@ -232,9 +213,9 @@
     <div class="modal fade" id="modalHorarios" aria-hidden="true" aria-labelledby="modalHorariosLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #1d2185;">
-                    <h5 class="modal-title" id="modalLoginLabel" style="color : white">Horarios disponibles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #1d2185;"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLoginLabel">Horarios disponibles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="lista-horarios-container">
@@ -243,7 +224,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -257,9 +238,9 @@
          tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #1d2185;">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2" style="color : white">Butacas disponibles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #1d2185;"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">Butacas disponibles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="theather-container">
@@ -286,8 +267,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" style="background-color: #1d2185;" id = "comprar">COMPRAR</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cerrar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" id = "comprar">COMPRAR</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -302,8 +283,8 @@
     <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalPeliculaLabel" style="color : white">Pelicula</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPeliculaLabel">Pelicula</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -343,9 +324,9 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary" id="peliculaRegister" style="background-color: #1d2185;">Aceptar</button>
+                <button class="btn btn-primary" id="peliculaRegister">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
             </div>
         </div>
@@ -360,8 +341,8 @@
     <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalSalalaLabel" style="color : white">Sala</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSalalaLabel">Sala</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="forSala">
@@ -382,9 +363,9 @@
                 </div>
             </form>  
             <div class="modal-footer">
-                <button class="btn btn-primary" id="salaRegister" style="background-color: #1d2185;">Aceptar</button>
+                <button class="btn btn-primary" id="salaRegister">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
             </div>
         </div>
@@ -398,8 +379,8 @@
 <div class="modal fade" id="modalCartelera" aria-hidden="true" aria-labelledby="modalCarteleraLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalCarteleraLabel" style="color : white">Cartelera</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCarteleraLabel">Cartelera</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -441,9 +422,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="cartRegister" style="background-color: #1d2185;">Aceptar</button>
+                <button class="btn btn-primary" id="cartRegister">Aceptar</button>
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
 
             </div>
         </div>
@@ -459,8 +440,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!--form-->
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalRegistroLabel" style="color : white">Registrarse</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRegistroLabel">Registrarse</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -496,8 +477,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="register" style="background-color: #1d2185;">Registrar</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" id="register">Registrar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
             </div>
             <!--form-->
 
@@ -514,8 +495,8 @@
         <div class="modal-content">
             <!--form!-->
 
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalLoginLabel" style="color : white">Login</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLoginLabel">Login</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" >
@@ -535,9 +516,9 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" id="login-aceptar-btn" style="background-color: #1d2185;"> Aceptar </button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" id="login-aceptar-btn"> Aceptar </button>
 
-                <button class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
             </div>
             <!--/form!-->
 
@@ -551,14 +532,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!--form!-->
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalLoginLabel" style="color : white">Delete movie</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLoginLabel">Delete movie</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" ></div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="action-movie-aceptar-btn" style="background-color: #1d2185;"> Aceptar </button>
-                <button class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" id="action-movie-aceptar-btn"> Aceptar </button>
+                <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
             </div>
             <!--/form!-->
 
@@ -575,23 +556,23 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!--form-->
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalTicketsLabel" style="color : white">Historial de Tickets </h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTicketsLabel">Historial de Tickets </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div class="modal-body">
                 <input type="search" placeholder="Id del cliente" aria-label="Search" id="buscarT" name="buscarT" style="width:50%; height:50%;" class="curso-derecha">
-                <button class="btn btn-primary" style="background-color: #1d2185;" class="curso-derecha" id="ticketCliente" name="ticketCliente"> Buscar </button>
-                
+                <button class="btn btn-primary" class="curso-derecha" id="ticketCliente" name="ticketCliente"> Buscar </button>
+
                 <table id="tablaTicktes" class="tablaTicktes">
                     <div id="errorBT"></div>
                 </table>
             </div>
             <div class="modal-footer">
-                
 
-                <button class="btn btn-primary" id="imprimir" style="background-color: #1d2185;">Imprimir</button>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+
+                <button class="btn btn-primary" id="imprimir">Imprimir</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
             </div>
             <!--form-->
 
@@ -609,115 +590,20 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!--form-->
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalTicketsUsuarioLabel" style="color : white">Historial de Compras me cago en todos</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTicketsUsuarioLabel">Historial de Compras me cago en todos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div class="modal-body">
-                <!--<input type="search" placeholder="Id del cliente" aria-label="Search" id="buscarTU" name="buscarTU" style="width:50%; height:50%;" class="curso-derecha">
-                <button class="btn btn-primary" style="background-color: #1d2185;" class="curso-derecha" id="ticketClientePersonales" name="ticketClientePersonales"> Buscar </button>-->
-                
                 <table id="tablaTicktesUsuario" class="tablaTicktesUsuario">
                     <div id="errorUT"></div>
                 </table>
             </div>
             <div class="modal-footer">
-                
-
-                <!--<button class="btn btn-primary" id="imprimir" style="background-color: #1d2185;">Imprimir</button>-->
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
             </div>
             <!--form-->
 
         </div>
     </div>
 </div>
-
-
-<!--################################################################################### Shopping cart #############################################################################################################-->
-<!-- comment 
-<div class="modal fade" id="modalShoppingCart" aria-hidden="true" aria-labelledby="modalShoppingCart" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #1d2185;">
-                <h5 class="modal-title" id="modalShoppingCartLabel" style="color : white">Shopping Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="shopping-cart">
-                    <div class="column-labels">
-                        <label class="product-image">Image</label>
-                        <label class="product-details">Product</label>
-                        <label class="product-price">Price</label>
-                        <label class="product-quantity">Quantity</label>
-                        <label class="product-removal">Remove</label>
-                        <label class="product-line-price">Total</label>
-                    </div>
-                    <div class="product">
-                        <div class="product-image">
-                            <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                        </div>
-                        <div class="product-details">
-                            <div class="product-title">Dingo Dog Bones</div>
-                            <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-                        </div>
-                        <div class="product-price">12.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                Remove
-                            </button>
-                        </div>
-                        <div class="product-line-price">25.98</div>
-                    </div>
-
-                    <div class="product">
-                        <div class="product-image">
-                            <img src="https://s.cdpn.io/3/large-NutroNaturalChoiceAdultLambMealandRiceDryDogFood.png">
-                        </div>
-                        <div class="product-details">
-                            <div class="product-title">Nutro™ Adult Lamb and Rice Dog Food</div>
-                            <p class="product-description">Who doesn't like lamb and rice? We've all hit the halal cart at 3am while quasi-blackout after a night of binge drinking in Manhattan. Now it's your dog's turn!</p>
-                        </div>
-                        <div class="product-price">45.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                Remove
-                            </button>
-                        </div>
-                        <div class="product-line-price">45.99</div>
-                    </div>
-                    <div class="totals">
-                        <div class="totals-item">
-                            <label>Subtotal</label>
-                            <div class="totals-value" id="cart-subtotal">71.97</div>
-                        </div>
-                        <div class="totals-item">
-                            <label>Tax (5%)</label>
-                            <div class="totals-value" id="cart-tax">3.60</div>
-                        </div>
-                        <div class="totals-item">
-                            <label>Shipping</label>
-                            <div class="totals-value" id="cart-shipping">15.00</div>
-                        </div>
-                        <div class="totals-item totals-item-total">
-                            <label>Grand Total</label>
-                            <div class="totals-value" id="cart-total">90.57</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" id="shopping-comprar-btn" style="background-color: #1d2185;"> Comprar </button>
-                <button class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #1d2185;">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
--->
