@@ -33,8 +33,8 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
                             <img id="view-movie" src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             <div class="card-body">
                                 <p class="card-text">`
-                                    + movieDescripcion +
-                                `</p>
+                + movieDescripcion +
+                `</p>
                                 <div class="d-flex justify-content-end" >
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>
@@ -129,6 +129,7 @@ function resetSeatsArray() { //Esta funcion solo se utiliza para volver a poner 
 }
 function resetTotalPagar() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
     totalPagar = 0;
+    $('#total').empty().html(0);
 }
 function view(movieName, idPelicula, precio) {
     //Aqui va el request al API para que retorne los datos de la pelicula indicada en el ID
@@ -157,13 +158,14 @@ function resetPrecioSeat() { //Esta funcion solo se utiliza para volver a poner 
 }
 function resetSeatSelected() { //Esta funcion solo se utiliza para volver a poner el array donde se guardan los asientos 
     seatSelected = 0;
+    $('#count').empty().html(0);
 }
 function butacas(movieName, movieCartelera, preciom) {
     resetSeatsArray(); //movieName
     resetPrecioSeat();
     resetSeatSelected();
     resetTotalPagar();
-    
+
     $("#exampleModalToggleLabel2").empty();
     $("#exampleModalToggleLabel2").text(movieName + Array(20).fill('\xa0').join('') + '  Butacas disponibles');
     //exampleModalToggleLabel2
@@ -200,13 +202,13 @@ function butacas(movieName, movieCartelera, preciom) {
 }
 function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesaria
 
-    
+
     resetSeats(); //Lo unico que hace es borrar el arreglo donde guardan los asientos seleccionados por el usuario
     resetSeatsArray(); //movieName
     resetPrecioSeat();
     resetSeatSelected();
     resetTotalPagar();
-    
+
     $("#screen-seats-container").remove();//Borra el 'body' del modal para que este no se duplique cada vez que se abre la pestaña de butacas
 
     //Carga de variables desde JSON
@@ -306,7 +308,7 @@ function comprar(idCartelera) {
     }
 
     if (usuario !== null) {
-       // var ticket;
+        // var ticket;
         let request = new Request(url + 'api/usuario/' + idCartelera + '/comprar', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatsArray)});
         (async () => {
             const response = await fetch(request);
@@ -316,13 +318,13 @@ function comprar(idCartelera) {
             }
             ticket = await response.json();
             generatePDF(ticket[0], ticketHeaders, ticketKeys);
-            
+
         })();
-     
+
         setTimeout(() => {
             fetchAndListTickets();
         }, 400);
-        
+
         $('#modalButacas').modal('hide');
         $('#modalHorarios').modal('hide');
         $('#modalButacas').empty();
@@ -384,12 +386,11 @@ function buscar() {
 
     try {
         usuario = sessionStorage.getItem("Usuario");
+        usuario = JSON.parse(usuario);
     } catch (exception) {
-        
-    }
-    if(usuario === null || usuario.type === "CLIENTE"){
 
-        var listaPeliculasContainer = $("#movie-cards-container");
+    }
+    if (usuario === null || usuario.type === "CLIENTE") {
         var x = $("#textoB").val();
         var low = x.toUpperCase();
         resetPrecioSeat();
@@ -400,46 +401,111 @@ function buscar() {
         peliculas.forEach((item) => {
             var a = item.nombre.toUpperCase();
             if (a.includes(low)) {
+                clientSearch(item);
 
-                var movieID = item.id;
-                var movieName = item.nombre;
+            } else if (x === "" || x === " ") {
+                loadMoviesListing();
+            }
+        });
+    } else if (usuario.type === "ADMINISTRATOR") {
+        var x = $("#textoB").val();
+        var low = x.toUpperCase();
+        resetPrecioSeat();
+        resetSeatSelected();
+        resetSeatsArray();
+        resetTotalPagar();
+        resetMoviesContainer();
+        peliculas.forEach((item) => {
+            var a = item.nombre.toUpperCase();
+            if (a.includes(low)) {
+                adminSearch(item);
+            } else if (x === "" || x === " ") {
+                loadMoviesListingAdmin();
+            }
+        });
+        
+    }
+}
 
-                var movieDuration = item.duracion;
-                var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
-                var newListItem = $("<div />");
-                var clientCard = `<div class="col">
+function clientSearch(item) {
+    var listaPeliculasContainer = $("#movie-cards-container");
+    var movieID = item.id;
+    var movieName = item.nombre;
+    var movieDuration = item.duracion;
+    var movieDescripcion = item.descripcion;
+    var newListItem = $("<div />");
+    var clientCard = `
+                    <div class="col">
                         <div class="card shadow-sm">
-                            
-                            <img   src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            <img id="view-movie" src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
                             <div class="card-body">
                                 <p class="card-text">`
-                        + movieDescripcion +
-                        `</p>
-                                <div class="d-flex justify-content-between align-items-center" >
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="view-movie" style="background-color: #1d2185; color:white;">
-                                            View
-                                        </button>
-                                        
-                                    </div>
+            + movieDescripcion +
+            `</p>
+                                <div class="d-flex justify-content-end" >
                                     <small class="text-muted">` + movieDuration + `</small>
                                 </div>
                             </div>
                         </div>
                     </div>`;
+    newListItem.html(clientCard);
+    newListItem.find("#view-movie").on("click", () => {
+        view(movieName, movieID, item.precio);
+    });
+    var btn = newListItem.find("#view-movie");
+    btn.css('cursor', 'pointer');
+    listaPeliculasContainer.append(newListItem);
+}
 
-                newListItem.html(clientCard);
-                newListItem.find("#view-movie").on("click", () => {
-                   view(movieName, movieID, item.precio);
-                });
-                listaPeliculasContainer.append(newListItem);
-            } else if (x === "" || x === " ") {
-                loadMoviesListing();
-            }
+function adminSearch(item) {
+    var listaPeliculasContainer = $("#movie-cards-container");
+    var movieID = item.id;
+    var movieName = item.nombre;
+    var movieDuration = item.duracion;
+    var movieDescripcion = item.descripcion;//"data:image/jpg;base64,${image.base64Image}"
+    var movieStatus = item.estado;
+    var buttonDelete = `<button id="admin-movie-action" type="button" class="btn btn-danger movie-action">Quitar de cartelera</button>`;
+    var buttonAdd = `<button id="admin-movie-action" type="button" class="btn btn-success movie-action">Agregar a cartelera</button>`;
+    var actionButton = (movieStatus === "0") ? buttonAdd : buttonDelete;
+    var newListItem = $("<div />");
+    var adminCard = `<div class="col">
+                        <div class="card shadow-sm">
+                            
+                            <img  src="` + url + `api/cartelera/` + movieID + `/imagen" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <p class="card-text">`
+            + movieDescripcion +
+            `</p>
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <div class="btn-group">`
+
+            + actionButton +
+            `</div>
+                                    <small class="text-muted">` + movieDuration + `</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+    newListItem.html(adminCard);
+
+    var btn = newListItem.find("#admin-movie-action");
+    if (movieStatus === "1") {
+        btn.on("click", () => {
+            loadDeleteMovieModal(movieID, movieName);
         });
-    }else if (usuario.type === "ADMINISTRADOR") {
-        loadMoviesListingAdmin();
-    } 
+    } else {
+        btn.on("click", () => {
+            loadActivateMovieModal(movieID, movieName);
+        });
+    }
+    btn.hide();
+    newListItem.on("mouseover", () => {
+        btn.show();
+    });
+    newListItem.on("mouseleave", () => {
+        btn.hide();
+    });
+    listaPeliculasContainer.append(newListItem);
 }
 
 function load() {
