@@ -51,6 +51,8 @@ function showAdminOptions() {
 
     $('#nav-usuario-dropdown').show();
 
+    $('#nav-dropdown-tickets-btn').show();
+    
     fetchAndListMoviesAdmin();
 }
 
