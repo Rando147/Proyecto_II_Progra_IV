@@ -2,6 +2,11 @@
 
 body {
     width: 100%;
+    background-color: #eff6e0 !important;
+}
+
+.album.py-5.bg-light{
+    background-color: #eff6e0 !important;
 }
 :root {
     --selected-color: #2ecc71;
@@ -233,6 +238,7 @@ td{
 
 .card:hover{
     transform: scale(1.05);
+    transition-duration: 1s;
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
@@ -251,5 +257,17 @@ td{
 .card.shadow-sm > img {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    
+}
+
+.navbar-custom { 
+    background-color: #284B63 !important; 
+}
+
+.nav-link{
+    color: white !important;
+}
+
+.btn-primary.custom-btn {
+    background-color: #C1121F !important;
+    border-color: #C1121F !important;
 }
