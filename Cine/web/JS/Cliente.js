@@ -144,20 +144,11 @@ function leerTicketsUsuario(){
 
 
 function load() {
-    let request = new Request(url + 'registro.html', {method: 'GET'});
-    (async () => {
-        const response = await fetch(request);
-        if (!response.ok) {
-            errorMessage(response.status, $("#loginDialog #errorDiv"));
-            return;
-        }
-        content = await response.text();
         $('body').append(content);
         $("#register").click(register);
         $("#nav-compras-btn").click(fetchTUsuarios);
         //$("#logout").click(logout);
         console.log("LOAD CLIENTE");
-    })();
 } 
 
 $(load);
