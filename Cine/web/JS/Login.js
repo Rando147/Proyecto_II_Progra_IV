@@ -71,6 +71,7 @@ function showClientOptions() {
     
     
     $('#nav-dropdown-tickets-btn').hide();
+    $('#nav-dropdown-tickets-divider').hide();
     
 
     $('#nav-dropdown-sala').hide();
