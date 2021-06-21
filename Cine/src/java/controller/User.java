@@ -77,7 +77,8 @@ public class User {
     @Produces({MediaType.APPLICATION_JSON})
     @PermitAll
     public Usuario checkUser() {
-        return (Usuario) request.getSession(true).getAttribute("Usuario"); 
+        Usuario usr = (Usuario) request.getSession(true).getAttribute("Usuario"); 
+        return usr;
     }
 
     @POST

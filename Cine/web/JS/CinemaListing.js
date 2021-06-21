@@ -67,18 +67,23 @@ function checkUser() {
             errorMessage(response.status, $("#loginDialog #errorDiv"));
             return false;
         }
-        usuario = await response.json();
-        if (usuario !== null) {
-            sessionStorage.setItem('Usuario', JSON.stringify(usuario));
-            switch (usuario.type) {
-                case 'ADMINISTRATOR':
-                    showAdminOptions();
-                    break;
-                case 'CLIENTE':
-                    showClientOptions();
-                    break;
+        try {
+            usuario = await response.json();
+            if (usuario !== null) {
+                sessionStorage.setItem('Usuario', JSON.stringify(usuario));
+                switch (usuario.type) {
+                    case 'ADMINISTRATOR':
+                        showAdminOptions();
+                        break;
+                    case 'CLIENTE':
+                        showClientOptions();
+                        break;
+                }
             }
+        } catch (ex) {
+            fetchAndListMovies();
         }
+
     })();
 }
 
@@ -335,20 +340,21 @@ function comprar(idCartelera) {
             }
             ticket = await response.json();
             generatePDF(ticket[0], ticketHeaders, ticketKeys);
+            resetSeatsArray(); //movieName
+            resetPrecioSeat();
+            resetSeatSelected();
+            resetTotalPagar();
+            $('#modalButacas').modal('hide');
+            $('#modalHorarios').modal('hide');
+            fetchAndListTickets();
 
         })();
 
-        setTimeout(() => {
-            fetchAndListTickets();
-        }, 400);
 
-        $('#modalButacas').modal('hide');
-        $('#modalHorarios').modal('hide');
-        $('#modalButacas').empty();
-        resetSeatsArray(); //movieName
-        resetPrecioSeat();
-        resetSeatSelected();
-        resetTotalPagar();
+
+
+
+
     } else {
         // while (usuario === null) {
         $('#modalRegistro').modal('show');
@@ -526,7 +532,7 @@ function adminSearch(item) {
 }
 
 function load() {
-    fetchAndListMovies();
+    //fetchAndListMovies();
     checkUser();
     $("#buscaboton").click(buscar);
 

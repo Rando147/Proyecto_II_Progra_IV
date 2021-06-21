@@ -52,6 +52,7 @@ function showAdminOptions() {
     $('#nav-usuario-dropdown').show();
 
     $('#nav-dropdown-tickets-btn').show();
+    $('#nav-dropdown-tickets-divider').show();
     
     fetchAndListMoviesAdmin();
 }
@@ -81,7 +82,7 @@ function showClientOptions() {
     $('#nav-dropdown-cartelera-divider').hide();
 
     $('#nav-usuario-dropdown').show();
-    //fetchAndListMovies();
+    fetchAndListMovies();
 }
 function showNotLoggedOptions() {
     $('#nav-usuario-dropdown').hide();

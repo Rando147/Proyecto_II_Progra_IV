@@ -282,7 +282,7 @@ function Sala() {
             return;
         }
         $('#modalSala').modal('hide');
-
+        fetchAndListSalas();
 
 
         resetSala();

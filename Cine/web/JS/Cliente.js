@@ -39,6 +39,9 @@ function register() {
                 break;
             case 'CLIENTE':
                 showClientOptions();
+                
+                $("#modalButacas").modal("hide");
+                $("#modalHorarios").modal("hide");
                 console.log("LOGIN REGISTER CLIENTE"); //document.location = url+"about.html"; 
                 break;
         }
@@ -109,7 +112,7 @@ function leerTicketsUsuario(){
         var as = item.asiento;
 
         var tr = $("<div>Ticket Numero: "+id+" </div>");
-        var tr1 = $("<div>Cliente: "+n+" "+a+" ></div>");
+        var tr1 = $("<div>Cliente: "+n+" "+a+" </div>");
         var tr2 = $("<div>Sala: "+s+" </div>");
         var tr3 = $("<div>Pelicula: "+p+" </div>");
         var tr4 = $("<div>Asiento: "+as+" </div>");
