@@ -71,6 +71,14 @@ public class User {
         request.getSession(true).setAttribute("Usuario", logged);
         return logged;
     }
+    
+    @GET 
+    @Path("check-user")
+    @Produces({MediaType.APPLICATION_JSON})
+    @PermitAll
+    public Usuario checkUser() {
+        return (Usuario) request.getSession(true).getAttribute("Usuario"); 
+    }
 
     @POST
     @Path("register")

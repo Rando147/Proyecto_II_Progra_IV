@@ -53,6 +53,34 @@ function loadMoviesListing() { //Dentro de este metodo deberia ir el request al 
     });
 }
 
+function checkUser() {
+    //if (!loginValidar()) return;
+    usuario = {
+        id: $("#id").val(),
+        password: $("#password").val(),
+        type: "LOGIN"
+    };
+    let request = new Request(url + 'api/usuario/check-user', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#loginDialog #errorDiv"));
+            return false;
+        }
+        usuario = await response.json();
+        if (usuario !== null) {
+            sessionStorage.setItem('Usuario', JSON.stringify(usuario));
+            switch (usuario.type) {
+                case 'ADMINISTRATOR':
+                    showAdminOptions();
+                    break;
+                case 'CLIENTE':
+                    showClientOptions();
+                    break;
+            }
+        }
+    })();
+}
 
 function fetchAndListMovies() {
     resetPeliculas();
@@ -423,7 +451,7 @@ function buscar() {
                 loadMoviesListingAdmin();
             }
         });
-        
+
     }
 }
 
@@ -510,6 +538,7 @@ function adminSearch(item) {
 
 function load() {
     fetchAndListMovies();
+    checkUser();
     $("#buscaboton").click(buscar);
 
 }
