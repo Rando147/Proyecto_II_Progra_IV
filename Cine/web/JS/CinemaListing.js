@@ -266,17 +266,6 @@ function loadSeats(informacionButacasJSON) {//Recibe JSON con informacion necesa
         container.append(newRow);
     }
 
-    if (asientosUltimaFilaIncompleta !== 0) {//En caso de que la ultima fila no este completamente llena de butacas, se ejecuta lo siguiente
-        var newRow = $("<div class='row'></div>");
-        for (i = 0; i < asientosUltimaFilaIncompleta; i++) {
-            var newSeat = $("<div class='seat'></div>");
-            if (ocupiedSeats.includes(id)) {
-                newSeat.addClass("occupied");
-            }
-            newRow.append(newSeat);
-        }
-        container.append(newRow);
-    }
     $('#modalButacas').find("#comprar").on("click", () => {
         comprar(informacionButacasJSON.idCartelera);//pase el id de la cartelera al cual se hace la compra
         $('#modalButacas').find("#comprar").off('click');
